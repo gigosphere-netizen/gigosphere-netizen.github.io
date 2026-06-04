@@ -3,123 +3,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>IranFreelancer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Vazirmatn',sans-serif;
 }
 
 body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#0f172a;
-    font-family:Tahoma, sans-serif;
-    padding:20px;
+background:#071633;
+color:white;
+overflow-x:hidden;
 }
 
-.logo-container{
-    display:flex;
-    align-items:center;
-    gap:18px;
-    background:#111827;
-    padding:20px 30px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.3);
-    transition:.3s;
+header{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:40px;
 }
 
-.logo-container:hover{
-    transform:translateY(-3px);
+.hero{
+max-width:1200px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:50px;
+align-items:center;
 }
 
-.logo-icon{
-    width:90px;
-    height:90px;
-    border:3px solid #fbbf24;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#fbbf24;
-    font-size:38px;
-    font-weight:bold;
-    flex-shrink:0;
+.hero-text h1{
+font-size:60px;
+color:#d4af37;
+margin-bottom:15px;
 }
 
-.logo-text{
-    display:flex;
-    flex-direction:column;
+.hero-text h2{
+font-size:30px;
+margin-bottom:20px;
 }
 
-.logo-title{
-    color:white;
-    font-size:2rem;
-    font-weight:700;
+.hero-text p{
+line-height:2;
+font-size:18px;
+color:#ddd;
 }
 
-.logo-subtitle{
-    color:#fbbf24;
-    font-size:.9rem;
-    letter-spacing:4px;
-    margin-top:6px;
+.btn{
+display:inline-block;
+margin-top:25px;
+padding:14px 35px;
+background:#d4af37;
+color:#071633;
+text-decoration:none;
+border-radius:50px;
+font-weight:bold;
+transition:.3s;
 }
 
-/* Tablet */
-@media (max-width:768px){
-
-    .logo-container{
-        padding:18px;
-        gap:12px;
-    }
-
-    .logo-icon{
-        width:70px;
-        height:70px;
-        font-size:28px;
-    }
-
-    .logo-title{
-        font-size:1.5rem;
-    }
-
-    .logo-subtitle{
-        font-size:.75rem;
-        letter-spacing:2px;
-    }
+.btn:hover{
+transform:translateY(-4px);
 }
 
-/* Mobile */
-@media (max-width:480px){
+.hero-image{
+text-align:center;
+}
 
-    .logo-container{
-        flex-direction:column;
-        text-align:center;
-        width:100%;
-        max-width:320px;
-    }
+.hero-image img{
+width:100%;
+max-width:420px;
+border-radius:25px;
+border:4px solid #d4af37;
+box-shadow:0 0 35px rgba(212,175,55,.4);
+}
 
-    .logo-icon{
-        width:80px;
-        height:80px;
-        font-size:30px;
-    }
+section{
+padding:90px 8%;
+}
 
-    .logo-title{
-        font-size:1.3rem;
-        word-break:break-word;
-    }
+.section-title{
+text-align:center;
+font-size:42px;
+margin-bottom:60px;
+color:#d4af37;
+}
 
-    .logo-subtitle{
-        font-size:.7rem;
-        letter-spacing:2px;
-    }
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+background:#0d224d;
+padding:30px;
+border-radius:20px;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card h3{
+margin-bottom:15px;
+color:#d4af37;
+}
+
+.card p{
+line-height:1.9;
+}
+
+.about{
+background:#0b1c40;
+border-radius:25px;
+padding:40px;
+line-height:2.2;
+font-size:18px;
+}
+
+footer{
+background:#051126;
+padding:40px;
+text-align:center;
+}
+
+.contact{
+font-size:20px;
+margin-top:15px;
+}
+
+@media(max-width:900px){
+
+.hero{
+grid-template-columns:1fr;
+text-align:center;
+}
+
+.hero-text h1{
+font-size:42px;
+}
+
+.hero-text h2{
+font-size:24px;
+}
+
+.hero-image{
+order:-1;
+}
+
 }
 
 </style>
@@ -127,23 +165,108 @@ body{
 
 <body>
 
-<div class="logo-container">
+<header>
 
-    <div class="logo-icon">
-        IF
-    </div>
+<div class="hero">
 
-    <div class="logo-text">
-        <div class="logo-title">
-            IranFreelancer
-        </div>
+<div class="hero-text">
 
-        <div class="logo-subtitle">
-            FREELANCE PLATFORM
-        </div>
-    </div>
+<h1>IranFreelancer</h1>
+
+<h2>طراحی سایت، اپلیکیشن و هوش مصنوعی</h2>
+
+<p>
+پلتفرم تخصصی ارائه خدمات فریلنسری، طراحی وب‌سایت‌های حرفه‌ای،
+توسعه اپلیکیشن‌های اندروید، سئو، دیجیتال مارکتینگ و راهکارهای
+هوش مصنوعی برای کسب‌وکارهای مدرن.
+</p>
+
+<a href="tel:09131580395" class="btn">
+تماس با ما
+</a>
 
 </div>
+
+<div class="hero-image">
+
+<img src="Founder.jpg" alt="Founder">
+
+</div>
+
+</div>
+
+</header>
+
+<section>
+
+<h2 class="section-title">خدمات ما</h2>
+
+<div class="services">
+
+<div class="card">
+<h3>طراحی سایت</h3>
+<p>
+طراحی انواع سایت شرکتی، فروشگاهی، خدماتی و شخصی با جدیدترین فناوری‌ها.
+</p>
+</div>
+
+<div class="card">
+<h3>طراحی اپلیکیشن</h3>
+<p>
+ساخت اپلیکیشن اندروید و وب اپلیکیشن با رابط کاربری حرفه‌ای.
+</p>
+</div>
+
+<div class="card">
+<h3>هوش مصنوعی</h3>
+<p>
+پیاده‌سازی چت‌بات، اتوماسیون هوشمند و ابزارهای مبتنی بر AI.
+</p>
+</div>
+
+<div class="card">
+<h3>سئو و دیجیتال مارکتینگ</h3>
+<p>
+افزایش رتبه گوگل و جذب مشتریان هدفمند برای کسب‌وکار شما.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="section-title">درباره ما</h2>
+
+<div class="about">
+
+IranFreelancer با هدف ارائه خدمات تخصصی فناوری اطلاعات،
+طراحی وب، توسعه اپلیکیشن، هوش مصنوعی و بازاریابی دیجیتال
+راه‌اندازی شده است.
+
+ما به کسب‌وکارها کمک می‌کنیم تا با استفاده از فناوری‌های
+روز دنیا حضور قدرتمندی در فضای آنلاین داشته باشند.
+
+</div>
+
+</section>
+
+<footer>
+
+<h2 style="color:#d4af37;">IranFreelancer</h2>
+
+<div class="contact">
+
+📞 09131580395
+
+<br><br>
+
+✉️ info@iranfreelancer.com
+
+</div>
+
+</footer>
 
 </body>
 </html>
