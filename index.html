@@ -2,16 +2,148 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>IranFreelancer</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#0f172a;
+    font-family:Tahoma, sans-serif;
+    padding:20px;
+}
+
+.logo-container{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    background:#111827;
+    padding:20px 30px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+    transition:.3s;
+}
+
+.logo-container:hover{
+    transform:translateY(-3px);
+}
+
+.logo-icon{
+    width:90px;
+    height:90px;
+    border:3px solid #fbbf24;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fbbf24;
+    font-size:38px;
+    font-weight:bold;
+    flex-shrink:0;
+}
+
+.logo-text{
+    display:flex;
+    flex-direction:column;
+}
+
+.logo-title{
+    color:white;
+    font-size:2rem;
+    font-weight:700;
+}
+
+.logo-subtitle{
+    color:#fbbf24;
+    font-size:.9rem;
+    letter-spacing:4px;
+    margin-top:6px;
+}
+
+/* Tablet */
+@media (max-width:768px){
+
+    .logo-container{
+        padding:18px;
+        gap:12px;
+    }
+
+    .logo-icon{
+        width:70px;
+        height:70px;
+        font-size:28px;
+    }
+
+    .logo-title{
+        font-size:1.5rem;
+    }
+
+    .logo-subtitle{
+        font-size:.75rem;
+        letter-spacing:2px;
+    }
+}
+
+/* Mobile */
+@media (max-width:480px){
+
+    .logo-container{
+        flex-direction:column;
+        text-align:center;
+        width:100%;
+        max-width:320px;
+    }
+
+    .logo-icon{
+        width:80px;
+        height:80px;
+        font-size:30px;
+    }
+
+    .logo-title{
+        font-size:1.3rem;
+        word-break:break-word;
+    }
+
+    .logo-subtitle{
+        font-size:.7rem;
+        letter-spacing:2px;
+    }
+}
+
+</style>
 </head>
+
 <body>
 
-<h1>IranFreelancer.com</h1>
+<div class="logo-container">
 
-<h2>طراحی سایت، اپلیکیشن، سئو و هوش مصنوعی</h2>
+    <div class="logo-icon">
+        IF
+    </div>
 
-<p>وب سایت رسمی در حال راه‌اندازی است.</p>
+    <div class="logo-text">
+        <div class="logo-title">
+            IranFreelancer
+        </div>
+
+        <div class="logo-subtitle">
+            FREELANCE PLATFORM
+        </div>
+    </div>
+
+</div>
 
 </body>
 </html>
