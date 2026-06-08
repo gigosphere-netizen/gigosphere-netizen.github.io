@@ -6,13 +6,15 @@
     <title>ایران فریلنسر | IranFreelancer - به زودی</title>
     <!-- فونت فارسی وزیر -->
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" />
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Reset و فونت‌ها */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Vazir', Tahoma, sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #e9edf5 100%);
@@ -20,35 +22,41 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             color: #1A2634;
             position: relative;
             overflow-x: hidden;
+            padding-bottom: 80px; /* فضای دکمه شناور */
         }
 
-        /* هدر شبیه به freelancer.com */
+        /* هدر */
         .header {
             width: 100%;
             background: #1A2634;
-            padding: 1rem 2rem;
+            padding: 0.8rem 2rem;
             color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: absolute;
+            position: sticky;
             top: 0;
-            left: 0;
             z-index: 10;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .header .logo {
-            font-size: 1.5rem;
+        .header .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .header .logo-container img {
+            height: 45px;
+        }
+        .header .logo-text {
+            font-size: 1.2rem;
             font-weight: bold;
-            color: #f60;
-            letter-spacing: 1px;
-        }
-        .header .logo span {
             color: white;
-            font-weight: normal;
+        }
+        .header .logo-text span {
+            color: #f60;
         }
         .contact-header {
             font-size: 0.9rem;
@@ -75,10 +83,11 @@
             align-items: center;
             text-align: center;
             padding: 2rem;
-            margin-top: 4rem;
             width: 100%;
             max-width: 900px;
+            margin-top: 1.5rem;
         }
+
         .badge {
             background: rgba(255, 102, 0, 0.1);
             color: #f60;
@@ -90,8 +99,9 @@
             display: inline-block;
             border: 1px dashed #f60;
         }
+
         h1 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             font-weight: 900;
             line-height: 1.3;
             margin-bottom: 1rem;
@@ -99,12 +109,13 @@
         }
         .en-title {
             display: block;
-            font-size: 2rem;
+            font-size: 1.8rem;
             direction: ltr;
             margin-top: 0.5rem;
             font-family: 'Vazir', sans-serif;
             color: #2c3e50;
         }
+
         .description {
             font-size: 1.1rem;
             color: #4a5568;
@@ -112,10 +123,11 @@
             margin: 1.5rem auto;
             line-height: 1.8;
         }
+
         .features {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
             margin: 2rem 0;
             flex-wrap: wrap;
         }
@@ -124,7 +136,7 @@
             padding: 1.5rem;
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            width: 180px;
+            width: 170px;
             text-align: center;
             transition: transform 0.3s;
         }
@@ -141,59 +153,10 @@
             margin-bottom: 0.5rem;
         }
 
-        /* فرم ثبت‌نام */
-        .subscribe-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 500px;
-            margin: 2rem 0;
-        }
-        .subscribe-box h2 {
-            margin-bottom: 1.5rem;
-            font-size: 1.4rem;
-        }
-        .input-group {
-            display: flex;
-            gap: 0.5rem;
-            flex-direction: row;
-        }
-        .input-group input {
-            flex: 1;
-            padding: 0.8rem 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-family: 'Vazir', sans-serif;
-            font-size: 1rem;
-            outline: none;
-            transition: 0.3s;
-        }
-        .input-group input:focus {
-            border-color: #f60;
-        }
-        .input-group button {
-            background: #f60;
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            font-family: 'Vazir', sans-serif;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            white-space: nowrap;
-        }
-        .input-group button:hover {
-            background: #e55a00;
-            box-shadow: 0 5px 15px rgba(255,102,0,0.3);
-        }
-
         /* شمارش معکوس */
         .countdown {
             display: flex;
-            gap: 1.2rem;
+            gap: 1rem;
             justify-content: center;
             margin: 2rem 0;
             flex-wrap: wrap;
@@ -203,7 +166,7 @@
             color: white;
             padding: 1rem 1.5rem;
             border-radius: 12px;
-            min-width: 70px;
+            min-width: 75px;
             text-align: center;
         }
         .countdown-item span:first-child {
@@ -217,6 +180,67 @@
             color: #ccc;
         }
 
+        /* باکس‌های فرم */
+        .form-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        .form-box h2 {
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        /* استایل مشترک فیلدها */
+        .input-field {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Vazir', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.3s;
+            margin-bottom: 1rem;
+        }
+        .input-field:focus {
+            border-color: #f60;
+        }
+        .btn-primary {
+            background: #1A2634;
+            color: white;
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            font-family: 'Vazir', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            font-size: 1rem;
+        }
+        .btn-primary:hover {
+            background: #f60;
+            box-shadow: 0 5px 15px rgba(255,102,0,0.3);
+        }
+
+        .row-fields {
+            display: flex;
+            gap: 1rem;
+        }
+        .row-fields .half {
+            flex: 1;
+        }
+
+        /* اطلاعات تماس */
         .contact-info {
             display: flex;
             gap: 2rem;
@@ -242,6 +266,47 @@
             color: #64748b;
             font-size: 0.85rem;
             padding: 1rem;
+            text-align: center;
+        }
+
+        .explanation-text {
+            max-width: 600px;
+            margin: 1rem auto;
+            line-height: 1.9;
+            color: #4a5568;
+        }
+
+        /* دکمه شناور چت / واتس‌اپ */
+        .floating-chat {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 999;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            text-decoration: none;
+            transition: 0.3s;
+            animation: pulse 2s infinite;
+        }
+        .floating-chat:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        .floating-chat i {
+            margin-top: 2px;
         }
 
         /* ریسپانسیو */
@@ -249,11 +314,13 @@
             .header {
                 flex-direction: column;
                 gap: 0.5rem;
-                text-align: center;
                 padding: 1rem;
             }
+            .header .logo-container {
+                justify-content: center;
+            }
             h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             .en-title {
                 font-size: 1.4rem;
@@ -265,22 +332,32 @@
                 width: 140px;
                 padding: 1rem;
             }
-            .input-group {
+            .row-fields {
                 flex-direction: column;
+            }
+            .contact-info {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            .floating-chat {
+                width: 55px;
+                height: 55px;
+                bottom: 15px;
+                right: 15px;
+                font-size: 1.8rem;
             }
         }
     </style>
-    <!-- Font Awesome برای آیکون‌ها -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <!-- هدر -->
     <header class="header">
-        <div class="logo">
-            <span>Iran</span>Freelancer <span style="font-size:0.8rem; margin-right:0.5rem;">| ایران فریلنسر</span>
+        <div class="logo-container">
+            <img src="Founder.png" alt="IranFreelancer Logo">
+            <div class="logo-text"><span>Iran</span>Freelancer | ایران فریلنسر</div>
         </div>
         <div class="contact-header">
-            <a href="tel:+989131580395"><i class="fas fa-phone"></i> ۱۲۳۴۵۶۷۸ - ۰۲۱</a>
+            <a href="tel:+989131580395"><i class="fas fa-phone"></i> ۰۹۱۳۱۵۸۰۳۹۵</a>
             <a href="mailto:hello@iranfreelancer.com"><i class="fas fa-envelope"></i> hello@iranfreelancer.com</a>
         </div>
     </header>
@@ -318,7 +395,7 @@
             </div>
         </div>
 
-        <!-- شمارش معکوس (مثلاً ۳۰ روز دیگر) - کنجکاوی ایجاد می‌کند -->
+        <!-- شمارش معکوس -->
         <div class="countdown" id="countdown">
             <div class="countdown-item"><span id="days">00</span><span class="label">روز</span></div>
             <div class="countdown-item"><span id="hours">00</span><span class="label">ساعت</span></div>
@@ -326,18 +403,61 @@
             <div class="countdown-item"><span id="seconds">00</span><span class="label">ثانیه</span></div>
         </div>
 
-        <!-- باکس عضویت برای اطلاع‌رسانی -->
-        <div class="subscribe-box">
+        <!-- فرم اول: عضویت در خبرنامه -->
+        <div class="form-box">
             <h2>📩 اولین نفر باشید که مطلع می‌شود</h2>
-            <div class="input-group">
-                <input type="email" placeholder="ایمیل خود را وارد کنید" dir="ltr">
-                <button>اطلاع بده</button>
-            </div>
+            <form action="https://formspree.io/f/xkobkppd" method="POST">
+                <input type="email" name="email" class="input-field" placeholder="ایمیل خود را وارد کنید" dir="ltr" required>
+                <button type="submit" class="btn-primary">اطلاع بده</button>
+            </form>
         </div>
 
-        <!-- راه‌های ارتباطی -->
+        <!-- فرم دوم: ثبت‌نام فریلنسرهای بین‌المللی -->
+        <div class="form-box">
+            <h2>🤝 به جمع فریلنسرهای حرفه‌ای بپیوندید</h2>
+            <p style="color: #64748b; margin-bottom: 1.5rem;">اطلاعات خود را وارد کنید تا در اولین فرصت به پروژه‌های مناسب متصل شوید.</p>
+            <form action="https://formspree.io/f/xdavglkr" method="POST">
+                <div class="row-fields">
+                    <div class="half">
+                        <label style="display:block; margin-bottom:0.3rem; font-weight:bold;">نام *</label>
+                        <input type="text" name="firstname" class="input-field" required>
+                    </div>
+                    <div class="half">
+                        <label style="display:block; margin-bottom:0.3rem; font-weight:bold;">نام خانوادگی *</label>
+                        <input type="text" name="lastname" class="input-field" required>
+                    </div>
+                </div>
+                <label style="display:block; margin-bottom:0.3rem; font-weight:bold;">ایمیل *</label>
+                <input type="email" name="email" class="input-field" dir="ltr" required>
+                
+                <label style="display:block; margin-bottom:0.3rem; font-weight:bold;">شماره تماس</label>
+                <input type="tel" name="phone" class="input-field" dir="ltr" placeholder="0912xxxxxxx">
+                
+                <label style="display:block; margin-bottom:0.3rem; font-weight:bold;">مهارت‌های اصلی *</label>
+                <input type="text" name="skills" class="input-field" placeholder="مثلاً: React، طراحی UI/UX، سئو..." required>
+                
+                <label style="display:block; margin-bottom:0.3rem; font-weight:bold;">لینک نمونه‌کار (پورتفولیو)</label>
+                <input type="url" name="portfolio" class="input-field" dir="ltr" placeholder="https://yourportfolio.com">
+                
+                <label style="display:block; margin-bottom:0.3rem; font-weight:bold;">درباره شما (اختیاری)</label>
+                <textarea name="about" rows="3" class="input-field" placeholder="کمی از تجربه و تخصصتان بگویید..."></textarea>
+                
+                <button type="submit" class="btn-primary">ثبت‌نام رایگان</button>
+            </form>
+        </div>
+
+        <!-- توضیح پایین صفحه -->
+        <div class="explanation-text">
+            <strong>چرا ایران فریلنسر؟</strong><br>
+            ما با هدف ایجاد پلی میان فریلنسرهای فارسی‌زبان و بازار کار جهانی شکل گرفته‌ایم. 
+            با استفاده از زیرساخت امن پرداخت ریالی و همکاری استراتژیک با پلتفرم‌های بین‌المللی، 
+            تلاش داریم فضایی قابل اعتماد برای انجام پروژه‌های باکیفیت فراهم کنیم. 
+            اگر شما یک متخصص با مهارت‌های دیجیتال هستید، همین حالا ثبت‌نام کنید تا جزو نخستین اعضای جامعه ما باشید.
+        </div>
+
+        <!-- اطلاعات تماس -->
         <div class="contact-info">
-            <a href="tel:+982112345678"><i class="fas fa-phone"></i> ۱۲۳۴۵۶۷۸ - ۰۲۱</a>
+            <a href="tel:+989131580395"><i class="fas fa-phone"></i> ۰۹۱۳۱۵۸۰۳۹۵</a>
             <a href="mailto:hello@iranfreelancer.com"><i class="fas fa-envelope"></i> hello@iranfreelancer.com</a>
             <a href="#"><i class="fab fa-instagram"></i> IranFreelancer@</a>
             <a href="#"><i class="fab fa-linkedin"></i> IranFreelancer</a>
@@ -348,9 +468,13 @@
         © 2025 IranFreelancer. تمامی حقوق محفوظ است.
     </footer>
 
-    <!-- اسکریپت شمارش معکوس (تاریخ هدف: ۳۰ روز از امروز) -->
+    <!-- دکمه شناور چت واتس‌اپ -->
+    <a href="https://wa.me/989131580395" target="_blank" class="floating-chat" title="چت آنلاین در واتس‌اپ">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- اسکریپت شمارش معکوس -->
     <script>
-        // تاریخ هدف: 30 روز بعد از امروز
         const targetDate = new Date();
         targetDate.setDate(targetDate.getDate() + 30);
         targetDate.setHours(23, 59, 59, 0);
