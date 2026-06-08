@@ -1,847 +1,382 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdolreza Ataei | PhD Industrial Management | AI & Web Solutions</title>
-    <meta name="description" content="Abdolreza Ataei - PhD in Industrial Management, SCM Expert, University Lecturer, AI Solutions Architect, Founder & CEO of iranfreelancer. Web & App Design, AI Integration, Advertising.">
-
+    <title>ایران فریلنسر | IranFreelancer - به زودی</title>
+    <!-- فونت فارسی وزیر -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" />
     <style>
-        :root {
-            --navy-deep: #060f1f;
-            --navy: #0a1a33;
-            --navy-mid: #0f2440;
-            --navy-light: #162d52;
-            --white: #ffffff;
-            --white-soft: #f0f3f7;
-            --white-muted: #d4dce6;
-            --gold-accent: #c9a96e;
-            --gold-subtle: #d4bc8b;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.5);
-            --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.4);
-            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
-            --font-heading: 'Georgia', 'Times New Roman', 'Palatino Linotype', 'Book Antiqua', serif;
-            --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        }
-
+        /* Reset و فونت‌ها */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
         body {
-            font-family: var(--font-body);
-            background: var(--navy-deep);
-            color: var(--white-soft);
+            font-family: 'Vazir', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9edf5 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            color: #1A2634;
+            position: relative;
             overflow-x: hidden;
-            position: relative;
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ── Subtle Animated Background ── */
-        .bg-layer {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .bg-layer::before {
-            content: '';
-            position: absolute;
-            inset: -50%;
-            background:
-                radial-gradient(ellipse at 30% 20%, rgba(201, 169, 110, 0.04) 0%, transparent 55%),
-                radial-gradient(ellipse at 70% 60%, rgba(255, 255, 255, 0.03) 0%, transparent 55%),
-                radial-gradient(ellipse at 50% 80%, rgba(201, 169, 110, 0.05) 0%, transparent 50%),
-                radial-gradient(ellipse at 20% 70%, rgba(255, 255, 255, 0.02) 0%, transparent 45%);
-            animation: bgPulse 18s ease-in-out infinite;
-        }
-
-        @keyframes bgPulse {
-            0%,
-            100% {
-                transform: scale(1) translate(0, 0);
-            }
-            25% {
-                transform: scale(1.08) translate(-1%, -1%);
-            }
-            50% {
-                transform: scale(1.04) translate(1%, 0.5%);
-            }
-            75% {
-                transform: scale(1.1) translate(0.5%, -0.5%);
-            }
-        }
-
-        /* Subtle grid pattern */
-        .bg-grid {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.025;
-            background-image:
-                linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
-            background-size: 50px 50px;
-            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
-            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
-        }
-
-        /* Optional subtle bg image overlay */
-        .bg-texture {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.06;
-            background-image: url('bg-subtle.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            mix-blend-mode: soft-light;
-        }
-
-        /* ── Floating Particles ── */
-        .particles {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--white-muted);
-            border-radius: 50%;
-            animation: floatUp linear infinite;
-            opacity: 0;
-        }
-        .particle:nth-child(1) {
-            left: 10%;
-            animation-duration: 14s;
-            animation-delay: 0s;
-            width: 1.5px;
-            height: 1.5px;
-        }
-        .particle:nth-child(2) {
-            left: 25%;
-            animation-duration: 18s;
-            animation-delay: 3s;
-            width: 2px;
-            height: 2px;
-        }
-        .particle:nth-child(3) {
-            left: 40%;
-            animation-duration: 12s;
-            animation-delay: 6s;
-            width: 1px;
-            height: 1px;
-        }
-        .particle:nth-child(4) {
-            left: 55%;
-            animation-duration: 20s;
-            animation-delay: 2s;
-            width: 2.5px;
-            height: 2.5px;
-        }
-        .particle:nth-child(5) {
-            left: 70%;
-            animation-duration: 16s;
-            animation-delay: 8s;
-            width: 1.5px;
-            height: 1.5px;
-        }
-        .particle:nth-child(6) {
-            left: 85%;
-            animation-duration: 22s;
-            animation-delay: 4s;
-            width: 2px;
-            height: 2px;
-        }
-        .particle:nth-child(7) {
-            left: 15%;
-            animation-duration: 19s;
-            animation-delay: 10s;
-            width: 1px;
-            height: 1px;
-        }
-        .particle:nth-child(8) {
-            left: 60%;
-            animation-duration: 15s;
-            animation-delay: 7s;
-            width: 2px;
-            height: 2px;
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(105vh) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.7;
-            }
-            50% {
-                opacity: 0.4;
-            }
-            90% {
-                opacity: 0.1;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1.5);
-                opacity: 0;
-            }
-        }
-
-        /* ── Main Content Wrapper ── */
-        .main-wrapper {
-            position: relative;
-            z-index: 1;
+        /* هدر شبیه به freelancer.com */
+        .header {
             width: 100%;
-            max-width: 1100px;
-            padding: 2rem 1.5rem;
+            background: #1A2634;
+            padding: 1rem 2rem;
+            color: white;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            gap: 2.5rem;
-        }
-
-        /* ── Profile Card ── */
-        .profile-card {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 3.5rem;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 3rem 3.5rem;
-            box-shadow: var(--shadow-lg);
-            transition: var(--transition-smooth);
-            width: 100%;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .profile-card:hover {
-            border-color: rgba(255, 255, 255, 0.18);
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(201, 169, 110, 0.1) inset;
-        }
-
-        /* ── Photo Orbit Container ── */
-        .photo-orbit-wrapper {
-            position: relative;
-            width: 340px;
-            height: 340px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Rotating Orbits */
-        .orbit {
             position: absolute;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-        }
-
-        .orbit-1 {
-            width: 310px;
-            height: 310px;
-            border: 1.5px dashed rgba(255, 255, 255, 0.25);
-            animation-name: rotateClockwise;
-            animation-duration: 20s;
-        }
-
-        .orbit-2 {
-            width: 285px;
-            height: 285px;
-            border: 1px dotted rgba(201, 169, 110, 0.35);
-            animation-name: rotateCounterClockwise;
-            animation-duration: 14s;
-        }
-
-        .orbit-3 {
-            width: 260px;
-            height: 260px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            animation-name: rotateClockwise;
-            animation-duration: 25s;
-            border-style: dashed;
-            border-width: 1px;
-            border-color: rgba(255, 255, 255, 0.18);
-            border-dash-array: 20 40;
-        }
-
-        /* Small orbiting dot */
-        .orbit-dot {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: var(--gold-accent);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            pointer-events: none;
-            animation: orbitDot 10s linear infinite;
-            box-shadow: 0 0 12px rgba(201, 169, 110, 0.7), 0 0 30px rgba(201, 169, 110, 0.3);
-        }
-
-        @keyframes orbitDot {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg) translateX(155px) rotate(0deg);
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg) translateX(155px) rotate(-360deg);
-            }
-        }
-
-        @keyframes rotateClockwise {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
-        }
-        @keyframes rotateCounterClockwise {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(-360deg);
-            }
-        }
-
-        /* Photo Frame */
-        .photo-frame {
-            position: relative;
-            z-index: 5;
-            width: 150px;
-            height: 200px;
-            /* 3:4 ratio */
-            border-radius: 14px;
-            overflow: hidden;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5), 0 0 0 8px rgba(201, 169, 110, 0.08);
-            transition: var(--transition-smooth);
-            background: var(--navy-mid);
-        }
-
-        .photo-frame:hover {
-            border-color: rgba(255, 255, 255, 0.6);
-            box-shadow: 0 14px 45px rgba(0, 0, 0, 0.6), 0 0 0 14px rgba(201, 169, 110, 0.13);
-            transform: translateY(-3px);
-        }
-
-        .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.6s ease;
-        }
-        .photo-frame:hover img {
-            transform: scale(1.04);
-        }
-
-        /* ── Info Section ── */
-        .info-section {
-            flex: 1;
-            min-width: 280px;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .name-title {
-            font-family: var(--font-heading);
-            font-size: 2.4rem;
-            font-weight: 700;
-            color: var(--white);
-            letter-spacing: 0.03em;
-            line-height: 1.2;
-            position: relative;
-            display: inline-block;
-        }
-
-        .name-title::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
+            top: 0;
             left: 0;
-            width: 55px;
-            height: 3px;
-            background: var(--gold-accent);
-            border-radius: 3px;
-            transition: width 0.5s ease;
+            z-index: 10;
         }
-        .profile-card:hover .name-title::after {
-            width: 80px;
+        .header .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #f60;
+            letter-spacing: 1px;
         }
-
-        .badge-row {
+        .header .logo span {
+            color: white;
+            font-weight: normal;
+        }
+        .contact-header {
+            font-size: 0.9rem;
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin-top: 0.3rem;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .contact-header a {
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .contact-header a:hover {
+            color: #f60;
+        }
+        .contact-header i {
+            margin-left: 0.3rem;
         }
 
+        /* محتوای اصلی */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            width: 100%;
+            max-width: 900px;
+        }
         .badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--white-soft);
-            padding: 0.4rem 1rem;
+            background: rgba(255, 102, 0, 0.1);
+            color: #f60;
+            padding: 0.4rem 1.2rem;
             border-radius: 50px;
-            font-size: 0.82rem;
-            font-weight: 500;
-            letter-spacing: 0.02em;
-            transition: var(--transition-smooth);
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            border: 1px dashed #f60;
+        }
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: #1A2634;
+        }
+        .en-title {
+            display: block;
+            font-size: 2rem;
+            direction: ltr;
+            margin-top: 0.5rem;
+            font-family: 'Vazir', sans-serif;
+            color: #2c3e50;
+        }
+        .description {
+            font-size: 1.1rem;
+            color: #4a5568;
+            max-width: 600px;
+            margin: 1.5rem auto;
+            line-height: 1.8;
+        }
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        .feature {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            width: 180px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        .feature i {
+            font-size: 2rem;
+            color: #f60;
+            margin-bottom: 0.8rem;
+        }
+        .feature h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* فرم ثبت‌نام */
+        .subscribe-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            margin: 2rem 0;
+        }
+        .subscribe-box h2 {
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-direction: row;
+        }
+        .input-group input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Vazir', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+        .input-group input:focus {
+            border-color: #f60;
+        }
+        .input-group button {
+            background: #f60;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Vazir', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
             white-space: nowrap;
         }
-        .badge:hover {
-            background: rgba(255, 255, 255, 0.13);
-            border-color: rgba(255, 255, 255, 0.4);
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-        }
-        .badge.accent {
-            border-color: rgba(201, 169, 110, 0.45);
-            background: rgba(201, 169, 110, 0.08);
-            color: var(--gold-subtle);
-        }
-        .badge.accent:hover {
-            border-color: var(--gold-accent);
-            background: rgba(201, 169, 110, 0.16);
-            color: #e8d5a8;
-            box-shadow: 0 6px 22px rgba(201, 169, 110, 0.2);
+        .input-group button:hover {
+            background: #e55a00;
+            box-shadow: 0 5px 15px rgba(255,102,0,0.3);
         }
 
-        .credentials-list {
-            list-style: none;
+        /* شمارش معکوس */
+        .countdown {
             display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            margin-top: 0.4rem;
+            gap: 1.2rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
         }
-        .credentials-list li {
+        .countdown-item {
+            background: #1A2634;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            min-width: 70px;
+            text-align: center;
+        }
+        .countdown-item span:first-child {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+            line-height: 1;
+        }
+        .countdown-item .label {
+            font-size: 0.8rem;
+            color: #ccc;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        .contact-info a {
+            color: #1A2634;
+            text-decoration: none;
+            font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 0.7rem;
-            font-size: 0.95rem;
-            color: var(--white-muted);
-            transition: color 0.3s;
+            gap: 0.3rem;
         }
-        .credentials-list li:hover {
-            color: #fff;
-        }
-        .credentials-list li .dot-icon {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--gold-accent);
-            flex-shrink: 0;
-            box-shadow: 0 0 8px rgba(201, 169, 110, 0.5);
+        .contact-info i {
+            color: #f60;
+            font-size: 1.2rem;
         }
 
-        .highlight-text {
-            color: var(--gold-subtle);
-            font-weight: 600;
+        .footer {
+            margin-top: 2rem;
+            color: #64748b;
+            font-size: 0.85rem;
+            padding: 1rem;
         }
 
-        /* ── Services Section ── */
-        .services-section {
-            width: 100%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2rem 2.5rem;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition-smooth);
-        }
-        .services-section:hover {
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
-        }
-        .services-section h3 {
-            font-family: var(--font-heading);
-            font-size: 1.3rem;
-            color: var(--white);
-            margin-bottom: 1.2rem;
-            letter-spacing: 0.02em;
-            position: relative;
-            display: inline-block;
-        }
-        .services-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--gold-accent);
-            border-radius: 2px;
-        }
-        .services-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.7rem;
-        }
-        .service-tag {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            color: var(--white-soft);
-            padding: 0.55rem 1.2rem;
-            border-radius: 8px;
-            font-size: 0.88rem;
-            font-weight: 500;
-            transition: var(--transition-smooth);
-            cursor: default;
-            letter-spacing: 0.015em;
-        }
-        .service-tag:hover {
-            background: rgba(201, 169, 110, 0.1);
-            border-color: rgba(201, 169, 110, 0.5);
-            color: #fff;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
-        }
-
-        /* ── Footer ── */
-        .site-footer {
-            width: 100%;
-            text-align: center;
-            padding: 1.5rem 1rem;
-            position: relative;
-            z-index: 1;
-        }
-        .site-footer .copyright {
-            font-size: 0.82rem;
-            color: rgba(255, 255, 255, 0.45);
-            letter-spacing: 0.03em;
-            transition: color 0.3s;
-        }
-        .site-footer .copyright a {
-            color: var(--gold-subtle);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s, text-shadow 0.3s;
-        }
-        .site-footer .copyright a:hover {
-            color: #e8d5a8;
-            text-shadow: 0 0 12px rgba(201, 169, 110, 0.4);
-            text-decoration: underline;
-            text-underline-offset: 4px;
-        }
-        .footer-divider {
-            width: 60px;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.2);
-            margin: 0 auto 0.8rem;
-            border-radius: 1px;
-        }
-
-        /* ── Responsive Design ── */
-        @media (max-width: 900px) {
-            .profile-card {
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            .header {
                 flex-direction: column;
-                gap: 2rem;
-                padding: 2rem 1.8rem;
-                text-align: center;
-                border-radius: 20px;
-            }
-            .photo-orbit-wrapper {
-                width: 260px;
-                height: 260px;
-            }
-            .orbit-1 {
-                width: 240px;
-                height: 240px;
-            }
-            .orbit-2 {
-                width: 218px;
-                height: 218px;
-            }
-            .orbit-3 {
-                width: 198px;
-                height: 198px;
-            }
-            .orbit-dot {
-                animation: orbitDotSmall 10s linear infinite;
-            }
-            @keyframes orbitDotSmall {
-                0% {
-                    transform: translate(-50%, -50%) rotate(0deg) translateX(120px) rotate(0deg);
-                }
-                100% {
-                    transform: translate(-50%, -50%) rotate(360deg) translateX(120px) rotate(-360deg);
-                }
-            }
-            .photo-frame {
-                width: 120px;
-                height: 160px;
-                border-radius: 12px;
-            }
-            .name-title {
-                font-size: 1.8rem;
-            }
-            .name-title::after {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .profile-card:hover .name-title::after {
-                width: 60px;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .badge-row {
-                justify-content: center;
-            }
-            .credentials-list li {
-                justify-content: center;
-                font-size: 0.88rem;
-            }
-            .services-section {
-                padding: 1.5rem 1.5rem;
-                text-align: center;
-                border-radius: 16px;
-            }
-            .services-section h3::after {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .services-grid {
-                justify-content: center;
-            }
-            .info-section {
-                align-items: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .main-wrapper {
-                padding: 1.2rem 0.8rem;
-                gap: 1.8rem;
-            }
-            .profile-card {
-                padding: 1.5rem 1rem;
-                gap: 1.5rem;
-                border-radius: 16px;
-            }
-            .photo-orbit-wrapper {
-                width: 210px;
-                height: 210px;
-            }
-            .orbit-1 {
-                width: 195px;
-                height: 195px;
-            }
-            .orbit-2 {
-                width: 178px;
-                height: 178px;
-            }
-            .orbit-3 {
-                width: 162px;
-                height: 162px;
-            }
-            @keyframes orbitDotSmallMobile {
-                0% {
-                    transform: translate(-50%, -50%) rotate(0deg) translateX(97px) rotate(0deg);
-                }
-                100% {
-                    transform: translate(-50%, -50%) rotate(360deg) translateX(97px) rotate(-360deg);
-                }
-            }
-            .orbit-dot {
-                animation: orbitDotSmallMobile 10s linear infinite;
-            }
-            .photo-frame {
-                width: 100px;
-                height: 133px;
-                border-radius: 10px;
-                border-width: 2px;
-            }
-            .name-title {
-                font-size: 1.45rem;
-            }
-            .badge {
-                font-size: 0.7rem;
-                padding: 0.3rem 0.7rem;
-            }
-            .credentials-list li {
-                font-size: 0.78rem;
                 gap: 0.5rem;
+                text-align: center;
+                padding: 1rem;
             }
-            .service-tag {
-                font-size: 0.75rem;
-                padding: 0.4rem 0.85rem;
-                border-radius: 6px;
+            h1 {
+                font-size: 2rem;
             }
-            .services-section {
-                padding: 1.2rem 1rem;
-                border-radius: 14px;
+            .en-title {
+                font-size: 1.4rem;
             }
-            .site-footer .copyright {
-                font-size: 0.7rem;
+            .features {
+                gap: 1rem;
             }
-        }
-
-        /* ── Accessibility: Reduced Motion ── */
-        @media (prefers-reduced-motion: reduce) {
-            .orbit,
-            .orbit-dot,
-            .bg-layer::before,
-            .particle {
-                animation-duration: 0s !important;
-                animation: none !important;
+            .feature {
+                width: 140px;
+                padding: 1rem;
             }
-            .photo-frame:hover img {
-                transform: none;
+            .input-group {
+                flex-direction: column;
             }
         }
     </style>
+    <!-- Font Awesome برای آیکون‌ها -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <!-- هدر -->
+    <header class="header">
+        <div class="logo">
+            <span>Iran</span>Freelancer <span style="font-size:0.8rem; margin-right:0.5rem;">| ایران فریلنسر</span>
+        </div>
+        <div class="contact-header">
+            <a href="tel:+982112345678"><i class="fas fa-phone"></i> ۱۲۳۴۵۶۷۸ - ۰۲۱</a>
+            <a href="mailto:hello@iranfreelancer.com"><i class="fas fa-envelope"></i> hello@iranfreelancer.com</a>
+        </div>
+    </header>
 
-    <!-- Background Layers -->
-    <div class="bg-layer"></div>
-    <div class="bg-grid"></div>
-    <!-- Optional subtle background image — replace 'bg-subtle.jpg' with your own -->
-    <div class="bg-texture" aria-hidden="true"></div>
+    <!-- محتوای اصلی -->
+    <main class="main-content">
+        <div class="badge">🚀 به زودی اتفاقی بزرگ در راه است</div>
+        
+        <h1>
+            پلتفرم فریلنسینگ ایران،
+            <span class="en-title">Powered by Global Expertise</span>
+        </h1>
+        
+        <p class="description">
+            اولین بازار آنلاین تخصصی که مستقیماً فریلنسرهای فارسی‌زبان را به پروژه‌های داخلی و بین‌المللی متصل می‌کند.
+            <br>با پشتوانه همکاری استراتژیک، دروازه‌ای به روی فرصت‌های بی‌نظیر.
+        </p>
 
-    <!-- Floating Particles -->
-    <div class="particles" aria-hidden="true">
-        <span class="particle"></span>
-        <span class="particle"></span>
-        <span class="particle"></span>
-        <span class="particle"></span>
-        <span class="particle"></span>
-        <span class="particle"></span>
-        <span class="particle"></span>
-        <span class="particle"></span>
-    </div>
-
-    <!-- Main Content -->
-    <main class="main-wrapper">
-
-        <!-- Profile Card -->
-        <article class="profile-card">
-
-            <!-- Photo with Rotating Orbits -->
-            <div class="photo-orbit-wrapper" aria-hidden="false">
-                <div class="orbit orbit-1"></div>
-                <div class="orbit orbit-2"></div>
-                <div class="orbit orbit-3"></div>
-                <div class="orbit-dot"></div>
-                <div class="photo-frame">
-                    <!-- Replace 'founder.jpg' with your actual photo — 3:4 ratio recommended (e.g. 600×800px) -->
-                    <img
-                    src="founder.jpg"
-                    alt="Abdolreza Ataei — Founder & CEO"
-                    loading="eager"
-                    width="150"
-                    height="200"
-                    onerror="this.style.display='none';this.parentElement.style.background='rgba(255,255,255,0.05)';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.innerHTML='<span style=color:rgba(255,255,255,0.4);font-size:0.75rem;text-align:center;>Photo<br>founder.jpg</span>';"
-                    >
-                </div>
+        <!-- ویژگی‌ها -->
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-globe"></i>
+                <h3>دسترسی جهانی</h3>
+                <p>ارتباط با کارفرمایان بین‌المللی</p>
             </div>
-
-            <!-- Info Section -->
-            <div class="info-section">
-                <h1 class="name-title">Abdolreza Ataei</h1>
-
-                <div class="badge-row">
-                    <span class="badge accent">PhD | Industrial Management</span>
-                    <span class="badge">SCM Expert</span>
-                    <span class="badge">University Lecturer</span>
-                </div>
-
-                <ul class="credentials-list">
-                    <li>
-                        <span class="dot-icon"></span>
-                        <span><strong class="highlight-text">Author & Researcher</strong> — Published works in Supply Chain & AI</span>
-                    </li>
-                    <li>
-                        <span class="dot-icon"></span>
-                        <span><strong class="highlight-text">AI Solutions Architect</strong> — APIs • Machine Learning • Intelligent Automation</span>
-                    </li>
-                    <li>
-                        <span class="dot-icon"></span>
-                        <span><strong class="highlight-text">Web & App Design</strong> — Full‑stack development • UI/UX • Responsive Design</span>
-                    </li>
-                    <li>
-                        <span class="dot-icon"></span>
-                        <span><strong class="highlight-text">Founder & CEO</strong> of <span class="highlight-text">iranfreelancer</span></span>
-                    </li>
-                </ul>
-
-                <div class="badge-row" style="margin-top:0.2rem;">
-                    <span class="badge accent">🎯 Strategic Consulting</span>
-                    <span class="badge">📊 Data-Driven Insights</span>
-                    <span class="badge">🔗 End-to-End Solutions</span>
-                </div>
+            <div class="feature">
+                <i class="fas fa-shield-alt"></i>
+                <h3>پرداخت امن</h3>
+                <p>تسویه ریالی سریع و مطمئن</p>
             </div>
-        </article>
-
-        <!-- Services Section -->
-        <section class="services-section">
-            <h3>🛠️ Professional Services</h3>
-            <div class="services-grid">
-                <span class="service-tag">🌐 Website Design & Development</span>
-                <span class="service-tag">📱 Mobile App Design (iOS & Android)</span>
-                <span class="service-tag">🤖 AI & Machine Learning Solutions</span>
-                <span class="service-tag">🔌 API Development & Integration</span>
-                <span class="service-tag">📢 Digital Advertising & Marketing</span>
-                <span class="service-tag">🎨 Icon & Brand Identity Design</span>
-                <span class="service-tag">📋 Supply Chain Consulting</span>
-                <span class="service-tag">🎓 Academic & Corporate Training</span>
-                <span class="service-tag">💡 Tina Platform Solutions</span>
-                <span class="service-tag">🚀 Startup & MVP Strategy</span>
+            <div class="feature">
+                <i class="fas fa-users"></i>
+                <h3>جامعه حرفه‌ای</h3>
+                <p>فریلنسرهای تأییدشده</p>
             </div>
-        </section>
+        </div>
 
-        <!-- Footer -->
-        <footer class="site-footer">
-            <div class="footer-divider"></div>
-            <p class="copyright">
-                &copy; 2026 <strong>Abdolreza Ataei</strong> — All Rights Reserved &nbsp;|&nbsp;
-                <a href="https://iranfreelancer.ir" target="_blank" rel="noopener noreferrer" title="Visit iranfreelancer">iranfreelancer.ir</a>
-                &nbsp;|&nbsp; Founder & CEO
-            </p>
-        </footer>
+        <!-- شمارش معکوس (مثلاً ۳۰ روز دیگر) - کنجکاوی ایجاد می‌کند -->
+        <div class="countdown" id="countdown">
+            <div class="countdown-item"><span id="days">00</span><span class="label">روز</span></div>
+            <div class="countdown-item"><span id="hours">00</span><span class="label">ساعت</span></div>
+            <div class="countdown-item"><span id="minutes">00</span><span class="label">دقیقه</span></div>
+            <div class="countdown-item"><span id="seconds">00</span><span class="label">ثانیه</span></div>
+        </div>
 
+        <!-- باکس عضویت برای اطلاع‌رسانی -->
+        <div class="subscribe-box">
+            <h2>📩 اولین نفر باشید که مطلع می‌شود</h2>
+            <div class="input-group">
+                <input type="email" placeholder="ایمیل خود را وارد کنید" dir="ltr">
+                <button>اطلاع بده</button>
+            </div>
+        </div>
+
+        <!-- راه‌های ارتباطی -->
+        <div class="contact-info">
+            <a href="tel:+982112345678"><i class="fas fa-phone"></i> ۱۲۳۴۵۶۷۸ - ۰۲۱</a>
+            <a href="mailto:hello@iranfreelancer.com"><i class="fas fa-envelope"></i> hello@iranfreelancer.com</a>
+            <a href="#"><i class="fab fa-instagram"></i> IranFreelancer@</a>
+            <a href="#"><i class="fab fa-linkedin"></i> IranFreelancer</a>
+        </div>
     </main>
 
+    <footer class="footer">
+        © 2025 IranFreelancer. تمامی حقوق محفوظ است.
+    </footer>
+
+    <!-- اسکریپت شمارش معکوس (تاریخ هدف: ۳۰ روز از امروز) -->
+    <script>
+        // تاریخ هدف: 30 روز بعد از امروز
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 30);
+        targetDate.setHours(23, 59, 59, 0);
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate.getTime() - now;
+
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = "<p style='color:#f60; font-weight:bold;'>به زودی راه‌اندازی می‌شویم!</p>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
 </html>
