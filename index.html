@@ -44,41 +44,84 @@
 
     <style>
         :root {
-            --green-dark: #1E4A3B;
-            --green-mid: #2D6A4F;
-            --red-dark: #8B0000;
-            --red-mid: #A31515;
-            --gray-dark: #2C3E50;
-            --gray-mid: #4A5568;
-            --gray-light: #A0AEC0;
-            --white: #FFFFFF;
-            --glass-bg: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --shadow-sm: 0 4px 6px rgba(0,0,0,0.07);
-            --shadow-md: 0 10px 30px rgba(0,0,0,0.12);
-            --shadow-lg: 0 20px 50px rgba(0,0,0,0.18);
+            --primary-dark: #0B1D3A;
+            --primary-mid: #13294B;
+            --accent: #C41E3A;
+            --accent-soft: #E8455B;
+            --text-dark: #1E293B;
+            --text-mid: #475569;
+            --text-light: #94A3B8;
+            --white: #F8F9FA;
+            --bg-light: #FFFFFF;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.04);
+            --shadow-md: 0 10px 25px rgba(0,0,0,0.07);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.1);
             --radius-sm: 8px;
             --radius-md: 14px;
             --radius-lg: 20px;
-            --transition: 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Vazir', Tahoma, sans-serif;
-            background: linear-gradient(145deg, #F5F7FA 0%, #E8ECF1 50%, #DCE3EA 100%);
+            background: var(--white);
             min-height: 100vh;
-            color: var(--gray-dark);
+            color: var(--text-dark);
             overflow-x: hidden;
             padding-bottom: 80px;
-            transition: background 0.5s;
+            transition: background 0.4s;
         }
 
-        /* ===== هدر شیشه‌ای ===== */
+        /* ========== لودینگ برفکی تلویزیون ========== */
+        #tv-loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.7s ease, visibility 0.7s;
+        }
+        #tv-loader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .static-noise {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-radial-gradient(circle at 20% 30%, #fff 0.5px, #000 1px);
+            opacity: 0.15;
+            animation: tvStatic 0.1s infinite steps(2);
+        }
+        @keyframes tvStatic {
+            0% { transform: translate(0,0); opacity: 0.12; }
+            25% { transform: translate(-5px,2px); opacity: 0.18; }
+            50% { transform: translate(3px,-4px); opacity: 0.1; }
+            75% { transform: translate(-2px,5px); opacity: 0.2; }
+            100% { transform: translate(0,0); opacity: 0.15; }
+        }
+        .loader-logo {
+            position: relative;
+            z-index: 2;
+            width: 130px;
+            animation: logoReveal 0.8s ease-out 2s both;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        @keyframes logoReveal {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* ===== هدر ===== */
         .header {
             width: 100%;
-            background: rgba(28, 40, 51, 0.85);
+            background: rgba(11, 29, 58, 0.92);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             padding: 0.8rem 2.5rem;
@@ -89,7 +132,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid rgba(255,255,255,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
             flex-wrap: wrap;
             gap: 1rem;
         }
@@ -107,7 +150,7 @@
             font-weight: 900;
             letter-spacing: 0.5px;
         }
-        .logo-text span { color: #FF6B2C; }
+        .logo-text span { color: var(--accent-soft); }
 
         .nav-links {
             display: flex;
@@ -116,20 +159,19 @@
             font-weight: 500;
         }
         .nav-links a {
-            color: #ddd;
+            color: #CBD5E1;
             text-decoration: none;
             padding: 0.4rem 0.2rem;
             border-bottom: 2px solid transparent;
             transition: var(--transition);
-            position: relative;
         }
         .nav-links a:hover, .nav-links a.active {
             color: white;
-            border-bottom-color: #FF6B2C;
+            border-bottom-color: var(--accent);
         }
         .lang-btn {
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.25);
             color: white;
             padding: 0.4rem 1rem;
             border-radius: 50px;
@@ -137,17 +179,16 @@
             font-family: 'Vazir';
             font-size: 0.85rem;
             transition: var(--transition);
-            backdrop-filter: blur(5px);
         }
-        .lang-btn:hover { background: rgba(255,255,255,0.25); }
+        .lang-btn:hover { background: rgba(255,255,255,0.2); }
 
         .contact-header {
             display: flex;
             gap: 1.2rem;
             font-size: 0.85rem;
         }
-        .contact-header a { color: #ddd; text-decoration: none; transition: 0.3s; }
-        .contact-header a:hover { color: #FF6B2C; }
+        .contact-header a { color: #CBD5E1; text-decoration: none; transition: 0.3s; }
+        .contact-header a:hover { color: var(--accent-soft); }
 
         /* ===== صفحه‌ها ===== */
         .page {
@@ -161,7 +202,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== محتوای اصلی ===== */
         .main-content {
             display: flex;
             flex-direction: column;
@@ -174,18 +214,13 @@
         }
 
         .badge {
-            background: rgba(139, 0, 0, 0.08);
-            color: var(--red-dark);
+            background: rgba(196, 30, 58, 0.06);
+            color: var(--accent);
             padding: 0.5rem 1.4rem;
             border-radius: 50px;
             font-weight: 700;
             margin-bottom: 1.8rem;
-            border: 1px dashed var(--red-dark);
-            animation: softPulse 3s infinite;
-        }
-        @keyframes softPulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(139,0,0,0.2); }
-            50% { box-shadow: 0 0 0 12px rgba(139,0,0,0); }
+            border: 1px dashed var(--accent);
         }
 
         h1 {
@@ -193,32 +228,25 @@
             font-weight: 900;
             line-height: 1.5;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--green-dark), var(--red-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary-dark);
         }
         .en-title {
             display: block;
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             direction: ltr;
             font-weight: 700;
             margin-top: 0.3rem;
-            background: linear-gradient(135deg, #2D6A4F, #1A2634);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--text-mid);
         }
 
         .description {
             font-size: 1.1rem;
-            color: var(--gray-mid);
+            color: var(--text-mid);
             max-width: 650px;
             margin: 1.8rem auto;
             line-height: 2;
         }
 
-        /* ===== کارت‌های ویژگی ===== */
         .features {
             display: flex;
             justify-content: center;
@@ -228,8 +256,8 @@
         }
         .feature {
             background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             padding: 1.8rem 1.2rem;
             border-radius: var(--radius-md);
@@ -237,36 +265,20 @@
             text-align: center;
             transition: var(--transition);
             box-shadow: var(--shadow-sm);
-            position: relative;
-            overflow: hidden;
         }
-        .feature::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(45,106,79,0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-        .feature:hover::before { opacity: 1; }
         .feature:hover {
-            transform: translateY(-8px) scale(1.03);
+            transform: translateY(-6px);
             box-shadow: var(--shadow-lg);
-            border-color: var(--green-mid);
+            border-color: var(--primary-dark);
         }
         .feature i {
             font-size: 2.2rem;
-            color: var(--green-dark);
+            color: var(--primary-dark);
             margin-bottom: 0.8rem;
             transition: 0.4s;
         }
-        .feature:hover i { color: var(--red-dark); transform: rotateY(180deg); }
-        .feature h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+        .feature:hover i { color: var(--accent); }
 
-        /* ===== شمارش معکوس ===== */
         .countdown {
             display: flex;
             gap: 1rem;
@@ -275,8 +287,7 @@
             flex-wrap: wrap;
         }
         .countdown-item {
-            background: rgba(44, 62, 80, 0.9);
-            backdrop-filter: blur(10px);
+            background: var(--primary-dark);
             color: white;
             padding: 1.2rem 1.4rem;
             border-radius: var(--radius-md);
@@ -284,11 +295,10 @@
             text-align: center;
             box-shadow: var(--shadow-md);
             transition: 0.3s;
-            border: 1px solid rgba(255,255,255,0.15);
         }
         .countdown-item:hover {
-            transform: scale(1.08);
-            background: var(--red-dark);
+            background: var(--accent);
+            transform: scale(1.05);
         }
         .countdown-item span:first-child {
             font-size: 2.2rem;
@@ -296,46 +306,36 @@
             display: block;
             line-height: 1.2;
         }
-        .countdown-item .label { font-size: 0.78rem; color: #ccc; }
+        .countdown-item .label { font-size: 0.78rem; color: #CBD5E1; }
 
-        /* ===== باکس‌های فرم ===== */
         .form-box {
-            background: rgba(255,255,255,0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: var(--white);
+            border: 1px solid #E2E8F0;
             padding: 2.5rem;
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-md);
             width: 100%;
             max-width: 600px;
             margin: 2.5rem auto;
-            border: 1px solid rgba(255,255,255,0.8);
         }
-        .form-box h2 {
-            margin-bottom: 1.5rem;
-            font-size: 1.4rem;
-            color: var(--green-dark);
-        }
-
         .input-field {
             width: 100%;
             padding: 0.8rem 1rem;
-            border: 2px solid #e2e8f0;
+            border: 2px solid #E2E8F0;
             border-radius: var(--radius-sm);
             font-family: 'Vazir', sans-serif;
             font-size: 0.95rem;
             outline: none;
             transition: var(--transition);
             margin-bottom: 1rem;
-            background: rgba(255,255,255,0.8);
+            background: #F8FAFC;
         }
         .input-field:focus {
-            border-color: var(--green-mid);
-            box-shadow: 0 0 0 4px rgba(45,106,79,0.15);
+            border-color: var(--primary-dark);
+            box-shadow: 0 0 0 4px rgba(11,29,58,0.08);
         }
-
         .btn-primary {
-            background: linear-gradient(135deg, var(--green-dark), var(--gray-dark));
+            background: var(--primary-dark);
             color: white;
             border: none;
             padding: 0.9rem 2.5rem;
@@ -346,37 +346,16 @@
             transition: var(--transition);
             width: 100%;
             font-size: 1rem;
-            letter-spacing: 0.3px;
-            position: relative;
-            overflow: hidden;
         }
         .btn-primary:hover {
-            background: linear-gradient(135deg, var(--red-dark), var(--green-dark));
-            box-shadow: 0 10px 25px rgba(139,0,0,0.3);
+            background: var(--accent);
+            box-shadow: 0 10px 25px rgba(196,30,58,0.25);
             transform: translateY(-2px);
         }
 
         .row-fields { display: flex; gap: 1rem; }
         .row-fields .half { flex: 1; }
 
-        /* ===== دایره چرخان تزئینی ===== */
-        .rotating-ring {
-            width: 100px;
-            height: 100px;
-            border: 6px solid transparent;
-            border-top-color: var(--green-dark);
-            border-right-color: var(--red-dark);
-            border-radius: 50%;
-            animation: spin 4s linear infinite;
-            margin: 2rem auto;
-            box-shadow: 0 0 25px rgba(45,106,79,0.3);
-        }
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* ===== بخش تماس ===== */
         .contact-info {
             display: flex;
             gap: 2rem;
@@ -385,7 +364,7 @@
             margin: 1.5rem 0;
         }
         .contact-info a {
-            color: var(--gray-dark);
+            color: var(--text-dark);
             text-decoration: none;
             font-weight: 600;
             display: flex;
@@ -394,25 +373,24 @@
             transition: 0.3s;
             padding: 0.5rem 1rem;
             border-radius: 50px;
-            background: rgba(255,255,255,0.5);
+            background: #F1F5F9;
         }
-        .contact-info a:hover { background: var(--green-dark); color: white; }
+        .contact-info a:hover { background: var(--primary-dark); color: white; }
 
-        /* ===== فوتر ===== */
         .footer {
             margin-top: 3rem;
-            color: var(--gray-mid);
+            color: var(--text-mid);
             font-size: 0.85rem;
             padding: 1.5rem;
             text-align: center;
-            border-top: 1px solid rgba(0,0,0,0.05);
+            border-top: 1px solid #E2E8F0;
         }
 
-        /* ===== دکمه شناور چت ===== */
+        /* واتساپ سمت چپ */
         .floating-chat {
             position: fixed;
             bottom: 25px;
-            right: 25px;
+            left: 25px;
             z-index: 999;
             background: #25D366;
             color: white;
@@ -423,18 +401,17 @@
             align-items: center;
             justify-content: center;
             font-size: 1.9rem;
-            box-shadow: 0 8px 24px rgba(37,211,102,0.4);
+            box-shadow: 0 8px 24px rgba(37,211,102,0.35);
             text-decoration: none;
             transition: var(--transition);
             animation: floatPulse 2.2s infinite;
         }
         @keyframes floatPulse {
-            0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
-            70% { box-shadow: 0 0 0 22px rgba(37,211,102,0); }
+            0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(37,211,102,0); }
             100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
         }
 
-        /* ===== مقالات ===== */
         .articles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -444,30 +421,27 @@
             margin-top: 2rem;
         }
         .article-card {
-            background: rgba(255,255,255,0.7);
-            backdrop-filter: blur(10px);
+            background: var(--white);
+            border: 1px solid #E2E8F0;
             border-radius: var(--radius-md);
             padding: 1.5rem;
             text-align: right;
             box-shadow: var(--shadow-sm);
             transition: var(--transition);
-            border: 1px solid rgba(255,255,255,0.6);
         }
         .article-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-        .article-card h3 { color: var(--green-dark); margin-bottom: 0.7rem; }
-        .article-card p { color: var(--gray-mid); line-height: 1.7; font-size: 0.9rem; }
+        .article-card h3 { color: var(--primary-dark); margin-bottom: 0.7rem; }
+        .article-card p { color: var(--text-mid); line-height: 1.7; font-size: 0.9rem; }
 
-        /* ===== درباره ما ===== */
         .about-section {
             text-align: right;
             max-width: 750px;
             margin: 1rem auto;
             line-height: 2.1;
             font-size: 1rem;
-            color: var(--gray-mid);
+            color: var(--text-mid);
         }
 
-        /* ریسپانسیو */
         @media (max-width: 768px) {
             .header { flex-direction: column; padding: 1rem; }
             .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; }
@@ -481,6 +455,13 @@
     </style>
 </head>
 <body>
+
+    <!-- لودینگ برفکی تلویزیون -->
+    <div id="tv-loader">
+        <div class="static-noise"></div>
+        <img src="img-01.png" alt="IranFreelancer" class="loader-logo" onerror="this.style.display='none'">
+    </div>
+
     <!-- هدر -->
     <header class="header">
         <div class="logo-container">
@@ -489,10 +470,10 @@
         </div>
         <nav>
             <ul class="nav-links">
-                <li><a href="#" class="nav-link active" data-page="home">خانه</a></li>
-                <li><a href="#" class="nav-link" data-page="about">درباره ما</a></li>
-                <li><a href="#" class="nav-link" data-page="blog">مقالات</a></li>
-                <li><a href="#" class="nav-link" data-page="contact">تماس</a></li>
+                <li><a href="#" class="nav-link active" data-page="home" data-i18n="nav-home">خانه</a></li>
+                <li><a href="#" class="nav-link" data-page="about" data-i18n="nav-about">درباره ما</a></li>
+                <li><a href="#" class="nav-link" data-page="blog" data-i18n="nav-blog">مقالات</a></li>
+                <li><a href="#" class="nav-link" data-page="contact" data-i18n="nav-contact">تماس</a></li>
             </ul>
         </nav>
         <button class="lang-btn" id="langToggle">English</button>
@@ -505,64 +486,59 @@
     <!-- صفحه اصلی -->
     <main class="page active" id="page-home">
         <div class="main-content">
-            <div class="badge">🚀 پلتفرم فریلنسینگ حرفه‌ای ایران</div>
+            <div class="badge" data-i18n="badge">🚀 پلتفرم فریلنسینگ حرفه‌ای ایران</div>
             
-            <h1>ایران فریلنسر، پل ارتباطی شما با پروژه‌های جهانی<br>
-                <span class="en-title">Your Gateway to Global Opportunities</span>
+            <h1 data-i18n="heading">ایران فریلنسر، پل ارتباطی شما با پروژه‌های جهانی<br>
+                <span class="en-title" data-i18n="subheading">Your Gateway to Global Opportunities</span>
             </h1>
             
-            <div class="rotating-ring"></div>
-            
-            <p class="description">
-                اولین بازار تخصصی فریلنسینگ که مستقیماً متخصصان فارسی‌زبان را به پروژه‌های داخلی و بین‌المللی متصل می‌کند.
-                <br>با پشتوانه همکاری استراتژیک، دروازه‌ای به سوی فرصت‌های بی‌نظیر.
-            </p>
+            <p class="description" data-i18n="desc">اولین بازار تخصصی فریلنسینگ که مستقیماً متخصصان فارسی‌زبان را به پروژه‌های داخلی و بین‌المللی متصل می‌کند. با پشتوانه همکاری استراتژیک، دروازه‌ای به سوی فرصت‌های بی‌نظیر.</p>
 
             <div class="features">
-                <div class="feature"><i class="fas fa-globe-americas"></i><h3>دسترسی جهانی</h3><p>پروژه‌های بین‌المللی</p></div>
-                <div class="feature"><i class="fas fa-shield-haltered"></i><h3>پرداخت امن</h3><p>تسویه ریالی سریع</p></div>
-                <div class="feature"><i class="fas fa-user-check"></i><h3>جامعه تأییدشده</h3><p>متخصصان حرفه‌ای</p></div>
-                <div class="feature"><i class="fas fa-chart-line"></i><h3>رشد مستمر</h3><p>منابع آموزشی رایگان</p></div>
+                <div class="feature"><i class="fas fa-globe-americas"></i><h3 data-i18n="feat1-title">دسترسی جهانی</h3><p data-i18n="feat1-desc">پروژه‌های بین‌المللی</p></div>
+                <div class="feature"><i class="fas fa-shield-haltered"></i><h3 data-i18n="feat2-title">پرداخت امن</h3><p data-i18n="feat2-desc">تسویه ریالی سریع</p></div>
+                <div class="feature"><i class="fas fa-user-check"></i><h3 data-i18n="feat3-title">جامعه تأییدشده</h3><p data-i18n="feat3-desc">متخصصان حرفه‌ای</p></div>
+                <div class="feature"><i class="fas fa-chart-line"></i><h3 data-i18n="feat4-title">رشد مستمر</h3><p data-i18n="feat4-desc">منابع آموزشی رایگان</p></div>
             </div>
 
             <div class="countdown" id="countdown">
-                <div class="countdown-item"><span id="days">00</span><span class="label">روز</span></div>
-                <div class="countdown-item"><span id="hours">00</span><span class="label">ساعت</span></div>
-                <div class="countdown-item"><span id="minutes">00</span><span class="label">دقیقه</span></div>
-                <div class="countdown-item"><span id="seconds">00</span><span class="label">ثانیه</span></div>
+                <div class="countdown-item"><span id="days">00</span><span class="label" data-i18n="days">روز</span></div>
+                <div class="countdown-item"><span id="hours">00</span><span class="label" data-i18n="hours">ساعت</span></div>
+                <div class="countdown-item"><span id="minutes">00</span><span class="label" data-i18n="minutes">دقیقه</span></div>
+                <div class="countdown-item"><span id="seconds">00</span><span class="label" data-i18n="seconds">ثانیه</span></div>
             </div>
 
             <div class="form-box">
-                <h2>📩 اولین نفر باشید که مطلع می‌شود</h2>
+                <h2 data-i18n="email-form-title">📩 اولین نفر باشید که مطلع می‌شود</h2>
                 <form action="https://formspree.io/f/xkobkppd" method="POST">
-                    <input type="email" name="email" class="input-field" placeholder="ایمیل خود را وارد کنید" dir="ltr" required>
-                    <button type="submit" class="btn-primary">اطلاع بده</button>
+                    <input type="email" name="email" class="input-field" placeholder="ایمیل خود را وارد کنید" dir="ltr" required data-i18n-placeholder="email-placeholder">
+                    <button type="submit" class="btn-primary" data-i18n="notify-btn">اطلاع بده</button>
                 </form>
             </div>
 
             <div class="form-box">
-                <h2>🤝 به جمع فریلنسرهای حرفه‌ای بپیوندید</h2>
-                <p style="color:#64748b;margin-bottom:1.5rem;">اطلاعات خود را وارد کنید تا به پروژه‌های مناسب متصل شوید.</p>
+                <h2 data-i18n="join-title">🤝 به جمع فریلنسرهای حرفه‌ای بپیوندید</h2>
+                <p style="color:#64748b;margin-bottom:1.5rem;" data-i18n="join-desc">اطلاعات خود را وارد کنید تا به پروژه‌های مناسب متصل شوید.</p>
                 <form action="https://formspree.io/f/xdavglkr" method="POST">
                     <div class="row-fields">
-                        <div class="half"><label style="display:block;margin-bottom:0.3rem;font-weight:700;">نام *</label><input type="text" name="firstname" class="input-field" required></div>
-                        <div class="half"><label style="display:block;margin-bottom:0.3rem;font-weight:700;">نام خانوادگی *</label><input type="text" name="lastname" class="input-field" required></div>
+                        <div class="half"><label data-i18n="fname-label">نام *</label><input type="text" name="firstname" class="input-field" required></div>
+                        <div class="half"><label data-i18n="lname-label">نام خانوادگی *</label><input type="text" name="lastname" class="input-field" required></div>
                     </div>
-                    <label style="display:block;margin-bottom:0.3rem;font-weight:700;">ایمیل *</label>
+                    <label data-i18n="email-label">ایمیل *</label>
                     <input type="email" name="email" class="input-field" dir="ltr" required>
-                    <label style="display:block;margin-bottom:0.3rem;font-weight:700;">شماره تماس</label>
+                    <label data-i18n="phone-label">شماره تماس</label>
                     <input type="tel" name="phone" class="input-field" dir="ltr" placeholder="0912xxxxxxx">
-                    <label style="display:block;margin-bottom:0.3rem;font-weight:700;">مهارت‌های اصلی *</label>
+                    <label data-i18n="skills-label">مهارت‌های اصلی *</label>
                     <input type="text" name="skills" class="input-field" placeholder="مثلاً: React، طراحی UI/UX، سئو..." required>
-                    <label style="display:block;margin-bottom:0.3rem;font-weight:700;">لینک نمونه‌کار</label>
+                    <label data-i18n="portfolio-label">لینک نمونه‌کار</label>
                     <input type="url" name="portfolio" class="input-field" dir="ltr" placeholder="https://yourportfolio.com">
-                    <label style="display:block;margin-bottom:0.3rem;font-weight:700;">درباره شما</label>
+                    <label data-i18n="about-label">درباره شما</label>
                     <textarea name="about" rows="3" class="input-field" placeholder="کمی از تجربه و تخصصتان بگویید..."></textarea>
-                    <button type="submit" class="btn-primary">ثبت‌نام رایگان</button>
+                    <button type="submit" class="btn-primary" data-i18n="register-btn">ثبت‌نام رایگان</button>
                 </form>
             </div>
 
-            <div class="explanation-text" style="max-width:600px;margin:1.5rem auto;line-height:1.9;color:#4a5568;">
+            <div class="explanation-text" style="max-width:600px;margin:1.5rem auto;line-height:1.9;color:#475569;" data-i18n="why-text">
                 <strong>چرا ایران فریلنسر؟</strong><br>
                 ما پلی میان فریلنسرهای فارسی‌زبان و بازار کار جهانی هستیم. با زیرساخت امن پرداخت ریالی و همکاری با پلتفرم‌های بین‌المللی، فضایی قابل اعتماد برای انجام پروژه‌های باکیفیت فراهم کرده‌ایم.
             </div>
@@ -579,9 +555,8 @@
     <!-- صفحه درباره ما -->
     <div class="page" id="page-about">
         <div class="main-content">
-            <h1>درباره ایران فریلنسر</h1>
-            <div class="rotating-ring"></div>
-            <div class="about-section">
+            <h1 data-i18n="about-heading">درباره ایران فریلنسر</h1>
+            <div class="about-section" data-i18n="about-text">
                 <p><strong>ایران فریلنسر</strong> از سال ۱۴۰۴ با هدف ایجاد پلی میان متخصصان ایرانی و پروژه‌های بین‌المللی شکل گرفت.</p>
                 <p>ما بر این باوریم که استعدادهای فارسی‌زبان شایسته دیده شدن در سطح جهانی هستند. پلتفرم ما با فراهم کردن زیرساخت پرداخت امن، داوری پروژه‌ها، و جامعه‌ای از فریلنسرهای تأییدشده، به شما کمک می‌کند تا بدون دغدغه‌های مرسوم، بر روی کاری که عاشقش هستید تمرکز کنید.</p>
                 <p>تیم ما ترکیبی از متخصصان فناوری، بازاریابی و منابع انسانی است که همگی یک هدف را دنبال می‌کنند: <strong>توانمندسازی فریلنسرهای ایرانی.</strong></p>
@@ -593,28 +568,27 @@
     <!-- صفحه مقالات -->
     <div class="page" id="page-blog">
         <div class="main-content">
-            <h1>مقالات آموزشی فریلنسری</h1>
-            <div class="rotating-ring"></div>
+            <h1 data-i18n="blog-heading">مقالات آموزشی فریلنسری</h1>
             <div class="articles-grid">
                 <div class="article-card">
                     <img src="img-03.jpg" alt="نوشتن پروپوزال" style="width:100%;border-radius:12px;margin-bottom:1rem;" onerror="this.style.display='none'">
-                    <h3>چطور یک پروپوزال برنده بنویسیم؟</h3>
-                    <p>یاد بگیرید چطور در ۵ گام، پیشنهادی بنویسید که کارفرما را مجذوب کند.</p>
+                    <h3 data-i18n="article1-title">چطور یک پروپوزال برنده بنویسیم؟</h3>
+                    <p data-i18n="article1-desc">یاد بگیرید چطور در ۵ گام، پیشنهادی بنویسید که کارفرما را مجذوب کند.</p>
                 </div>
                 <div class="article-card">
                     <img src="img-04.jpg" alt="قیمت‌گذاری پروژه" style="width:100%;border-radius:12px;margin-bottom:1rem;" onerror="this.style.display='none'">
-                    <h3>راهنمای قیمت‌گذاری پروژه‌ها</h3>
-                    <p>استراتژی‌های قیمت‌دهی که نه مشتری را فراری دهد، نه ارزش کارتان را کم کند.</p>
+                    <h3 data-i18n="article2-title">راهنمای قیمت‌گذاری پروژه‌ها</h3>
+                    <p data-i18n="article2-desc">استراتژی‌های قیمت‌دهی که نه مشتری را فراری دهد، نه ارزش کارتان را کم کند.</p>
                 </div>
                 <div class="article-card">
                     <img src="img-05.jpg" alt="بازاریابی فریلنسری" style="width:100%;border-radius:12px;margin-bottom:1rem;" onerror="this.style.display='none'">
-                    <h3>بازاریابی برای فریلنسرها</h3>
-                    <p>از شبکه‌های اجتماعی تا لینکدین، برند شخصی خود را بسازید.</p>
+                    <h3 data-i18n="article3-title">بازاریابی برای فریلنسرها</h3>
+                    <p data-i18n="article3-desc">از شبکه‌های اجتماعی تا لینکدین، برند شخصی خود را بسازید.</p>
                 </div>
                 <div class="article-card">
                     <img src="img-06.jpg" alt="مدیریت زمان" style="width:100%;border-radius:12px;margin-bottom:1rem;" onerror="this.style.display='none'">
-                    <h3>مدیریت زمان در فریلنسینگ</h3>
-                    <p>تکنیک‌های عملی برای اینکه همیشه از برنامه جلوتر باشید.</p>
+                    <h3 data-i18n="article4-title">مدیریت زمان در فریلنسینگ</h3>
+                    <p data-i18n="article4-desc">تکنیک‌های عملی برای اینکه همیشه از برنامه جلوتر باشید.</p>
                 </div>
             </div>
         </div>
@@ -623,14 +597,13 @@
     <!-- صفحه تماس -->
     <div class="page" id="page-contact">
         <div class="main-content">
-            <h1>تماس با ما</h1>
-            <div class="rotating-ring"></div>
+            <h1 data-i18n="contact-heading">تماس با ما</h1>
             <div class="form-box">
                 <form action="https://formspree.io/f/xkobkppd" method="POST">
-                    <input type="text" name="name" class="input-field" placeholder="نام شما" required>
-                    <input type="email" name="email" class="input-field" placeholder="ایمیل" dir="ltr" required>
-                    <textarea name="message" rows="5" class="input-field" placeholder="پیامتان را بنویسید..."></textarea>
-                    <button type="submit" class="btn-primary">ارسال پیام</button>
+                    <input type="text" name="name" class="input-field" placeholder="نام شما" required data-i18n-placeholder="contact-name">
+                    <input type="email" name="email" class="input-field" placeholder="ایمیل" dir="ltr" required data-i18n-placeholder="contact-email">
+                    <textarea name="message" rows="5" class="input-field" placeholder="پیامتان را بنویسید..." data-i18n-placeholder="contact-msg"></textarea>
+                    <button type="submit" class="btn-primary" data-i18n="send-btn">ارسال پیام</button>
                 </form>
             </div>
             <div class="contact-info" style="margin-top:2rem;">
@@ -640,23 +613,31 @@
         </div>
     </div>
 
-    <footer class="footer">© 2025 IranFreelancer. تمامی حقوق محفوظ است.</footer>
+    <footer class="footer" data-i18n="footer">© 2025 IranFreelancer. کلیه حقوق برای عبدالرضا عطائی محفوظ است.</footer>
 
     <a href="https://wa.me/989131580395" target="_blank" class="floating-chat" title="چت در واتس‌اپ"><i class="fab fa-whatsapp"></i></a>
 
     <!-- اسکریپت‌ها -->
     <script>
+        // حذف لودینگ بعد از 2.5 ثانیه
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const loader = document.getElementById('tv-loader');
+                loader.classList.add('fade-out');
+                setTimeout(() => loader.remove(), 700);
+            }, 2500);
+        });
+
         // شمارش معکوس
         (function() {
             const targetDate = new Date();
             targetDate.setDate(targetDate.getDate() + 30);
             targetDate.setHours(23, 59, 59, 0);
-
             function updateCountdown() {
                 const now = new Date().getTime();
                 const distance = targetDate.getTime() - now;
                 if (distance < 0) {
-                    document.getElementById('countdown').innerHTML = "<p style='color:var(--red-dark);font-weight:bold;'>همین حالا شروع کنید!</p>";
+                    document.getElementById('countdown').innerHTML = "<p style='color:var(--accent);font-weight:bold;' data-i18n='expired'>همین حالا شروع کنید!</p>";
                     return;
                 }
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -685,33 +666,157 @@
             });
         });
 
-        // تغییر زبان (ساده شده)
-        let langFa = true;
-        const langToggle = document.getElementById('langToggle');
+        // سیستم ترجمه کامل با data-i18n
         const translations = {
-            home: ['خانه', 'Home'],
-            about: ['درباره ما', 'About Us'],
-            blog: ['مقالات', 'Blog'],
-            contact: ['تماس', 'Contact'],
-            badge: ['🚀 پلتفرم فریلنسینگ حرفه‌ای ایران', '🚀 Professional Iranian Freelancing Platform'],
-            heading: ['ایران فریلنسر، پل ارتباطی شما با پروژه‌های جهانی', 'IranFreelancer, Your Bridge to Global Projects'],
-            subheading: ['Your Gateway to Global Opportunities', 'دریچه‌ای به فرصت‌های جهانی'],
-            desc: ['اولین بازار تخصصی فریلنسینگ که مستقیماً متخصصان فارسی‌زبان را به پروژه‌های داخلی و بین‌المللی متصل می‌کند.', 'The first specialized freelancing marketplace connecting Persian-speaking experts directly to domestic and international projects.']
+            fa: {
+                'nav-home': 'خانه',
+                'nav-about': 'درباره ما',
+                'nav-blog': 'مقالات',
+                'nav-contact': 'تماس',
+                'badge': '🚀 پلتفرم فریلنسینگ حرفه‌ای ایران',
+                'heading': 'ایران فریلنسر، پل ارتباطی شما با پروژه‌های جهانی',
+                'subheading': 'Your Gateway to Global Opportunities',
+                'desc': 'اولین بازار تخصصی فریلنسینگ که مستقیماً متخصصان فارسی‌زبان را به پروژه‌های داخلی و بین‌المللی متصل می‌کند. با پشتوانه همکاری استراتژیک، دروازه‌ای به سوی فرصت‌های بی‌نظیر.',
+                'feat1-title': 'دسترسی جهانی',
+                'feat1-desc': 'پروژه‌های بین‌المللی',
+                'feat2-title': 'پرداخت امن',
+                'feat2-desc': 'تسویه ریالی سریع',
+                'feat3-title': 'جامعه تأییدشده',
+                'feat3-desc': 'متخصصان حرفه‌ای',
+                'feat4-title': 'رشد مستمر',
+                'feat4-desc': 'منابع آموزشی رایگان',
+                'days': 'روز',
+                'hours': 'ساعت',
+                'minutes': 'دقیقه',
+                'seconds': 'ثانیه',
+                'email-form-title': '📩 اولین نفر باشید که مطلع می‌شود',
+                'email-placeholder': 'ایمیل خود را وارد کنید',
+                'notify-btn': 'اطلاع بده',
+                'join-title': '🤝 به جمع فریلنسرهای حرفه‌ای بپیوندید',
+                'join-desc': 'اطلاعات خود را وارد کنید تا به پروژه‌های مناسب متصل شوید.',
+                'fname-label': 'نام *',
+                'lname-label': 'نام خانوادگی *',
+                'email-label': 'ایمیل *',
+                'phone-label': 'شماره تماس',
+                'skills-label': 'مهارت‌های اصلی *',
+                'portfolio-label': 'لینک نمونه‌کار',
+                'about-label': 'درباره شما',
+                'register-btn': 'ثبت‌نام رایگان',
+                'why-text': '<strong>چرا ایران فریلنسر؟</strong><br>ما پلی میان فریلنسرهای فارسی‌زبان و بازار کار جهانی هستیم. با زیرساخت امن پرداخت ریالی و همکاری با پلتفرم‌های بین‌المللی، فضایی قابل اعتماد برای انجام پروژه‌های باکیفیت فراهم کرده‌ایم.',
+                'about-heading': 'درباره ایران فریلنسر',
+                'about-text': '<p><strong>ایران فریلنسر</strong> از سال ۱۴۰۴ با هدف ایجاد پلی میان متخصصان ایرانی و پروژه‌های بین‌المللی شکل گرفت.</p><p>ما بر این باوریم که استعدادهای فارسی‌زبان شایسته دیده شدن در سطح جهانی هستند. پلتفرم ما با فراهم کردن زیرساخت پرداخت امن، داوری پروژه‌ها، و جامعه‌ای از فریلنسرهای تأییدشده، به شما کمک می‌کند تا بدون دغدغه‌های مرسوم، بر روی کاری که عاشقش هستید تمرکز کنید.</p><p>تیم ما ترکیبی از متخصصان فناوری، بازاریابی و منابع انسانی است که همگی یک هدف را دنبال می‌کنند: <strong>توانمندسازی فریلنسرهای ایرانی.</strong></p>',
+                'blog-heading': 'مقالات آموزشی فریلنسری',
+                'article1-title': 'چطور یک پروپوزال برنده بنویسیم؟',
+                'article1-desc': 'یاد بگیرید چطور در ۵ گام، پیشنهادی بنویسید که کارفرما را مجذوب کند.',
+                'article2-title': 'راهنمای قیمت‌گذاری پروژه‌ها',
+                'article2-desc': 'استراتژی‌های قیمت‌دهی که نه مشتری را فراری دهد، نه ارزش کارتان را کم کند.',
+                'article3-title': 'بازاریابی برای فریلنسرها',
+                'article3-desc': 'از شبکه‌های اجتماعی تا لینکدین، برند شخصی خود را بسازید.',
+                'article4-title': 'مدیریت زمان در فریلنسینگ',
+                'article4-desc': 'تکنیک‌های عملی برای اینکه همیشه از برنامه جلوتر باشید.',
+                'contact-heading': 'تماس با ما',
+                'contact-name': 'نام شما',
+                'contact-email': 'ایمیل',
+                'contact-msg': 'پیامتان را بنویسید...',
+                'send-btn': 'ارسال پیام',
+                'footer': '© 2025 IranFreelancer. کلیه حقوق برای عبدالرضا عطائی محفوظ است.',
+                'expired': 'همین حالا شروع کنید!'
+            },
+            en: {
+                'nav-home': 'Home',
+                'nav-about': 'About Us',
+                'nav-blog': 'Blog',
+                'nav-contact': 'Contact',
+                'badge': '🚀 Professional Iranian Freelancing Platform',
+                'heading': 'IranFreelancer, Your Bridge to Global Projects',
+                'subheading': 'Your Gateway to Global Opportunities',
+                'desc': 'The first specialized freelancing marketplace connecting Persian-speaking experts directly to domestic and international projects. Strategic partnerships open doors to unique opportunities.',
+                'feat1-title': 'Global Access',
+                'feat1-desc': 'International Projects',
+                'feat2-title': 'Secure Payment',
+                'feat2-desc': 'Quick Rial Settlement',
+                'feat3-title': 'Verified Community',
+                'feat3-desc': 'Professional Experts',
+                'feat4-title': 'Continuous Growth',
+                'feat4-desc': 'Free Learning Resources',
+                'days': 'Days',
+                'hours': 'Hours',
+                'minutes': 'Minutes',
+                'seconds': 'Seconds',
+                'email-form-title': '📩 Be the First to Know',
+                'email-placeholder': 'Enter your email',
+                'notify-btn': 'Notify Me',
+                'join-title': '🤝 Join Professional Freelancers',
+                'join-desc': 'Enter your information to be matched with suitable projects.',
+                'fname-label': 'First Name *',
+                'lname-label': 'Last Name *',
+                'email-label': 'Email *',
+                'phone-label': 'Phone Number',
+                'skills-label': 'Main Skills *',
+                'portfolio-label': 'Portfolio Link',
+                'about-label': 'About You',
+                'register-btn': 'Free Registration',
+                'why-text': '<strong>Why IranFreelancer?</strong><br>We bridge Persian-speaking freelancers to the global market. With secure Rial payment infrastructure and partnerships with international platforms, we provide a trustworthy space for high-quality projects.',
+                'about-heading': 'About IranFreelancer',
+                'about-text': '<p><strong>IranFreelancer</strong> was founded in 2025 to bridge Iranian experts with international projects.</p><p>We believe Persian-speaking talents deserve global recognition. Our platform provides secure payment, project arbitration, and a verified freelancer community so you can focus on work you love.</p><p>Our team combines tech, marketing, and HR experts all aiming for one goal: <strong>Empowering Iranian freelancers.</strong></p>',
+                'blog-heading': 'Freelancing Educational Articles',
+                'article1-title': 'How to Write a Winning Proposal?',
+                'article1-desc': 'Learn to write a proposal that captivates clients in 5 steps.',
+                'article2-title': 'Project Pricing Guide',
+                'article2-desc': 'Pricing strategies that won\'t scare clients nor undervalue your work.',
+                'article3-title': 'Marketing for Freelancers',
+                'article3-desc': 'Build your personal brand from social media to LinkedIn.',
+                'article4-title': 'Time Management in Freelancing',
+                'article4-desc': 'Practical techniques to always stay ahead of schedule.',
+                'contact-heading': 'Contact Us',
+                'contact-name': 'Your Name',
+                'contact-email': 'Email',
+                'contact-msg': 'Write your message...',
+                'send-btn': 'Send Message',
+                'footer': '© 2025 IranFreelancer. All rights reserved for Abdolreza Ataei.',
+                'expired': 'Start Now!'
+            }
         };
-        langToggle.addEventListener('click', function() {
-            langFa = !langFa;
-            this.textContent = langFa ? 'English' : 'فارسی';
-            document.documentElement.lang = langFa ? 'fa' : 'en';
-            document.documentElement.dir = langFa ? 'rtl' : 'ltr';
-            document.querySelectorAll('.nav-link').forEach((link, i) => {
-                const keys = ['home', 'about', 'blog', 'contact'];
-                link.textContent = translations[keys[i]][langFa ? 0 : 1];
+
+        let currentLang = 'fa';
+        const langToggle = document.getElementById('langToggle');
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang === 'fa' ? 'fa' : 'en';
+            document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+            langToggle.textContent = lang === 'fa' ? 'English' : 'فارسی';
+
+            // عناصر با data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    if (key === 'why-text' || key === 'about-text') {
+                        el.innerHTML = translations[lang][key];
+                    } else {
+                        el.textContent = translations[lang][key];
+                    }
+                }
             });
-            document.querySelector('.badge').textContent = translations.badge[langFa ? 0 : 1];
-            document.querySelector('h1').childNodes[0].textContent = translations.heading[langFa ? 0 : 1];
-            document.querySelector('.en-title').textContent = translations.subheading[langFa ? 0 : 1];
-            document.querySelector('.description').childNodes[0].textContent = translations.desc[langFa ? 0 : 1];
+
+            // placeholder های ترجمه‌شونده
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang] && translations[lang][key]) {
+                    el.placeholder = translations[lang][key];
+                }
+            });
+
+            // به‌روزرسانی عنوان صفحه
+            document.title = lang === 'fa' ? 'ایران فریلنسر | IranFreelancer - پلتفرم فریلنسینگ حرفه‌ای' : 'IranFreelancer | Professional Freelancing Platform';
+        }
+
+        langToggle.addEventListener('click', function() {
+            setLanguage(currentLang === 'fa' ? 'en' : 'fa');
         });
+
+        // تنظیم اولیه
+        setLanguage('fa');
     </script>
 
     <!-- Chatbase Agent -->
