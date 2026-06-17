@@ -6,24 +6,41 @@
     
     <!-- SEO Meta Tags -->
     <title>ایران فریلنسر | IranFreelancer - پلتفرم فریلنسینگ حرفه‌ای</title>
-    <meta name="description" content="IranFreelancer پلتفرم فریلنسینگ حرفه‌ای برای متخصصان ایرانی. دسترسی به پروژه‌های داخلی و بین‌المللی، پرداخت امن ریالی و جامعه فریلنسرهای تأییدشده.">
-    <meta name="keywords" content="فریلنسر, فریلنسینگ, ایران, پروژه, برنامه‌نویسی, طراحی, سئو, مترجم, ایران فریلنسر, Iranian freelancer">
+    <meta name="description" content="IranFreelancer پلتفرم تخصصی فریلنسینگ برای ایرانیان. دسترسی به پروژه‌های بین‌المللی، پرداخت امن ریالی، همکاری با برندهای جهانی، دوره‌های آموزشی و پشتیبانی حرفه‌ای.">
+    <meta name="keywords" content="فریلنسر, فریلنسینگ, ایران, پروژه, برنامه‌نویسی, طراحی, سئو, مترجم, ایران فریلنسر, فریلنسر ایرانی, استخدام فریلنسر, پروژه بین‌المللی, پرداخت ریالی">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://iranfreelancer.com">
+    
+    <!-- Open Graph -->
     <meta property="og:title" content="ایران فریلنسر | IranFreelancer">
-    <meta property="og:description" content="پلتفرم فریلنسینگ حرفه‌ای برای متخصصان ایرانی">
+    <meta property="og:description" content="جامعه فریلنسرهای حرفه‌ای ایران؛ پروژه‌های جهانی، پرداخت امن، آموزش تخصصی.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://iranfreelancer.com">
-    <meta property="og:image" content="https://iranfreelancer.com/og-image.jpg">
+    <meta property="og:image" content="https://iranfreelancer.com/img-01.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="fa_IR">
+    <meta property="og:locale:alternate" content="en_US">
     
-    <!-- Schema Markup -->
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ایران فریلنسر | IranFreelancer">
+    <meta name="twitter:description" content="پلتفرم فریلنسینگ حرفه‌ای برای متخصصان ایرانی.">
+    <meta name="twitter:image" content="https://iranfreelancer.com/img-01.png">
+    
+    <!-- hreflang tags -->
+    <link rel="alternate" hreflang="fa" href="https://iranfreelancer.com">
+    <link rel="alternate" hreflang="en" href="https://iranfreelancer.com/?lang=en">
+    <link rel="alternate" hreflang="x-default" href="https://iranfreelancer.com">
+    
+    <!-- Schema Markup Organization -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "ایران فریلنسر | IranFreelancer",
         "url": "https://iranfreelancer.com",
-        "logo": "https://iranfreelancer.com/logo.png",
+        "logo": "https://iranfreelancer.com/img-01.png",
         "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+989131580395",
@@ -32,7 +49,8 @@
         },
         "sameAs": [
             "https://instagram.com/iranfreelancer",
-            "https://linkedin.com/company/iranfreelancer"
+            "https://linkedin.com/company/iranfreelancer",
+            "https://t.me/iranfreelancer"
         ]
     }
     </script>
@@ -73,14 +91,13 @@
             color: var(--text-dark);
             overflow-x: hidden;
             padding-bottom: 80px;
-            transition: background 0.4s;
         }
 
-        /* ========== لودینگ برفکی تلویزیون ========== */
-        #tv-loader {
+        /* ========== لودینگ شیشه‌ای با گیف ========== */
+        #custom-loader {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: #000;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
             z-index: 10000;
             display: flex;
             align-items: center;
@@ -88,40 +105,57 @@
             flex-direction: column;
             transition: opacity 0.7s ease, visibility 0.7s;
         }
-        #tv-loader.fade-out {
+        #custom-loader.fade-out {
             opacity: 0;
             visibility: hidden;
         }
-        .static-noise {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-radial-gradient(circle at 20% 30%, #fff 0.5px, #000 1px);
-            opacity: 0.15;
-            animation: tvStatic 0.1s infinite steps(2);
+        .loader-frame {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 28px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.03);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 90vw;
         }
-        @keyframes tvStatic {
-            0% { transform: translate(0,0); opacity: 0.12; }
-            25% { transform: translate(-5px,2px); opacity: 0.18; }
-            50% { transform: translate(3px,-4px); opacity: 0.1; }
-            75% { transform: translate(-2px,5px); opacity: 0.2; }
-            100% { transform: translate(0,0); opacity: 0.15; }
+        #loader-gif {
+            width: 700px;
+            max-width: 100%;
+            height: auto;
+            aspect-ratio: 700 / 525;
+            object-fit: contain;
+            border-radius: 18px;
         }
-        .loader-logo {
-            position: relative;
-            z-index: 2;
-            width: 130px;
-            animation: logoReveal 0.8s ease-out 2s both;
-            opacity: 0;
-            transform: scale(0.8);
+        .loader-caption {
+            margin-top: 20px;
+            font-family: 'Vazir', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #1e293b;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 2px;
         }
-        @keyframes logoReveal {
-            to { opacity: 1; transform: scale(1); }
+        .loader-dots::after {
+            content: '';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+        @keyframes dots {
+            0% { content: ''; }
+            25% { content: '.'; }
+            50% { content: '..'; }
+            75% { content: '...'; }
+            100% { content: ''; }
         }
 
         /* ===== هدر ===== */
         .header {
             width: 100%;
-            background: rgba(11, 29, 58, 0.92);
+            background: rgba(11, 29, 58, 0.94);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             padding: 0.8rem 2.5rem;
@@ -143,7 +177,6 @@
         }
         .logo-container img {
             height: 42px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
         }
         .logo-text {
             font-size: 1.2rem;
@@ -209,7 +242,7 @@
             text-align: center;
             padding: 2.5rem 1.5rem;
             width: 100%;
-            max-width: 950px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -242,31 +275,34 @@
         .description {
             font-size: 1.1rem;
             color: var(--text-mid);
-            max-width: 650px;
+            max-width: 750px;
             margin: 1.8rem auto;
             line-height: 2;
         }
 
-        .features {
+        .features, .partners-grid, .payment-grid, .cert-grid, .portfolio-grid, .courses-grid {
             display: flex;
             justify-content: center;
             gap: 1.5rem;
             margin: 2.5rem 0;
             flex-wrap: wrap;
         }
-        .feature {
+
+        .feature, .partner-item, .payment-item, .cert-item, .portfolio-card, .course-card {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
-            padding: 1.8rem 1.2rem;
             border-radius: var(--radius-md);
-            width: 185px;
-            text-align: center;
             transition: var(--transition);
             box-shadow: var(--shadow-sm);
         }
-        .feature:hover {
+        .feature {
+            padding: 1.8rem 1.2rem;
+            width: 185px;
+            text-align: center;
+        }
+        .feature:hover, .portfolio-card:hover, .course-card:hover {
             transform: translateY(-6px);
             box-shadow: var(--shadow-lg);
             border-color: var(--primary-dark);
@@ -275,9 +311,7 @@
             font-size: 2.2rem;
             color: var(--primary-dark);
             margin-bottom: 0.8rem;
-            transition: 0.4s;
         }
-        .feature:hover i { color: var(--accent); }
 
         .countdown {
             display: flex;
@@ -296,16 +330,8 @@
             box-shadow: var(--shadow-md);
             transition: 0.3s;
         }
-        .countdown-item:hover {
-            background: var(--accent);
-            transform: scale(1.05);
-        }
-        .countdown-item span:first-child {
-            font-size: 2.2rem;
-            font-weight: 900;
-            display: block;
-            line-height: 1.2;
-        }
+        .countdown-item:hover { background: var(--accent); transform: scale(1.05); }
+        .countdown-item span:first-child { font-size: 2.2rem; font-weight: 900; display: block; }
         .countdown-item .label { font-size: 0.78rem; color: #CBD5E1; }
 
         .form-box {
@@ -330,10 +356,7 @@
             margin-bottom: 1rem;
             background: #F8FAFC;
         }
-        .input-field:focus {
-            border-color: var(--primary-dark);
-            box-shadow: 0 0 0 4px rgba(11,29,58,0.08);
-        }
+        .input-field:focus { border-color: var(--primary-dark); box-shadow: 0 0 0 4px rgba(11,29,58,0.08); }
         .btn-primary {
             background: var(--primary-dark);
             color: white;
@@ -347,63 +370,44 @@
             width: 100%;
             font-size: 1rem;
         }
-        .btn-primary:hover {
-            background: var(--accent);
-            box-shadow: 0 10px 25px rgba(196,30,58,0.25);
-            transform: translateY(-2px);
-        }
-
+        .btn-primary:hover { background: var(--accent); box-shadow: 0 10px 25px rgba(196,30,58,0.25); transform: translateY(-2px); }
         .row-fields { display: flex; gap: 1rem; }
         .row-fields .half { flex: 1; }
 
         .contact-info {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 1.5rem 0;
+            display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; margin: 1.5rem 0;
         }
         .contact-info a {
-            color: var(--text-dark);
-            text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: 0.3s;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            background: #F1F5F9;
+            color: var(--text-dark); text-decoration: none; font-weight: 600;
+            display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem;
+            border-radius: 50px; background: #F1F5F9; transition: 0.3s;
         }
         .contact-info a:hover { background: var(--primary-dark); color: white; }
 
         .footer {
             margin-top: 3rem;
-            color: var(--text-mid);
-            font-size: 0.85rem;
-            padding: 1.5rem;
+            background: #F1F5F9;
+            padding: 2rem 1.5rem;
             text-align: center;
             border-top: 1px solid #E2E8F0;
+            color: var(--text-mid);
         }
-
-        /* واتساپ سمت چپ */
-        .floating-chat {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            z-index: 999;
-            background: #25D366;
-            color: white;
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
+        .footer-grid {
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
             justify-content: center;
-            font-size: 1.9rem;
-            box-shadow: 0 8px 24px rgba(37,211,102,0.35);
-            text-decoration: none;
-            transition: var(--transition);
+            gap: 2rem 4rem;
+            margin-bottom: 1.5rem;
+        }
+        .footer-section h4 { margin-bottom: 0.8rem; color: var(--primary-dark); }
+        .footer-section img { height: 30px; margin: 0 5px; vertical-align: middle; border-radius: 4px; }
+
+        .floating-chat {
+            position: fixed; bottom: 25px; left: 25px; z-index: 999;
+            background: #25D366; color: white; width: 58px; height: 58px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.9rem; box-shadow: 0 8px 24px rgba(37,211,102,0.35);
+            text-decoration: none; transition: var(--transition);
             animation: floatPulse 2.2s infinite;
         }
         @keyframes floatPulse {
@@ -412,67 +416,55 @@
             100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
         }
 
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.8rem;
-            width: 100%;
-            max-width: 900px;
-            margin-top: 2rem;
-        }
-        .article-card {
+        .faq-item {
             background: var(--white);
             border: 1px solid #E2E8F0;
             border-radius: var(--radius-md);
-            padding: 1.5rem;
+            margin-bottom: 1rem;
+            padding: 1rem 1.5rem;
             text-align: right;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
+            cursor: pointer;
         }
-        .article-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-        .article-card h3 { color: var(--primary-dark); margin-bottom: 0.7rem; }
-        .article-card p { color: var(--text-mid); line-height: 1.7; font-size: 0.9rem; }
-
-        .about-section {
-            text-align: right;
-            max-width: 750px;
-            margin: 1rem auto;
-            line-height: 2.1;
-            font-size: 1rem;
-            color: var(--text-mid);
-        }
+        .faq-item h3 { font-size: 1.1rem; color: var(--primary-dark); }
+        .faq-item .answer { display: none; margin-top: 0.8rem; color: var(--text-mid); }
+        .faq-item.open .answer { display: block; }
 
         @media (max-width: 768px) {
             .header { flex-direction: column; padding: 1rem; }
             .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; }
             h1 { font-size: 1.9rem; }
-            .en-title { font-size: 1.3rem; }
             .features { gap: 1rem; }
             .feature { width: 145px; padding: 1rem; }
             .row-fields { flex-direction: column; }
-            .articles-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- لودینگ برفکی تلویزیون -->
-    <div id="tv-loader">
-        <div class="static-noise"></div>
-        <img src="img-01.png" alt="IranFreelancer" class="loader-logo" onerror="this.style.display='none'">
+    <!-- لودینگ شیشه‌ای با گیف -->
+    <div id="custom-loader">
+        <div class="loader-frame">
+            <img src="loading.gif" alt="در حال بارگذاری..." id="loader-gif">
+            <div class="loader-caption">
+                <span data-i18n="loader-text">در حال آماده‌سازی فضای حرفه‌ای شما</span><span class="loader-dots"></span>
+            </div>
+        </div>
     </div>
 
     <!-- هدر -->
     <header class="header">
         <div class="logo-container">
-            <img src="img-01.png" alt="IranFreelancer Logo" onerror="this.style.display='none'">
-            <div class="logo-text"><span>Iran</span>Freelancer | ایران فریلنسر</div>
+            <img src="img-01.png" alt="IranFreelancer Logo">
+            <div class="logo-text"><span>Iran</span>Freelancer</div>
         </div>
         <nav>
             <ul class="nav-links">
                 <li><a href="#" class="nav-link active" data-page="home" data-i18n="nav-home">خانه</a></li>
                 <li><a href="#" class="nav-link" data-page="about" data-i18n="nav-about">درباره ما</a></li>
-                <li><a href="#" class="nav-link" data-page="blog" data-i18n="nav-blog">مقالات</a></li>
+                <li><a href="#" class="nav-link" data-page="services" data-i18n="nav-services">خدمات</a></li>
+                <li><a href="#" class="nav-link" data-page="portfolio" data-i18n="nav-portfolio">نمونه‌کارها</a></li>
+                <li><a href="#" class="nav-link" data-page="courses" data-i18n="nav-courses">دوره‌ها</a></li>
+                <li><a href="#" class="nav-link" data-page="faq" data-i18n="nav-faq">سوالات</a></li>
                 <li><a href="#" class="nav-link" data-page="contact" data-i18n="nav-contact">تماس</a></li>
             </ul>
         </nav>
@@ -483,16 +475,15 @@
         </div>
     </header>
 
+    <!-- ========================= صفحات ========================= -->
     <!-- صفحه اصلی -->
     <main class="page active" id="page-home">
         <div class="main-content">
             <div class="badge" data-i18n="badge">🚀 پلتفرم فریلنسینگ حرفه‌ای ایران</div>
-            
             <h1 data-i18n="heading">ایران فریلنسر، پل ارتباطی شما با پروژه‌های جهانی<br>
                 <span class="en-title" data-i18n="subheading">Your Gateway to Global Opportunities</span>
             </h1>
-            
-            <p class="description" data-i18n="desc">اولین بازار تخصصی فریلنسینگ که مستقیماً متخصصان فارسی‌زبان را به پروژه‌های داخلی و بین‌المللی متصل می‌کند. با پشتوانه همکاری استراتژیک، دروازه‌ای به سوی فرصت‌های بی‌نظیر.</p>
+            <p class="description" data-i18n="desc">ما با تکیه بر همکاری با غول‌های فناوری و برندهای بین‌المللی، بستری امن برای انجام پروژه‌های دلاری و داخلی فراهم کرده‌ایم. بیش از ۴۰۰۰ پروژه موفق، پرداخت امن ریالی و پشتیبانی حرفه‌ای.</p>
 
             <div class="features">
                 <div class="feature"><i class="fas fa-globe-americas"></i><h3 data-i18n="feat1-title">دسترسی جهانی</h3><p data-i18n="feat1-desc">پروژه‌های بین‌المللی</p></div>
@@ -538,7 +529,7 @@
                 </form>
             </div>
 
-            <div class="explanation-text" style="max-width:600px;margin:1.5rem auto;line-height:1.9;color:#475569;" data-i18n="why-text">
+            <div class="explanation-text" style="max-width:700px;margin:1.5rem auto;line-height:1.9;color:#475569;" data-i18n="why-text">
                 <strong>چرا ایران فریلنسر؟</strong><br>
                 ما پلی میان فریلنسرهای فارسی‌زبان و بازار کار جهانی هستیم. با زیرساخت امن پرداخت ریالی و همکاری با پلتفرم‌های بین‌المللی، فضایی قابل اعتماد برای انجام پروژه‌های باکیفیت فراهم کرده‌ایم.
             </div>
@@ -556,40 +547,110 @@
     <div class="page" id="page-about">
         <div class="main-content">
             <h1 data-i18n="about-heading">درباره ایران فریلنسر</h1>
-            <div class="about-section" data-i18n="about-text">
-                <p><strong>ایران فریلنسر</strong> از سال ۱۴۰۴ با هدف ایجاد پلی میان متخصصان ایرانی و پروژه‌های بین‌المللی شکل گرفت.</p>
-                <p>ما بر این باوریم که استعدادهای فارسی‌زبان شایسته دیده شدن در سطح جهانی هستند. پلتفرم ما با فراهم کردن زیرساخت پرداخت امن، داوری پروژه‌ها، و جامعه‌ای از فریلنسرهای تأییدشده، به شما کمک می‌کند تا بدون دغدغه‌های مرسوم، بر روی کاری که عاشقش هستید تمرکز کنید.</p>
-                <p>تیم ما ترکیبی از متخصصان فناوری، بازاریابی و منابع انسانی است که همگی یک هدف را دنبال می‌کنند: <strong>توانمندسازی فریلنسرهای ایرانی.</strong></p>
+            <div class="about-section" style="max-width:800px;text-align:right;line-height:2;margin:1rem auto;color:var(--text-mid);" data-i18n="about-text">
+                <p><strong>عبدالرضا عطائی</strong> بنیان‌گذار ایران فریلنسر، با بیش از یک دهه تجربه در مدیریت صنعتی، زنجیره تامین و هوش مصنوعی، همکاری با برندهای جهانی مانند adidas، BMW، GoDaddy و بسیاری دیگر را در کارنامه دارد.</p>
+                <p>پلتفرم ما حاصل ترکیب تخصص بین‌المللی و عشق به ایران است. هدف ما ایجاد فرصت‌های برابر برای فریلنسرهای فارسی‌زبان و ارائه‌ی خدمات پرداخت امن، آموزش و پروژه‌های واقعی است.</p>
+                <p>امروز ایران فریلنسر با بیش از ۴۰۰۰ پروژه موفق و همکاری با شرکت‌هایی در آمریکا، اروپا، روسیه و ژاپن، آماده‌ی خدمت‌رسانی به شماست.</p>
             </div>
-            <img src="img-02.jpg" alt="تیم ایران فریلنسر" style="max-width:500px;width:100%;border-radius:20px;margin-top:2rem;box-shadow:var(--shadow-lg);" onerror="this.style.display='none'">
+            <img src="abdolreza.webp" alt="عبدالرضا عطائی" style="max-width:350px;width:100%;border-radius:20px;margin-top:2rem;box-shadow:var(--shadow-lg);">
         </div>
     </div>
 
-    <!-- صفحه مقالات -->
-    <div class="page" id="page-blog">
+    <!-- صفحه خدمات -->
+    <div class="page" id="page-services">
         <div class="main-content">
-            <h1 data-i18n="blog-heading">مقالات آموزشی فریلنسری</h1>
-            <div class="articles-grid">
-                <div class="article-card">
-                    <img src="img-03.jpg" alt="نوشتن پروپوزال" style="width:100%;border-radius:12px;margin-bottom:1rem;" onerror="this.style.display='none'">
-                    <h3 data-i18n="article1-title">چطور یک پروپوزال برنده بنویسیم؟</h3>
-                    <p data-i18n="article1-desc">یاد بگیرید چطور در ۵ گام، پیشنهادی بنویسید که کارفرما را مجذوب کند.</p>
+            <h1 data-i18n="services-heading">خدمات تخصصی ما</h1>
+            <div class="features">
+                <div class="feature"><i class="fas fa-robot"></i><h3>هوش مصنوعی</h3><p>ساخت دستیارهای هوشمند</p></div>
+                <div class="feature"><i class="fas fa-code"></i><h3>اتوماسیون و API</h3><p>اسکریپت‌های سفارشی</p></div>
+                <div class="feature"><i class="fas fa-comments"></i><h3>چت‌بات</h3><p>پشتیبانی خودکار</p></div>
+                <div class="feature"><i class="fas fa-globe"></i><h3>فریلنسینگ بین‌المللی</h3><p>اتصال به پروژه‌های جهانی</p></div>
+                <div class="feature"><i class="fas fa-search"></i><h3>سئو و بازاریابی</h3><p>دیده‌شدن در گوگل</p></div>
+                <div class="feature"><i class="fas fa-chalkboard-teacher"></i><h3>مشاوره تخصصی</h3><p>رایگان برای اعضا</p></div>
+            </div>
+            <p class="description" data-i18n="services-desc">از طراحی چت‌بات هوش مصنوعی تا مدیریت پروژه‌های بین‌المللی، تیم ما آماده‌ی ارائه‌ی راه‌حل‌های دیجیتال است.</p>
+        </div>
+    </div>
+
+    <!-- صفحه نمونه‌کارها -->
+    <div class="page" id="page-portfolio">
+        <div class="main-content">
+            <h1 data-i18n="portfolio-heading">نمونه‌کارهای منتخب</h1>
+            <div class="portfolio-grid">
+                <div class="portfolio-card" style="width:280px;padding:1rem;">
+                    <img src="portfolio-1.webp" alt="پروژه یک" style="width:100%;border-radius:12px;height:180px;object-fit:cover;">
+                    <h3 style="margin-top:0.8rem;">اتوماسیون فروشگاه</h3>
+                    <p>طراحی ربات مدیریت سفارشات</p>
                 </div>
-                <div class="article-card">
-                    <img src="img-04.jpg" alt="قیمت‌گذاری پروژه" style="width:100%;border-radius:12px;margin-bottom:1rem;" onerror="this.style.display='none'">
-                    <h3 data-i18n="article2-title">راهنمای قیمت‌گذاری پروژه‌ها</h3>
-                    <p data-i18n="article2-desc">استراتژی‌های قیمت‌دهی که نه مشتری را فراری دهد، نه ارزش کارتان را کم کند.</p>
+                <div class="portfolio-card" style="width:280px;padding:1rem;">
+                    <img src="portfolio-2.webp" alt="پروژه دو" style="width:100%;border-radius:12px;height:180px;object-fit:cover;">
+                    <h3 style="margin-top:0.8rem;">چت‌بات پشتیبانی</h3>
+                    <p>هوش مصنوعی پاسخگو به مشتریان</p>
                 </div>
-                <div class="article-card">
-                    <img src="img-05.jpg" alt="بازاریابی فریلنسری" style="width:100%;border-radius:12px;margin-bottom:1rem;" onerror="this.style.display='none'">
-                    <h3 data-i18n="article3-title">بازاریابی برای فریلنسرها</h3>
-                    <p data-i18n="article3-desc">از شبکه‌های اجتماعی تا لینکدین، برند شخصی خود را بسازید.</p>
+                <div class="portfolio-card" style="width:280px;padding:1rem;">
+                    <img src="portfolio-3.webp" alt="پروژه سه" style="width:100%;border-radius:12px;height:180px;object-fit:cover;">
+                    <h3 style="margin-top:0.8rem;">سایت شرکتی</h3>
+                    <p>طراحی و سئوی دو زبانه</p>
                 </div>
-                <div class="article-card">
-                    <img src="img-06.jpg" alt="مدیریت زمان" style="width:100%;border-radius:12px;margin-bottom:1rem;" onerror="this.style.display='none'">
-                    <h3 data-i18n="article4-title">مدیریت زمان در فریلنسینگ</h3>
-                    <p data-i18n="article4-desc">تکنیک‌های عملی برای اینکه همیشه از برنامه جلوتر باشید.</p>
+                <div class="portfolio-card" style="width:280px;padding:1rem;">
+                    <img src="portfolio-4.webp" alt="پروژه چهار" style="width:100%;border-radius:12px;height:180px;object-fit:cover;">
+                    <h3 style="margin-top:0.8rem;">پرداخت بین‌المللی</h3>
+                    <p>راه‌اندازی درگاه واسط</p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحه دوره‌های آموزشی -->
+    <div class="page" id="page-courses">
+        <div class="main-content">
+            <h1 data-i18n="courses-heading">دوره‌های آموزشی</h1>
+            <div class="courses-grid">
+                <div class="course-card" style="width:300px;padding:1rem;text-align:right;">
+                    <img src="course-mobile.webp" alt="کسب درآمد با موبایل" style="width:100%;border-radius:12px;height:200px;object-fit:cover;">
+                    <h3 style="margin-top:0.8rem;">کسب درآمد با موبایل</h3>
+                    <p>از صفر تا درآمد دلاری</p>
+                    <button class="btn-primary" style="margin-top:1rem;">خرید دوره</button>
+                </div>
+                <div class="course-card" style="width:300px;padding:1rem;text-align:right;">
+                    <img src="course-ai.webp" alt="هوش مصنوعی" style="width:100%;border-radius:12px;height:200px;object-fit:cover;">
+                    <h3 style="margin-top:0.8rem;">هوش مصنوعی در کسب‌وکار</h3>
+                    <p>کاربردهای عملی ChatGPT</p>
+                    <button class="btn-primary" style="margin-top:1rem;">خرید دوره</button>
+                </div>
+                <div class="course-card" style="width:300px;padding:1rem;text-align:right;">
+                    <img src="course-other.webp" alt="فریلنسری حرفه‌ای" style="width:100%;border-radius:12px;height:200px;object-fit:cover;">
+                    <h3 style="margin-top:0.8rem;">فریلنسری در Upwork</h3>
+                    <p>پیدا کردن پروژه‌های بین‌المللی</p>
+                    <button class="btn-primary" style="margin-top:1rem;">خرید دوره</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحه سوالات متداول -->
+    <div class="page" id="page-faq">
+        <div class="main-content" style="max-width:800px;text-align:right;">
+            <h1 data-i18n="faq-heading">سوالات متداول</h1>
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <h3>چطور می‌توانم عضو ایران فریلنسر شوم؟</h3>
+                <div class="answer">کافی‌ست فرم ثبت‌نام را تکمیل کنید. پس از بررسی تخصص شما، به پروژه‌های مناسب دعوت می‌شوید.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <h3>پرداخت‌ها چگونه انجام می‌شود؟</h3>
+                <div class="answer">ما با همکاری با درگاه‌های بین‌المللی مانند PayPal و Wise، مبلغ پروژه را به ریال و بدون واسطه به حساب شما واریز می‌کنیم.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <h3>آیا دوره‌های آموزشی گارانتی دارند؟</h3>
+                <div class="answer">بله، تمام دوره‌ها تا ۷ روز ضمانت بازگشت وجه دارند.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <h3>آیا برای پروژه‌های خارجی نیاز به زبان انگلیسی دارم؟</h3>
+                <div class="answer">تیم ما ترجمه و هماهنگی اولیه را انجام می‌دهد، اما تسلط نسبی به انگلیسی برای ارتباط مستقیم توصیه می‌شود.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <h3>درآمد فریلنسرها در ایران فریلنسر چقدر است؟</h3>
+                <div class="answer">پروژه‌ها از ۵۰ دلار تا چند هزار دلار متغیرند. فریلنسرهای فعال ما ماهانه بالای ۱۰۰۰ دلار درآمد دارند.</div>
             </div>
         </div>
     </div>
@@ -606,29 +667,91 @@
                     <button type="submit" class="btn-primary" data-i18n="send-btn">ارسال پیام</button>
                 </form>
             </div>
-            <div class="contact-info" style="margin-top:2rem;">
+            <div class="contact-info">
                 <a href="tel:+989131580395"><i class="fas fa-phone"></i> ۰۹۱۳۱۵۸۰۳۹۵</a>
+                <a href="mailto:Admin@freelancer.com"><i class="fas fa-envelope"></i> Admin@freelancer.com</a>
                 <a href="mailto:Gigosphere@gmail.com"><i class="fas fa-envelope"></i> Gigosphere@gmail.com</a>
+            </div>
+            <div style="margin-top:2rem;display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;">
+                <a href="#"><i class="fab fa-instagram fa-2x"></i></a>
+                <a href="#"><i class="fab fa-linkedin fa-2x"></i></a>
+                <a href="#"><i class="fab fa-telegram fa-2x"></i></a>
+                <a href="#"><i class="fab fa-whatsapp fa-2x"></i></a>
             </div>
         </div>
     </div>
 
-    <footer class="footer" data-i18n="footer">© 2025 IranFreelancer. کلیه حقوق برای عبدالرضا عطائی محفوظ است.</footer>
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>همکاران بین‌المللی</h4>
+                <img src="partner-adidas.webp" alt="Adidas"><img src="partner-nike.webp" alt="Nike"><img src="partner-bmw.webp" alt="BMW"><img src="partner-siemens.webp" alt="Siemens"><img src="partner-godaddy.webp" alt="GoDaddy"><img src="partner-amazon.webp" alt="Amazon"><img src="partner-alibaba.webp" alt="Alibaba"><img src="partner-upwork.webp" alt="Upwork"><img src="partner-freelancer.webp" alt="Freelancer">
+                <img src="russia-1.webp" alt="Russian Partner"><img src="russia-2.webp" alt="Russian Partner"><img src="japan-1.webp" alt="Japanese Partner"><img src="japan-2.webp" alt="Japanese Partner">
+            </div>
+            <div class="footer-section">
+                <h4>پرداخت امن</h4>
+                <img src="bank-meli.webp" alt="Bank Melli"><img src="bank-mellat.webp" alt="Bank Mellat"><img src="bank-pasargad.webp" alt="Bank Pasargad">
+                <img src="paypal.webp" alt="PayPal"><img src="payoneer.webp" alt="Payoneer"><img src="wise.webp" alt="Wise">
+            </div>
+            <div class="footer-section">
+                <h4>مجوزها و اعتبارنامه‌ها</h4>
+                <img src="enamad.webp" alt="اینماد"><img src="iso.webp" alt="ISO"><img src="ecert.webp" alt="تجارت الکترونیک">
+                <img src="flag-usa.webp" alt="USA"><img src="flag-uk.webp" alt="UK"><img src="flag-germany.webp" alt="Germany"><img src="flag-canada.webp" alt="Canada"><img src="flag-uae.webp" alt="UAE">
+            </div>
+        </div>
 
+        <!-- نشانگر مصرف کربن -->
+        <div style="text-align:center; margin:1rem 0;">
+            <!-- Carbon Neutral Website Banner (light) -->
+            <a href="https://carbonneutralwebsite.org/" target="_blank" rel="noreferrer"><img src="https://carbonneutralwebsite.org/api/banner/Iranfreelancer.com/46.88mg/light.svg" width="300px" alt="Carbon impact of this web page" /></a>
+        </div>
+
+        <p data-i18n="footer">© 2025 IranFreelancer. کلیه حقوق برای عبدالرضا عطائی محفوظ است.</p>
+    </footer>
+
+    <!-- واتساپ شناور -->
     <a href="https://wa.me/989131580395" target="_blank" class="floating-chat" title="چت در واتس‌اپ"><i class="fab fa-whatsapp"></i></a>
 
-    <!-- اسکریپت‌ها -->
+    <!-- Chatbase (همان کد قبلی) -->
     <script>
-        // حذف لودینگ بعد از 2.5 ثانیه
+        (function() {
+            if (!window.chatbase || window.chatbase("getState") !== "initialized") {
+                window.chatbase = (...args) => {
+                    if (!window.chatbase.q) window.chatbase.q = [];
+                    window.chatbase.q.push(args);
+                };
+                window.chatbase = new Proxy(window.chatbase, {
+                    get(target, prop) {
+                        if (prop === "q") return target.q;
+                        return (...args) => target(prop, ...args);
+                    }
+                });
+            }
+            const onLoad = function() {
+                const script = document.createElement("script");
+                script.src = "https://www.chatbase.co/embed.min.js";
+                script.id = "MTLw3MGfW9Hl48b6yi1kR";
+                script.domain = "www.chatbase.co";
+                document.body.appendChild(script);
+            };
+            if (document.readyState === "complete") onLoad();
+            else window.addEventListener("load", onLoad);
+        })();
+    </script>
+
+    <!-- اسکریپت‌های اصلی -->
+    <script>
+        // حذف لودینگ بعد از بارگذاری کامل
         window.addEventListener('load', function() {
-            setTimeout(function() {
-                const loader = document.getElementById('tv-loader');
+            setTimeout(() => {
+                const loader = document.getElementById('custom-loader');
                 loader.classList.add('fade-out');
                 setTimeout(() => loader.remove(), 700);
             }, 2500);
         });
 
-        // شمارش معکوس
+        // شمارش معکوس (۳۰ روز)
         (function() {
             const targetDate = new Date();
             targetDate.setDate(targetDate.getDate() + 30);
@@ -637,7 +760,7 @@
                 const now = new Date().getTime();
                 const distance = targetDate.getTime() - now;
                 if (distance < 0) {
-                    document.getElementById('countdown').innerHTML = "<p style='color:var(--accent);font-weight:bold;' data-i18n='expired'>همین حالا شروع کنید!</p>";
+                    document.getElementById('countdown').innerHTML = "<p style='color:var(--accent);font-weight:bold;'>همین حالا شروع کنید!</p>";
                     return;
                 }
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -666,115 +789,73 @@
             });
         });
 
-        // سیستم ترجمه کامل با data-i18n
+        // سیستم ترجمه‌ی دو زبانه
         const translations = {
             fa: {
-                'nav-home': 'خانه',
-                'nav-about': 'درباره ما',
-                'nav-blog': 'مقالات',
-                'nav-contact': 'تماس',
+                'loader-text': 'در حال آماده‌سازی فضای حرفه‌ای شما',
+                'nav-home': 'خانه', 'nav-about': 'درباره ما', 'nav-services': 'خدمات', 'nav-portfolio': 'نمونه‌کارها', 'nav-courses': 'دوره‌ها', 'nav-faq': 'سوالات', 'nav-contact': 'تماس',
                 'badge': '🚀 پلتفرم فریلنسینگ حرفه‌ای ایران',
                 'heading': 'ایران فریلنسر، پل ارتباطی شما با پروژه‌های جهانی',
                 'subheading': 'Your Gateway to Global Opportunities',
-                'desc': 'اولین بازار تخصصی فریلنسینگ که مستقیماً متخصصان فارسی‌زبان را به پروژه‌های داخلی و بین‌المللی متصل می‌کند. با پشتوانه همکاری استراتژیک، دروازه‌ای به سوی فرصت‌های بی‌نظیر.',
-                'feat1-title': 'دسترسی جهانی',
-                'feat1-desc': 'پروژه‌های بین‌المللی',
-                'feat2-title': 'پرداخت امن',
-                'feat2-desc': 'تسویه ریالی سریع',
-                'feat3-title': 'جامعه تأییدشده',
-                'feat3-desc': 'متخصصان حرفه‌ای',
-                'feat4-title': 'رشد مستمر',
-                'feat4-desc': 'منابع آموزشی رایگان',
-                'days': 'روز',
-                'hours': 'ساعت',
-                'minutes': 'دقیقه',
-                'seconds': 'ثانیه',
+                'desc': 'ما با تکیه بر همکاری با غول‌های فناوری و برندهای بین‌المللی، بستری امن برای انجام پروژه‌های دلاری و داخلی فراهم کرده‌ایم. بیش از ۴۰۰۰ پروژه موفق، پرداخت امن ریالی و پشتیبانی حرفه‌ای.',
+                'feat1-title': 'دسترسی جهانی', 'feat1-desc': 'پروژه‌های بین‌المللی',
+                'feat2-title': 'پرداخت امن', 'feat2-desc': 'تسویه ریالی سریع',
+                'feat3-title': 'جامعه تأییدشده', 'feat3-desc': 'متخصصان حرفه‌ای',
+                'feat4-title': 'رشد مستمر', 'feat4-desc': 'منابع آموزشی رایگان',
+                'days': 'روز', 'hours': 'ساعت', 'minutes': 'دقیقه', 'seconds': 'ثانیه',
                 'email-form-title': '📩 اولین نفر باشید که مطلع می‌شود',
                 'email-placeholder': 'ایمیل خود را وارد کنید',
                 'notify-btn': 'اطلاع بده',
                 'join-title': '🤝 به جمع فریلنسرهای حرفه‌ای بپیوندید',
                 'join-desc': 'اطلاعات خود را وارد کنید تا به پروژه‌های مناسب متصل شوید.',
-                'fname-label': 'نام *',
-                'lname-label': 'نام خانوادگی *',
-                'email-label': 'ایمیل *',
-                'phone-label': 'شماره تماس',
-                'skills-label': 'مهارت‌های اصلی *',
-                'portfolio-label': 'لینک نمونه‌کار',
-                'about-label': 'درباره شما',
+                'fname-label': 'نام *', 'lname-label': 'نام خانوادگی *', 'email-label': 'ایمیل *', 'phone-label': 'شماره تماس',
+                'skills-label': 'مهارت‌های اصلی *', 'portfolio-label': 'لینک نمونه‌کار', 'about-label': 'درباره شما',
                 'register-btn': 'ثبت‌نام رایگان',
-                'why-text': '<strong>چرا ایران فریلنسر؟</strong><br>ما پلی میان فریلنسرهای فارسی‌زبان و بازار کار جهانی هستیم. با زیرساخت امن پرداخت ریالی و همکاری با پلتفرم‌های بین‌المللی، فضایی قابل اعتماد برای انجام پروژه‌های باکیفیت فراهم کرده‌ایم.',
+                'why-text': '<strong>چرا ایران فریلنسر؟</strong><br>ما پلی میان فریلنسرهای فارسی‌زبان و بازار کار جهانی هستیم...',
                 'about-heading': 'درباره ایران فریلنسر',
-                'about-text': '<p><strong>ایران فریلنسر</strong> از سال ۱۴۰۴ با هدف ایجاد پلی میان متخصصان ایرانی و پروژه‌های بین‌المللی شکل گرفت.</p><p>ما بر این باوریم که استعدادهای فارسی‌زبان شایسته دیده شدن در سطح جهانی هستند. پلتفرم ما با فراهم کردن زیرساخت پرداخت امن، داوری پروژه‌ها، و جامعه‌ای از فریلنسرهای تأییدشده، به شما کمک می‌کند تا بدون دغدغه‌های مرسوم، بر روی کاری که عاشقش هستید تمرکز کنید.</p><p>تیم ما ترکیبی از متخصصان فناوری، بازاریابی و منابع انسانی است که همگی یک هدف را دنبال می‌کنند: <strong>توانمندسازی فریلنسرهای ایرانی.</strong></p>',
-                'blog-heading': 'مقالات آموزشی فریلنسری',
-                'article1-title': 'چطور یک پروپوزال برنده بنویسیم؟',
-                'article1-desc': 'یاد بگیرید چطور در ۵ گام، پیشنهادی بنویسید که کارفرما را مجذوب کند.',
-                'article2-title': 'راهنمای قیمت‌گذاری پروژه‌ها',
-                'article2-desc': 'استراتژی‌های قیمت‌دهی که نه مشتری را فراری دهد، نه ارزش کارتان را کم کند.',
-                'article3-title': 'بازاریابی برای فریلنسرها',
-                'article3-desc': 'از شبکه‌های اجتماعی تا لینکدین، برند شخصی خود را بسازید.',
-                'article4-title': 'مدیریت زمان در فریلنسینگ',
-                'article4-desc': 'تکنیک‌های عملی برای اینکه همیشه از برنامه جلوتر باشید.',
+                'about-text': '<p><strong>عبدالرضا عطائی</strong> بنیان‌گذار ایران فریلنسر...</p>',
+                'services-heading': 'خدمات تخصصی ما',
+                'services-desc': 'از طراحی چت‌بات هوش مصنوعی تا مدیریت پروژه‌های بین‌المللی...',
+                'portfolio-heading': 'نمونه‌کارهای منتخب',
+                'courses-heading': 'دوره‌های آموزشی',
+                'faq-heading': 'سوالات متداول',
                 'contact-heading': 'تماس با ما',
-                'contact-name': 'نام شما',
-                'contact-email': 'ایمیل',
-                'contact-msg': 'پیامتان را بنویسید...',
+                'contact-name': 'نام شما', 'contact-email': 'ایمیل', 'contact-msg': 'پیامتان را بنویسید...',
                 'send-btn': 'ارسال پیام',
-                'footer': '© 2025 IranFreelancer. کلیه حقوق برای عبدالرضا عطائی محفوظ است.',
-                'expired': 'همین حالا شروع کنید!'
+                'footer': '© 2025 IranFreelancer. کلیه حقوق برای عبدالرضا عطائی محفوظ است.'
             },
             en: {
-                'nav-home': 'Home',
-                'nav-about': 'About Us',
-                'nav-blog': 'Blog',
-                'nav-contact': 'Contact',
+                'loader-text': 'Preparing your professional workspace',
+                'nav-home': 'Home', 'nav-about': 'About', 'nav-services': 'Services', 'nav-portfolio': 'Portfolio', 'nav-courses': 'Courses', 'nav-faq': 'FAQ', 'nav-contact': 'Contact',
                 'badge': '🚀 Professional Iranian Freelancing Platform',
                 'heading': 'IranFreelancer, Your Bridge to Global Projects',
                 'subheading': 'Your Gateway to Global Opportunities',
-                'desc': 'The first specialized freelancing marketplace connecting Persian-speaking experts directly to domestic and international projects. Strategic partnerships open doors to unique opportunities.',
-                'feat1-title': 'Global Access',
-                'feat1-desc': 'International Projects',
-                'feat2-title': 'Secure Payment',
-                'feat2-desc': 'Quick Rial Settlement',
-                'feat3-title': 'Verified Community',
-                'feat3-desc': 'Professional Experts',
-                'feat4-title': 'Continuous Growth',
-                'feat4-desc': 'Free Learning Resources',
-                'days': 'Days',
-                'hours': 'Hours',
-                'minutes': 'Minutes',
-                'seconds': 'Seconds',
+                'desc': 'Leveraging partnerships with global tech giants and brands, we provide a secure platform for dollar and domestic projects. 4000+ successful projects, secure Rial payments, and professional support.',
+                'feat1-title': 'Global Access', 'feat1-desc': 'International Projects',
+                'feat2-title': 'Secure Payment', 'feat2-desc': 'Quick Rial Settlement',
+                'feat3-title': 'Verified Community', 'feat3-desc': 'Professional Experts',
+                'feat4-title': 'Continuous Growth', 'feat4-desc': 'Free Learning Resources',
+                'days': 'Days', 'hours': 'Hours', 'minutes': 'Minutes', 'seconds': 'Seconds',
                 'email-form-title': '📩 Be the First to Know',
                 'email-placeholder': 'Enter your email',
                 'notify-btn': 'Notify Me',
                 'join-title': '🤝 Join Professional Freelancers',
                 'join-desc': 'Enter your information to be matched with suitable projects.',
-                'fname-label': 'First Name *',
-                'lname-label': 'Last Name *',
-                'email-label': 'Email *',
-                'phone-label': 'Phone Number',
-                'skills-label': 'Main Skills *',
-                'portfolio-label': 'Portfolio Link',
-                'about-label': 'About You',
+                'fname-label': 'First Name *', 'lname-label': 'Last Name *', 'email-label': 'Email *', 'phone-label': 'Phone Number',
+                'skills-label': 'Main Skills *', 'portfolio-label': 'Portfolio Link', 'about-label': 'About You',
                 'register-btn': 'Free Registration',
-                'why-text': '<strong>Why IranFreelancer?</strong><br>We bridge Persian-speaking freelancers to the global market. With secure Rial payment infrastructure and partnerships with international platforms, we provide a trustworthy space for high-quality projects.',
+                'why-text': '<strong>Why IranFreelancer?</strong><br>We bridge Persian-speaking freelancers to the global market...',
                 'about-heading': 'About IranFreelancer',
-                'about-text': '<p><strong>IranFreelancer</strong> was founded in 2025 to bridge Iranian experts with international projects.</p><p>We believe Persian-speaking talents deserve global recognition. Our platform provides secure payment, project arbitration, and a verified freelancer community so you can focus on work you love.</p><p>Our team combines tech, marketing, and HR experts all aiming for one goal: <strong>Empowering Iranian freelancers.</strong></p>',
-                'blog-heading': 'Freelancing Educational Articles',
-                'article1-title': 'How to Write a Winning Proposal?',
-                'article1-desc': 'Learn to write a proposal that captivates clients in 5 steps.',
-                'article2-title': 'Project Pricing Guide',
-                'article2-desc': 'Pricing strategies that won\'t scare clients nor undervalue your work.',
-                'article3-title': 'Marketing for Freelancers',
-                'article3-desc': 'Build your personal brand from social media to LinkedIn.',
-                'article4-title': 'Time Management in Freelancing',
-                'article4-desc': 'Practical techniques to always stay ahead of schedule.',
+                'about-text': '<p><strong>Abdolreza Ataei</strong>, founder of IranFreelancer...</p>',
+                'services-heading': 'Our Services',
+                'services-desc': 'From AI chatbot design to international project management...',
+                'portfolio-heading': 'Selected Portfolio',
+                'courses-heading': 'Training Courses',
+                'faq-heading': 'Frequently Asked Questions',
                 'contact-heading': 'Contact Us',
-                'contact-name': 'Your Name',
-                'contact-email': 'Email',
-                'contact-msg': 'Write your message...',
+                'contact-name': 'Your Name', 'contact-email': 'Email', 'contact-msg': 'Write your message...',
                 'send-btn': 'Send Message',
-                'footer': '© 2025 IranFreelancer. All rights reserved for Abdolreza Ataei.',
-                'expired': 'Start Now!'
+                'footer': '© 2025 IranFreelancer. All rights reserved for Abdolreza Ataei.'
             }
         };
 
@@ -783,15 +864,14 @@
 
         function setLanguage(lang) {
             currentLang = lang;
-            document.documentElement.lang = lang === 'fa' ? 'fa' : 'en';
+            document.documentElement.lang = lang;
             document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
             langToggle.textContent = lang === 'fa' ? 'English' : 'فارسی';
 
-            // عناصر با data-i18n
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translations[lang] && translations[lang][key]) {
-                    if (key === 'why-text' || key === 'about-text') {
+                    if (key.includes('text') || key.includes('desc') || key.includes('why-') || key.includes('about-')) {
                         el.innerHTML = translations[lang][key];
                     } else {
                         el.textContent = translations[lang][key];
@@ -799,7 +879,6 @@
                 }
             });
 
-            // placeholder های ترجمه‌شونده
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
                 const key = el.getAttribute('data-i18n-placeholder');
                 if (translations[lang] && translations[lang][key]) {
@@ -807,43 +886,11 @@
                 }
             });
 
-            // به‌روزرسانی عنوان صفحه
             document.title = lang === 'fa' ? 'ایران فریلنسر | IranFreelancer - پلتفرم فریلنسینگ حرفه‌ای' : 'IranFreelancer | Professional Freelancing Platform';
         }
 
-        langToggle.addEventListener('click', function() {
-            setLanguage(currentLang === 'fa' ? 'en' : 'fa');
-        });
-
-        // تنظیم اولیه
+        langToggle.addEventListener('click', () => setLanguage(currentLang === 'fa' ? 'en' : 'fa'));
         setLanguage('fa');
     </script>
-
-    <!-- Chatbase Agent -->
-    <script>
-        (function() {
-            if (!window.chatbase || window.chatbase("getState") !== "initialized") {
-                window.chatbase = (...args) => {
-                    if (!window.chatbase.q) window.chatbase.q = [];
-                    window.chatbase.q.push(args);
-                };
-                window.chatbase = new Proxy(window.chatbase, {
-                    get(target, prop) {
-                        if (prop === "q") return target.q;
-                        return (...args) => target(prop, ...args);
-                    }
-                });
-            }
-            const onLoad = function() {
-                const script = document.createElement("script");
-                script.src = "https://www.chatbase.co/embed.min.js";
-                script.id = "MTLw3MGfW9Hl48b6yi1kR";
-                script.domain = "www.chatbase.co";
-                document.body.appendChild(script);
-            };
-            if (document.readyState === "complete") onLoad();
-            else window.addEventListener("load", onLoad);
-        })();
-    </script>
 </body>
-</html>
+                </html>
