@@ -46,8 +46,8 @@
 
     <style>
         :root {
-            --primary: #0a0a0a;       /* مشکی زغالی */
-            --accent: #C41E3A;        /* قرمز تیره */
+            --primary: #0a0a0a;
+            --accent: #C41E3A;
             --accent-hover: #a01830;
             --white: #ffffff;
             --light-bg: #f9f9f9;
@@ -154,7 +154,7 @@
             background: var(--white); border: 1px solid var(--border);
             border-radius: var(--radius); padding: 2rem; width: 280px;
             text-align: center; box-shadow: var(--shadow-sm);
-            transition: var(--transition);
+            transition: var(--transition); cursor: pointer;
         }
         .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
         .card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; }
@@ -188,7 +188,24 @@
         }
         .footer-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem 4rem; margin-bottom: 2rem; }
         .footer-col h4 { color: white; margin-bottom: 1rem; font-weight: 600; }
-        .footer-col img { height: 30px; margin: 0 5px; border-radius: 4px; }
+
+        /* اسکرول لوگوها */
+        .logo-track {
+            overflow: hidden; width: 100%; margin: 1rem 0;
+        }
+        .logo-slide {
+            display: flex; gap: 2.5rem; width: max-content;
+            animation: scrollLogos 25s linear infinite;
+        }
+        .logo-slide img {
+            height: 40px; width: auto; filter: grayscale(100%);
+            opacity: 0.7; transition: 0.3s;
+        }
+        .logo-slide img:hover { filter: grayscale(0%); opacity: 1; }
+        @keyframes scrollLogos {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
 
         .whatsapp-float {
             position: fixed; bottom: 20px; left: 20px; background: #25D366; color: white;
@@ -198,6 +215,29 @@
             text-decoration: none; z-index: 998; transition: 0.3s;
         }
         .whatsapp-float:hover { transform: scale(1.1); }
+
+        /* مدال پروژه */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: white; border-radius: var(--radius); padding: 2rem;
+            max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto;
+            text-align: right; position: relative;
+        }
+        .modal .close-btn {
+            position: absolute; top: 1rem; left: 1rem; background: none; border: none;
+            font-size: 1.8rem; cursor: pointer; color: var(--text-mid);
+        }
+        .modal h2 { margin-bottom: 1rem; color: var(--primary); }
+        .modal .meta { display: flex; gap: 1.5rem; margin-bottom: 1rem; color: var(--text-mid); font-size: 0.9rem; }
+        .modal .skills { margin: 1rem 0; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .modal .skill-tag {
+            background: var(--light-bg); padding: 0.3rem 0.8rem;
+            border-radius: 50px; font-size: 0.85rem; color: var(--text-mid);
+        }
 
         @media (max-width: 600px) {
             .hero h1 { font-size: 2rem; }
@@ -224,9 +264,9 @@
         <div class="menu-icon" onclick="document.querySelector('.nav').classList.toggle('active')">☰</div>
         <ul class="nav">
             <li><a href="#" class="nav-link active" data-page="home">خانه</a></li>
+            <li><a href="#" class="nav-link" data-page="projects">پروژه‌ها</a></li>
             <li><a href="#" class="nav-link" data-page="about">درباره ما</a></li>
             <li><a href="#" class="nav-link" data-page="services">خدمات</a></li>
-            <li><a href="#" class="nav-link" data-page="portfolio">نمونه‌کارها</a></li>
             <li><a href="#" class="nav-link" data-page="courses">دوره‌ها</a></li>
             <li><a href="#" class="nav-link" data-page="faq">سوالات</a></li>
             <li><a href="#" class="nav-link" data-page="contact">تماس</a></li>
@@ -251,6 +291,14 @@
                 <div class="card"><i class="fas fa-users"></i><h3>جامعه تخصصی</h3><p>فریلنسرهای تأییدشده</p></div>
                 <div class="card"><i class="fas fa-graduation-cap"></i><h3>آموزش مداوم</h3><p>دوره‌های رایگان و کاربردی</p></div>
             </div>
+        </div>
+    </section>
+
+    <!-- پروژه‌ها (جدید) -->
+    <section class="page" id="page-projects">
+        <div class="main-content">
+            <h2 class="section-title">پروژه‌های <span>موجود</span></h2>
+            <div class="grid" id="projects-container"></div>
         </div>
     </section>
 
@@ -279,35 +327,6 @@
                 <div class="card"><i class="fas fa-briefcase"></i><h3>فریلنسینگ بین‌المللی</h3><p>اتصال به کارفرمایان خارجی</p></div>
                 <div class="card"><i class="fas fa-search"></i><h3>سئو و بازاریابی</h3><p>صفحه اول گوگل</p></div>
                 <div class="card"><i class="fas fa-chalkboard-teacher"></i><h3>مشاوره تخصصی</h3><p>رایگان برای اعضا</p></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- نمونه‌کارها -->
-    <section class="page" id="page-portfolio">
-        <div class="main-content">
-            <h2 class="section-title">نمونه‌کارهای <span>منتخب</span></h2>
-            <div class="grid">
-                <div class="card" style="text-align:right;">
-                    <img src="portfolio-1.webp" alt="پروژه یک" style="width:100%; height:180px; object-fit:cover; border-radius:12px;">
-                    <h3 style="margin-top:1rem;">اتوماسیون فروشگاه</h3>
-                    <p>ربات مدیریت سفارشات</p>
-                </div>
-                <div class="card" style="text-align:right;">
-                    <img src="portfolio-2.webp" alt="پروژه دو" style="width:100%; height:180px; object-fit:cover; border-radius:12px;">
-                    <h3 style="margin-top:1rem;">چت‌بات پشتیبانی</h3>
-                    <p>پاسخگویی هوشمند به مشتریان</p>
-                </div>
-                <div class="card" style="text-align:right;">
-                    <img src="portfolio-3.webp" alt="پروژه سه" style="width:100%; height:180px; object-fit:cover; border-radius:12px;">
-                    <h3 style="margin-top:1rem;">سایت شرکتی</h3>
-                    <p>طراحی و سئوی دو زبانه</p>
-                </div>
-                <div class="card" style="text-align:right;">
-                    <img src="portfolio-4.webp" alt="پروژه چهار" style="width:100%; height:180px; object-fit:cover; border-radius:12px;">
-                    <h3 style="margin-top:1rem;">پرداخت بین‌المللی</h3>
-                    <p>درگاه واسط امن</p>
-                </div>
             </div>
         </div>
     </section>
@@ -391,22 +410,21 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <h4>همکاران بین‌المللی</h4>
-                <img src="partner-adidas.webp" alt="Adidas"><img src="partner-nike.webp" alt="Nike">
-                <img src="partner-bmw.webp" alt="BMW"><img src="partner-siemens.webp" alt="Siemens">
-                <img src="partner-godaddy.webp" alt="GoDaddy"><img src="partner-amazon.webp" alt="Amazon">
-                <img src="partner-alibaba.webp" alt="Alibaba"><img src="partner-upwork.webp" alt="Upwork">
-                <img src="partner-freelancer.webp" alt="Freelancer">
-                <img src="russia-1.webp" alt=""><img src="russia-2.webp" alt="">
-                <img src="japan-1.webp" alt=""><img src="japan-2.webp" alt="">
+                <div class="logo-track">
+                    <div class="logo-slide" id="partners-slide"></div>
+                </div>
             </div>
             <div class="footer-col">
                 <h4>پرداخت امن</h4>
-                <img src="bank-meli.webp" alt=""><img src="bank-mellat.webp" alt=""><img src="bank-pasargad.webp" alt="">
-                <img src="paypal.webp" alt=""><img src="payoneer.webp" alt=""><img src="wise.webp" alt="">
+                <div class="logo-track">
+                    <div class="logo-slide" id="banks-slide"></div>
+                </div>
             </div>
             <div class="footer-col">
                 <h4>مجوزها</h4>
-                <img src="enamad.webp" alt=""><img src="iso.webp" alt=""><img src="ecert.webp" alt="">
+                <img src="enamad.webp" alt="" style="height:60px; margin:0 5px;">
+                <img src="iso.webp" alt="" style="height:60px; margin:0 5px;">
+                <img src="ecert.webp" alt="" style="height:60px; margin:0 5px;">
             </div>
         </div>
         <!-- نشان کربن -->
@@ -415,6 +433,21 @@
         </a>
         <p style="margin-top:1.5rem; color:#777;">© 2025 IranFreelancer. کلیه حقوق برای عبدالرضا عطائی محفوظ است.</p>
     </footer>
+
+    <!-- مدال جزئیات پروژه -->
+    <div class="modal-overlay" id="project-modal">
+        <div class="modal">
+            <button class="close-btn" onclick="closeModal()">✕</button>
+            <h2 id="modal-title"></h2>
+            <div class="meta">
+                <span id="modal-client"></span>
+                <span id="modal-budget"></span>
+                <span id="modal-date"></span>
+            </div>
+            <p id="modal-desc"></p>
+            <div class="skills" id="modal-skills"></div>
+        </div>
+    </div>
 
     <!-- واتساپ -->
     <a href="https://wa.me/989131580395" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
@@ -425,7 +458,7 @@
     </script>
 
     <script>
-        // حذف لودینگ
+        // لودینگ
         window.addEventListener('load', ()=>{
             setTimeout(()=>{
                 const loader = document.getElementById('preloader');
@@ -447,14 +480,129 @@
             });
         });
 
-        // تغییر زبان (نمونه ساده)
+        // داده‌های پروژه‌ها
+        const projects = [
+            {
+                title: "طراحی فروشگاه اینترنتی چندزبانه",
+                client: "شرکت آریا تجارت",
+                budget: "۲,۵۰۰ دلار",
+                date: "۱۵ اردیبهشت ۱۴۰۴",
+                desc: "طراحی کامل یک فروشگاه آنلاین با پشتیبانی از ۳ زبان فارسی، انگلیسی و عربی. شامل ریسپانسیو کامل، درگاه پرداخت ریالی و ارزی، و پنل مدیریت پیشرفته.",
+                skills: ["UI/UX", "React", "Node.js", "MongoDB"]
+            },
+            {
+                title: "ربات معامله‌گر ارز دیجیتال",
+                client: "یک استارت‌آپ آمریکایی",
+                budget: "۵,۰۰۰ دلار",
+                date: "۲ خرداد ۱۴۰۴",
+                desc: "توسعه ربات خودکار ترید با اتصال به API صرافی‌های Binance و Coinbase. تحلیل تکنیکال با یادگیری ماشین و گزارش‌گیری لحظه‌ای.",
+                skills: ["Python", "Machine Learning", "API", "Docker"]
+            },
+            {
+                title: "اپلیکیشن رزرو نوبت پزشکی",
+                client: "کلینیک سلامت نوین",
+                budget: "۱,۸۰۰ دلار",
+                date: "۱۰ فروردین ۱۴۰۴",
+                desc: "اپلیکیشن موبایل (اندروید و iOS) برای رزرو نوبت، یادآوری ویزیت، و ارتباط مستقیم با پزشک. پنل مدیریت تحت وب.",
+                skills: ["Flutter", "Firebase", "UI Design"]
+            },
+            {
+                title: "سایت شرکتی با سئوی پیشرفته",
+                client: "هلدینگ بین‌المللی مهر",
+                budget: "۳,۲۰۰ دلار",
+                date: "۲۸ اسفند ۱۴۰۳",
+                desc: "طراحی و پیاده‌سازی سایت شرکتی با آخرین استانداردهای سئو، سرعت بالا، و طراحی تعاملی. بهینه‌سازی برای موبایل و دسکتاپ.",
+                skills: ["HTML/CSS", "JavaScript", "SEO", "Figma"]
+            },
+            {
+                title: "سیستم مدیریت محتوای ویدئویی",
+                client: "یک شرکت رسانه‌ای در دبی",
+                budget: "۴,۰۰۰ دلار",
+                date: "۵ بهمن ۱۴۰۳",
+                desc: "پلتفرم اشتراک‌گذاری و پخش ویدئو با قابلیت آپلود، ترانسکود خودکار، و مدیریت کاربران. مشابه YouTube ولی با برندینگ اختصاصی.",
+                skills: ["React", "Node.js", "AWS", "FFmpeg"]
+            },
+            {
+                title: "چت‌بات هوش مصنوعی پشتیبانی",
+                client: "فروشگاه اینترنتی ماکسیم",
+                budget: "۱,۲۰۰ دلار",
+                date: "۲۰ آذر ۱۴۰۳",
+                desc: "چت‌بات مبتنی بر GPT-4 برای پاسخگویی خودکار به مشتریان، پیگیری سفارشات و ارائه پیشنهادات. یکپارچه‌سازی با ووکامرس.",
+                skills: ["Python", "OpenAI", "WordPress", "REST API"]
+            }
+        ];
+
+        // ساخت کارت‌های پروژه
+        function renderProjects() {
+            const container = document.getElementById('projects-container');
+            container.innerHTML = '';
+            projects.forEach((project, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.style.textAlign = 'right';
+                card.innerHTML = `
+                    <h3>${project.title}</h3>
+                    <p style="color:var(--text-mid);">کارفرما: ${project.client}</p>
+                    <p style="color:var(--accent); font-weight:600;">${project.budget}</p>
+                    <div style="margin-top:1rem;">
+                        ${project.skills.map(s => `<span class="skill-tag">${s}</span>`).join(' ')}
+                    </div>
+                `;
+                card.addEventListener('click', () => openModal(index));
+                container.appendChild(card);
+            });
+        }
+
+        // مدال پروژه
+        function openModal(index) {
+            const project = projects[index];
+            document.getElementById('modal-title').textContent = project.title;
+            document.getElementById('modal-client').innerHTML = `<i class="fas fa-building"></i> ${project.client}`;
+            document.getElementById('modal-budget').innerHTML = `<i class="fas fa-dollar-sign"></i> ${project.budget}`;
+            document.getElementById('modal-date').innerHTML = `<i class="fas fa-calendar"></i> ${project.date}`;
+            document.getElementById('modal-desc').textContent = project.desc;
+            const skillsContainer = document.getElementById('modal-skills');
+            skillsContainer.innerHTML = project.skills.map(s => `<span class="skill-tag">${s}</span>`).join(' ');
+            document.getElementById('project-modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('project-modal').classList.remove('active');
+        }
+
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) closeModal();
+        });
+
+        renderProjects();
+
+        // اسکرول لوگوها - همکاران
+        const partners = [
+            'partner-adidas.webp','partner-nike.webp','partner-bmw.webp','partner-siemens.webp',
+            'partner-godaddy.webp','partner-amazon.webp','partner-alibaba.webp',
+            'partner-upwork.webp','partner-freelancer.webp',
+            'russia-1.webp','russia-2.webp','japan-1.webp','japan-2.webp'
+        ];
+        const partnersSlide = document.getElementById('partners-slide');
+        partners.forEach(p => { partnersSlide.innerHTML += `<img src="${p}" alt="">`; });
+        partners.forEach(p => { partnersSlide.innerHTML += `<img src="${p}" alt="">`; }); // کپی برای لوپ
+
+        // اسکرول لوگوها - بانک‌ها
+        const banks = [
+            'bank-meli.webp','bank-mellat.webp','bank-pasargad.webp',
+            'paypal.webp','payoneer.webp','wise.webp'
+        ];
+        const banksSlide = document.getElementById('banks-slide');
+        banks.forEach(b => { banksSlide.innerHTML += `<img src="${b}" alt="">`; });
+        banks.forEach(b => { banksSlide.innerHTML += `<img src="${b}" alt="">`; }); // کپی برای لوپ
+
+        // تغییر زبان (ساده)
         let currentLang = 'fa';
         document.getElementById('langToggle').addEventListener('click', ()=>{
             if(currentLang === 'fa'){
                 currentLang = 'en';
                 document.documentElement.lang = 'en';
                 document.documentElement.dir = 'ltr';
-                // در نسخه نهایی می‌توانید همه متن‌ها را با data-i18n جایگزین کنید
             } else {
                 currentLang = 'fa';
                 document.documentElement.lang = 'fa';
