@@ -71,17 +71,33 @@
             overflow-x: hidden;
         }
 
-        /* لودینگ */
+        /* لودینگ با SVG */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--white);
+            background: #FDFBF7; /* کرم سفید */
             display: flex; align-items: center; justify-content: center;
             flex-direction: column; z-index: 10000;
             transition: opacity 0.6s, visibility 0.6s;
         }
         #preloader.fade-out { opacity: 0; visibility: hidden; }
-        #preloader img { width: 200px; border-radius: 12px; }
-        .loader-text { margin-top: 1rem; color: var(--text-mid); font-weight: 500; }
+        .loader-text { margin-top: 1rem; color: var(--text-mid); font-weight: 500; font-size: 1.1rem; }
+        
+        #loader-svg { width: 200px; height: 200px; max-width: 80vw; }
+        .pickaxe-group { transform-origin: 110px 95px; animation: swing 1.2s ease-in-out infinite; }
+        @keyframes swing { 0%, 100% { transform: rotate(10deg); } 50% { transform: rotate(-35deg); } }
+        .particle { animation: fly 1.2s ease-out infinite; }
+        .particle:nth-child(1) { animation-delay: 0s; }
+        .particle:nth-child(2) { animation-delay: 0.2s; }
+        .particle:nth-child(3) { animation-delay: 0.4s; }
+        .particle:nth-child(4) { animation-delay: 0.6s; }
+        .particle:nth-child(5) { animation-delay: 0.8s; }
+        .particle:nth-child(6) { animation-delay: 1.0s; }
+        @keyframes fly {
+            0% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+            100% { opacity: 0; transform: translate(40px, 50px) scale(0.2) rotate(200deg); }
+        }
+        .silhouette-group { animation: shake 1.2s ease-in-out infinite; }
+        @keyframes shake { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(2px); } }
 
         /* هدر */
         .header {
@@ -249,16 +265,36 @@
 </head>
 <body>
 
-    <!-- لودینگ -->
+    <!-- لودینگ (حذف عکس و جایگزینی با SVG متحرک) -->
     <div id="preloader">
-        <img src="loading.gif" alt="Loading">
+        <svg id="loader-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="200" fill="#FDFBF7" />
+            <path d="M 0,160 Q 100,175 200,140 L 200,200 L 0,200 Z" fill="#D32F2F" />
+            <circle cx="147" cy="147" r="2" fill="#1A1A1A" class="particle" />
+            <circle cx="153" cy="157" r="2.7" fill="#1A1A1A" class="particle" />
+            <circle cx="160" cy="140" r="1.8" fill="#1A1A1A" class="particle" />
+            <circle cx="167" cy="153" r="2.3" fill="#1A1A1A" class="particle" />
+            <circle cx="140" cy="163" r="1.5" fill="#1A1A1A" class="particle" />
+            <circle cx="150" cy="150" r="3" fill="#1A1A1A" class="particle" />
+            <g class="silhouette-group">
+                <circle cx="87" cy="53" r="8" fill="#1A1A1A" />
+                <polygon points="79,61 95,61 99,93 75,93" fill="#1A1A1A" />
+                <polygon points="77,93 83,93 90,147 83,150" fill="#1A1A1A" />
+                <polygon points="87,93 93,93 103,147 107,143" fill="#1A1A1A" />
+            </g>
+            <g class="pickaxe-group">
+                <line x1="87" y1="67" x2="110" y2="93" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" />
+                <line x1="110" y1="93" x2="130" y2="53" stroke="#1A1A1A" stroke-width="2.7" stroke-linecap="round" />
+                <path d="M 130,53 Q 137,53 137,40 L 123,40 Q 127,45 130,53 Z" fill="#1A1A1A" />
+            </g>
+        </svg>
         <div class="loader-text">در حال بارگذاری فضای حرفه‌ای شما</div>
     </div>
 
     <!-- هدر -->
     <header class="header">
         <div class="logo">
-            <img src="img-01.png" alt="IranFreelancer">
+            <img src="img-01.png" alt="لوگوی ایران فریلنسر">
             <span>IranFreelancer</span>
         </div>
         <div class="menu-icon" onclick="document.querySelector('.nav').classList.toggle('active')">☰</div>
@@ -294,7 +330,7 @@
         </div>
     </section>
 
-    <!-- پروژه‌ها (جدید) -->
+    <!-- پروژه‌ها -->
     <section class="page" id="page-projects">
         <div class="main-content">
             <h2 class="section-title">پروژه‌های <span>موجود</span></h2>
@@ -311,7 +347,7 @@
                 <p>ماموریت ما توانمندسازی استعدادهای فارسی‌زبان از طریق پروژه‌های واقعی، پرداخت‌های امن و آموزش‌های روز است. با بیش از ۴۰۰۰ پروژه موفق و همکارانی در آمریکا، اروپا، روسیه و ژاپن، آماده‌ی خدمت به شما هستیم.</p>
             </div>
             <div style="text-align:center; margin-top:2rem;">
-                <img src="abdolreza.webp" alt="عبدالرضا عطائی" style="max-width:280px; border-radius:20px; box-shadow:var(--shadow-lg);">
+                <img src="abdolreza.webp" alt="عبدالرضا عطائی بنیان‌گذار" style="max-width:280px; border-radius:20px; box-shadow:var(--shadow-lg);" loading="lazy">
             </div>
         </div>
     </section>
@@ -337,19 +373,19 @@
             <h2 class="section-title">دوره‌های <span>آموزشی</span></h2>
             <div class="grid">
                 <div class="card" style="text-align:right;">
-                    <img src="course-mobile.webp" alt="کسب درآمد با موبایل" style="width:100%; height:200px; object-fit:cover; border-radius:12px;">
+                    <img src="course-mobile.webp" alt="دوره کسب درآمد با موبایل" style="width:100%; height:200px; object-fit:cover; border-radius:12px;" loading="lazy">
                     <h3 style="margin-top:1rem;">کسب درآمد با موبایل</h3>
                     <p>از صفر تا درآمد دلاری</p>
                     <button class="btn" style="margin-top:1rem; width:100%;">خرید دوره</button>
                 </div>
                 <div class="card" style="text-align:right;">
-                    <img src="course-ai.webp" alt="هوش مصنوعی" style="width:100%; height:200px; object-fit:cover; border-radius:12px;">
+                    <img src="course-ai.webp" alt="دوره هوش مصنوعی در کسب‌وکار" style="width:100%; height:200px; object-fit:cover; border-radius:12px;" loading="lazy">
                     <h3 style="margin-top:1rem;">هوش مصنوعی در کسب‌وکار</h3>
                     <p>کاربردهای عملی ChatGPT</p>
                     <button class="btn" style="margin-top:1rem; width:100%;">خرید دوره</button>
                 </div>
                 <div class="card" style="text-align:right;">
-                    <img src="course-other.webp" alt="فریلنسری در Upwork" style="width:100%; height:200px; object-fit:cover; border-radius:12px;">
+                    <img src="course-other.webp" alt="دوره فریلنسری در Upwork" style="width:100%; height:200px; object-fit:cover; border-radius:12px;" loading="lazy">
                     <h3 style="margin-top:1rem;">فریلنسری در Upwork</h3>
                     <p>پیدا کردن پروژه‌های بین‌المللی</p>
                     <button class="btn" style="margin-top:1rem; width:100%;">خرید دوره</button>
@@ -397,10 +433,10 @@
                     <button type="submit" class="btn" style="width:100%;">ارسال پیام</button>
                 </form>
             </div>
-            <div style="text-align:center; margin-top:2rem; display:flex; gap:2rem; justify-content:center; color:var(--accent);">
-                <a href="tel:+989131580395"><i class="fas fa-phone"></i> ۰۹۱۳۱۵۸۰۳۹۵</a>
-                <a href="mailto:Admin@freelancer.com"><i class="fas fa-envelope"></i> Admin@freelancer.com</a>
-                <a href="mailto:Gigosphere@gmail.com"><i class="fas fa-envelope"></i> Gigosphere@gmail.com</a>
+            <div style="text-align:center; margin-top:2rem; display:flex; gap:2rem; justify-content:center; color:var(--accent); flex-wrap:wrap;">
+                <a href="tel:+989131580395" style="color:var(--accent); text-decoration:none;"><i class="fas fa-phone"></i> ۰۹۱۳۱۵۸۰۳۹۵</a>
+                <a href="mailto:Admin@freelancer.com" style="color:var(--accent); text-decoration:none;"><i class="fas fa-envelope"></i> Admin@freelancer.com</a>
+                <a href="mailto:Gigosphere@gmail.com" style="color:var(--accent); text-decoration:none;"><i class="fas fa-envelope"></i> Gigosphere@gmail.com</a>
             </div>
         </div>
     </section>
@@ -422,9 +458,9 @@
             </div>
             <div class="footer-col">
                 <h4>مجوزها</h4>
-                <img src="enamad.webp" alt="" style="height:60px; margin:0 5px;">
-                <img src="iso.webp" alt="" style="height:60px; margin:0 5px;">
-                <img src="ecert.webp" alt="" style="height:60px; margin:0 5px;">
+                <img src="enamad.webp" alt="نماد اعتماد الکترونیکی" style="height:60px; margin:0 5px;" loading="lazy">
+                <img src="iso.webp" alt="گواهی ISO" style="height:60px; margin:0 5px;" loading="lazy">
+                <img src="ecert.webp" alt="گواهی امنیتی" style="height:60px; margin:0 5px;" loading="lazy">
             </div>
         </div>
         <!-- نشان کربن -->
@@ -450,7 +486,7 @@
     </div>
 
     <!-- واتساپ -->
-    <a href="https://wa.me/989131580395" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/989131580395" class="whatsapp-float" target="_blank" rel="noreferrer"><i class="fab fa-whatsapp"></i></a>
 
     <!-- Chatbase -->
     <script>
@@ -458,13 +494,13 @@
     </script>
 
     <script>
-        // لودینگ
+        // لودینگ (تایم و محو کردن لودینگ)
         window.addEventListener('load', ()=>{
             setTimeout(()=>{
                 const loader = document.getElementById('preloader');
                 loader.classList.add('fade-out');
                 setTimeout(()=> loader.remove(), 600);
-            }, 2000);
+            }, 1500);
         });
 
         // ناوبری
@@ -584,8 +620,8 @@
             'russia-1.webp','russia-2.webp','japan-1.webp','japan-2.webp'
         ];
         const partnersSlide = document.getElementById('partners-slide');
-        partners.forEach(p => { partnersSlide.innerHTML += `<img src="${p}" alt="">`; });
-        partners.forEach(p => { partnersSlide.innerHTML += `<img src="${p}" alt="">`; }); // کپی برای لوپ
+        partners.forEach(p => { partnersSlide.innerHTML += `<img src="${p}" alt="لوگوی همکار" loading="lazy">`; });
+        partners.forEach(p => { partnersSlide.innerHTML += `<img src="${p}" alt="لوگوی همکار" loading="lazy">`; }); // کپی برای لوپ
 
         // اسکرول لوگوها - بانک‌ها
         const banks = [
@@ -593,8 +629,8 @@
             'paypal.webp','payoneer.webp','wise.webp'
         ];
         const banksSlide = document.getElementById('banks-slide');
-        banks.forEach(b => { banksSlide.innerHTML += `<img src="${b}" alt="">`; });
-        banks.forEach(b => { banksSlide.innerHTML += `<img src="${b}" alt="">`; }); // کپی برای لوپ
+        banks.forEach(b => { banksSlide.innerHTML += `<img src="${b}" alt="لوگوی بانک" loading="lazy">`; });
+        banks.forEach(b => { banksSlide.innerHTML += `<img src="${b}" alt="لوگوی بانک" loading="lazy">`; }); // کپی برای لوپ
 
         // تغییر زبان (ساده)
         let currentLang = 'fa';
