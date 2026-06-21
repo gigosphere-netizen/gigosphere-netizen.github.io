@@ -3,648 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>در دست تعمیر | IranFreelancer</title>
     
-    <!-- SEO Meta Tags -->
-    <title>ایران فریلنسر | IranFreelancer - پلتفرم فریلنسینگ حرفه‌ای</title>
-    <meta name="description" content="IranFreelancer بستر تخصصی فریلنسینگ برای ایرانیان. پروژه‌های بین‌المللی، پرداخت امن ریالی، همکاری با برندهای جهانی، دوره‌های آموزشی و جامعه فریلنسرهای تأییدشده.">
-    <meta name="keywords" content="فریلنسر, فریلنسینگ, ایران, پروژه, برنامه‌نویسی, سئو, ایران فریلنسر, فریلنسر ایرانی, پرداخت ریالی, پروژه دلاری">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://iranfreelancer.com">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="ایران فریلنسر | IranFreelancer">
-    <meta property="og:description" content="جامعه فریلنسرهای حرفه‌ای ایران؛ پروژه‌های جهانی، پرداخت امن، آموزش تخصصی.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://iranfreelancer.com">
-    <meta property="og:image" content="https://iranfreelancer.com/img-01.png">
-    
-    <!-- hreflang -->
-    <link rel="alternate" hreflang="fa" href="https://iranfreelancer.com">
-    <link rel="alternate" hreflang="en" href="https://iranfreelancer.com/?lang=en">
-    <link rel="alternate" hreflang="x-default" href="https://iranfreelancer.com">
-    
-    <!-- Schema Organization -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "ایران فریلنسر | IranFreelancer",
-        "url": "https://iranfreelancer.com",
-        "logo": "https://iranfreelancer.com/img-01.png",
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+989131580395",
-            "email": "Gigosphere@gmail.com",
-            "contactType": "customer service"
-        }
-    }
-    </script>
-
-    <!-- Fonts -->
+    <!-- فونت وزیرمتن برای زیبایی تایپوگرافی فارسی -->
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
+        /* تنظیمات اصلی رنگ */
         :root {
-            --primary: #0a0a0a;
-            --accent: #C41E3A;
-            --accent-hover: #a01830;
-            --white: #ffffff;
-            --light-bg: #f9f9f9;
-            --border: #eaeaea;
-            --text-dark: #1a1a1a;
-            --text-mid: #4a4a4a;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-            --shadow-md: 0 8px 24px rgba(0,0,0,0.06);
-            --shadow-lg: 0 20px 40px rgba(0,0,0,0.1);
-            --radius: 16px;
-            --transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+            --white-cream: #FDFBF7;
+            --dark-green: #1A4D2E;
+            --bg-overlay: rgba(253, 251, 247, 0.85); /* پوشش شیری شفاف روی عکس */
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Vazirmatn', sans-serif;
-            background: var(--white);
-            color: var(--text-dark);
-            line-height: 1.8;
-            overflow-x: hidden;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* لودینگ با SVG */
-        #preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #FDFBF7; /* کرم سفید */
-            display: flex; align-items: center; justify-content: center;
-            flex-direction: column; z-index: 10000;
-            transition: opacity 0.6s, visibility 0.6s;
-        }
-        #preloader.fade-out { opacity: 0; visibility: hidden; }
-        .loader-text { margin-top: 1rem; color: var(--text-mid); font-weight: 500; font-size: 1.1rem; }
-        
-        #loader-svg { width: 200px; height: 200px; max-width: 80vw; }
-        .pickaxe-group { transform-origin: 110px 95px; animation: swing 1.2s ease-in-out infinite; }
-        @keyframes swing { 0%, 100% { transform: rotate(10deg); } 50% { transform: rotate(-35deg); } }
-        .particle { animation: fly 1.2s ease-out infinite; }
-        .particle:nth-child(1) { animation-delay: 0s; }
-        .particle:nth-child(2) { animation-delay: 0.2s; }
-        .particle:nth-child(3) { animation-delay: 0.4s; }
-        .particle:nth-child(4) { animation-delay: 0.6s; }
-        .particle:nth-child(5) { animation-delay: 0.8s; }
-        .particle:nth-child(6) { animation-delay: 1.0s; }
-        @keyframes fly {
-            0% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
-            100% { opacity: 0; transform: translate(40px, 50px) scale(0.2) rotate(200deg); }
-        }
-        .silhouette-group { animation: shake 1.2s ease-in-out infinite; }
-        @keyframes shake { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(2px); } }
-
-        /* هدر */
-        .header {
-            position: sticky; top: 0; z-index: 999;
-            background: var(--primary);
-            padding: 0.8rem 2rem;
-            display: flex; align-items: center; justify-content: space-between;
-            flex-wrap: wrap;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-        }
-        .logo { display: flex; align-items: center; gap: 0.6rem; }
-        .logo img { height: 40px; }
-        .logo span { color: white; font-weight: 700; font-size: 1.3rem; letter-spacing: -0.5px; }
-        .nav { display: flex; gap: 1.8rem; list-style: none; }
-        .nav a {
-            color: #ccc; text-decoration: none; font-weight: 500;
-            padding-bottom: 4px; border-bottom: 2px solid transparent;
-            transition: var(--transition);
-        }
-        .nav a:hover, .nav a.active { color: white; border-bottom-color: var(--accent); }
-        .lang-btn {
-            background: transparent; border: 1px solid #555; color: #ccc;
-            padding: 0.4rem 1.2rem; border-radius: 50px;
-            cursor: pointer; font-family: inherit; transition: var(--transition);
-        }
-        .lang-btn:hover { background: #222; color: white; }
-        .menu-icon { display: none; color: white; font-size: 1.6rem; cursor: pointer; }
-
-        @media (max-width: 850px) {
-            .nav { display: none; position: absolute; top: 70px; left: 0; width: 100%;
-                background: var(--primary); flex-direction: column; padding: 1rem; gap: 1rem; }
-            .nav.active { display: flex; }
-            .menu-icon { display: block; }
+        body, html {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+            background-color: var(--white-cream);
+            direction: rtl;
         }
 
-        /* بخش‌ها */
-        .page { display: none; animation: fadeUp 0.4s ease; }
-        .page.active { display: block; }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Hero */
-        .hero {
+        /* کانتینر اصلی عکس */
+        .maintenance-wrapper {
             position: relative;
-            background: url('hero-bg.webp') center/cover no-repeat;
-            min-height: 80vh; display: flex; align-items: center; justify-content: center;
-            color: white; text-align: center;
-        }
-        .hero-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(196,30,58,0.5) 100%);
-        }
-        .hero-content { position: relative; z-index: 2; max-width: 700px; padding: 2rem; }
-        .hero h1 { font-size: 3rem; font-weight: 900; line-height: 1.3; margin-bottom: 1.5rem; }
-        .hero p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
-        .btn {
-            display: inline-block; background: var(--accent); color: white;
-            padding: 0.8rem 2.5rem; border-radius: 50px; text-decoration: none;
-            font-weight: 600; transition: var(--transition); border: none; cursor: pointer;
-        }
-        .btn:hover { background: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 10px 25px rgba(196,30,58,0.3); }
-
-        .main-content { max-width: 1100px; margin: auto; padding: 4rem 1.5rem; }
-
-        .section-title { text-align: center; font-size: 2.2rem; font-weight: 800; margin-bottom: 2.5rem; color: var(--primary); }
-        .section-title span { color: var(--accent); }
-
-        .grid { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
-
-        .card {
-            background: var(--white); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 2rem; width: 280px;
-            text-align: center; box-shadow: var(--shadow-sm);
-            transition: var(--transition); cursor: pointer;
-        }
-        .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
-        .card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; }
-        .card h3 { margin-bottom: 0.8rem; color: var(--primary); }
-
-        .form-wrap {
-            background: var(--light-bg); border-radius: var(--radius);
-            padding: 2.5rem; max-width: 500px; margin: 2rem auto;
-            box-shadow: var(--shadow-md);
-        }
-        .form-wrap input, .form-wrap textarea {
-            width: 100%; padding: 0.8rem; border: 1px solid var(--border);
-            border-radius: 8px; margin-bottom: 1rem; font-family: inherit;
-            background: white;
-        }
-        .row { display: flex; gap: 1rem; }
-        .half { flex: 1; }
-
-        .faq-item {
-            background: white; border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 1.2rem; margin-bottom: 0.8rem;
-            cursor: pointer; transition: 0.3s;
-        }
-        .faq-item.open { background: #fcfcfc; }
-        .faq-item .answer { display: none; margin-top: 0.8rem; }
-        .faq-item.open .answer { display: block; }
-
-        .footer {
-            background: var(--primary); color: #aaa;
-            padding: 3rem 1.5rem 2rem; text-align: center;
-        }
-        .footer-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem 4rem; margin-bottom: 2rem; }
-        .footer-col h4 { color: white; margin-bottom: 1rem; font-weight: 600; }
-
-        /* اسکرول لوگوها */
-        .logo-track {
-            overflow: hidden; width: 100%; margin: 1rem 0;
-        }
-        .logo-slide {
-            display: flex; gap: 2.5rem; width: max-content;
-            animation: scrollLogos 25s linear infinite;
-        }
-        .logo-slide img {
-            height: 40px; width: auto; filter: grayscale(100%);
-            opacity: 0.7; transition: 0.3s;
-        }
-        .logo-slide img:hover { filter: grayscale(0%); opacity: 1; }
-        @keyframes scrollLogos {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
+            width: 100%;
+            height: 100%;
+            background-image: url('maintance.gif'); /* نام فایل GIF شما */
+            background-size: cover;
+            background-position: center 30%; /* تنظیم مرکزیت عکس به بالاتر از وسط */
+            background-repeat: no-repeat;
         }
 
-        .whatsapp-float {
-            position: fixed; bottom: 20px; left: 20px; background: #25D366; color: white;
-            width: 55px; height: 55px; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; font-size: 1.8rem;
-            box-shadow: 0 4px 15px rgba(37,211,102,0.3);
-            text-decoration: none; z-index: 998; transition: 0.3s;
-        }
-        .whatsapp-float:hover { transform: scale(1.1); }
-
-        /* مدال پروژه */
-        .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;
-        }
-        .modal-overlay.active { display: flex; }
-        .modal {
-            background: white; border-radius: var(--radius); padding: 2rem;
-            max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto;
-            text-align: right; position: relative;
-        }
-        .modal .close-btn {
-            position: absolute; top: 1rem; left: 1rem; background: none; border: none;
-            font-size: 1.8rem; cursor: pointer; color: var(--text-mid);
-        }
-        .modal h2 { margin-bottom: 1rem; color: var(--primary); }
-        .modal .meta { display: flex; gap: 1.5rem; margin-bottom: 1rem; color: var(--text-mid); font-size: 0.9rem; }
-        .modal .skills { margin: 1rem 0; display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .modal .skill-tag {
-            background: var(--light-bg); padding: 0.3rem 0.8rem;
-            border-radius: 50px; font-size: 0.85rem; color: var(--text-mid);
+        /* لایه پوشش شیری برای دیده شدن بهتر متن */
+        .overlay-bg {
+            position: absolute;
+            inset: 0;
+            background: var(--bg-overlay);
+            z-index: 1;
         }
 
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 2rem; }
-            .grid { flex-direction: column; align-items: center; }
-            .card { width: 100%; max-width: 320px; }
-            .row { flex-direction: column; }
+        /* کانتینر متن‌ها */
+        .content-box {
+            position: absolute;
+            top: 18%; /* فاصله از بالا (بالاتر از وسط) */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            text-align: center;
+            width: 90%;
+            max-width: 1200px;
+            padding: 2rem;
+        }
+
+        /* انیمیشن متن */
+        .fade-in-text {
+            opacity: 0;
+            animation: fadeUp 1.2s ease forwards;
+            color: var(--dark-green);
+        }
+
+        .fade-in-text:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in-text:nth-child(3) { animation-delay: 0.4s; }
+        .fade-in-text:nth-child(4) { animation-delay: 0.6s; }
+        .fade-in-text:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* استایل متن‌ها */
+        .title-main {
+            font-size: 4.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .title-sub {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .lang-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem 3rem;
+            margin-top: 2.5rem;
+            font-size: 1.4rem;
+            font-weight: 400;
+        }
+
+        .lang-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .lang-item .label {
+            font-size: 1rem;
+            color: #4f6b5c;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+
+        .lang-item .text {
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* انعطاف‌پذیری برای موبایل و تبلت (Responsive) */
+        @media (max-width: 1024px) {
+            .content-box { top: 15%; }
+            .title-main { font-size: 3.5rem; }
+            .title-sub { font-size: 1.3rem; }
+            .lang-grid { gap: 1rem 2rem; font-size: 1.2rem; }
+        }
+
+        @media (max-width: 768px) {
+            .content-box { top: 12%; padding: 1.5rem; }
+            .title-main { font-size: 2.5rem; }
+            .title-sub { font-size: 1.1rem; }
+            .lang-grid {
+                flex-direction: column;
+                gap: 1rem;
+                font-size: 1rem;
+                margin-top: 1.5rem;
+            }
+            .maintenance-wrapper {
+                background-position: center 20%; /* جابجایی عکس به بالا در موبایل */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-box { top: 10%; padding: 1rem; }
+            .title-main { font-size: 2rem; }
+            .title-sub { font-size: 1rem; }
+            .lang-grid { font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- لودینگ (حذف عکس و جایگزینی با SVG متحرک) -->
-    <div id="preloader">
-        <svg id="loader-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <rect width="200" height="200" fill="#FDFBF7" />
-            <path d="M 0,160 Q 100,175 200,140 L 200,200 L 0,200 Z" fill="#D32F2F" />
-            <circle cx="147" cy="147" r="2" fill="#1A1A1A" class="particle" />
-            <circle cx="153" cy="157" r="2.7" fill="#1A1A1A" class="particle" />
-            <circle cx="160" cy="140" r="1.8" fill="#1A1A1A" class="particle" />
-            <circle cx="167" cy="153" r="2.3" fill="#1A1A1A" class="particle" />
-            <circle cx="140" cy="163" r="1.5" fill="#1A1A1A" class="particle" />
-            <circle cx="150" cy="150" r="3" fill="#1A1A1A" class="particle" />
-            <g class="silhouette-group">
-                <circle cx="87" cy="53" r="8" fill="#1A1A1A" />
-                <polygon points="79,61 95,61 99,93 75,93" fill="#1A1A1A" />
-                <polygon points="77,93 83,93 90,147 83,150" fill="#1A1A1A" />
-                <polygon points="87,93 93,93 103,147 107,143" fill="#1A1A1A" />
-            </g>
-            <g class="pickaxe-group">
-                <line x1="87" y1="67" x2="110" y2="93" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" />
-                <line x1="110" y1="93" x2="130" y2="53" stroke="#1A1A1A" stroke-width="2.7" stroke-linecap="round" />
-                <path d="M 130,53 Q 137,53 137,40 L 123,40 Q 127,45 130,53 Z" fill="#1A1A1A" />
-            </g>
-        </svg>
-        <div class="loader-text">در حال بارگذاری فضای حرفه‌ای شما</div>
-    </div>
+    <div class="maintenance-wrapper">
+        <!-- لایه کاور شیری رنگ برای خوانایی بهتر متن -->
+        <div class="overlay-bg"></div>
 
-    <!-- هدر -->
-    <header class="header">
-        <div class="logo">
-            <img src="img-01.png" alt="لوگوی ایران فریلنسر">
-            <span>IranFreelancer</span>
-        </div>
-        <div class="menu-icon" onclick="document.querySelector('.nav').classList.toggle('active')">☰</div>
-        <ul class="nav">
-            <li><a href="#" class="nav-link active" data-page="home">خانه</a></li>
-            <li><a href="#" class="nav-link" data-page="projects">پروژه‌ها</a></li>
-            <li><a href="#" class="nav-link" data-page="about">درباره ما</a></li>
-            <li><a href="#" class="nav-link" data-page="services">خدمات</a></li>
-            <li><a href="#" class="nav-link" data-page="courses">دوره‌ها</a></li>
-            <li><a href="#" class="nav-link" data-page="faq">سوالات</a></li>
-            <li><a href="#" class="nav-link" data-page="contact">تماس</a></li>
-        </ul>
-        <button class="lang-btn" id="langToggle">English</button>
-    </header>
+        <div class="content-box">
+            <!-- متن فارسی اصلی -->
+            <h1 class="title-main fade-in-text">در دست تعمیر هستیم</h1>
+            
+            <!-- جمله خلاقانه و حرفه‌ای -->
+            <p class="title-sub fade-in-text">
+                در حال بهینه‌سازی و توسعه زیرساخت‌ها برای ارائه خدمات بهتر به شما هستیم.
+            </p>
 
-    <!-- صفحه اصلی -->
-    <section class="page active" id="page-home">
-        <div class="hero">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1>بازار فریلنسینگ بدون مرز<br>برای متخصصان ایرانی</h1>
-                <p>به IranFreelancer خوش آمدید؛ جایی که استعداد شما با پروژه‌های جهانی پیوند می‌خورد.</p>
-                <a href="#" class="btn" onclick="document.querySelector('[data-page=contact]').click()">شروع همکاری</a>
-            </div>
-        </div>
-        <div class="main-content">
-            <div class="grid">
-                <div class="card"><i class="fas fa-globe-americas"></i><h3>دسترسی جهانی</h3><p>پروژه‌های دلاری از سراسر جهان</p></div>
-                <div class="card"><i class="fas fa-shield-alt"></i><h3>پرداخت امن</h3><p>تسویه ریالی سریع و شفاف</p></div>
-                <div class="card"><i class="fas fa-users"></i><h3>جامعه تخصصی</h3><p>فریلنسرهای تأییدشده</p></div>
-                <div class="card"><i class="fas fa-graduation-cap"></i><h3>آموزش مداوم</h3><p>دوره‌های رایگان و کاربردی</p></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- پروژه‌ها -->
-    <section class="page" id="page-projects">
-        <div class="main-content">
-            <h2 class="section-title">پروژه‌های <span>موجود</span></h2>
-            <div class="grid" id="projects-container"></div>
-        </div>
-    </section>
-
-    <!-- درباره ما -->
-    <section class="page" id="page-about">
-        <div class="main-content">
-            <h2 class="section-title">درباره <span>IranFreelancer</span></h2>
-            <div style="max-width:800px; margin:auto; text-align:right; line-height:2.2;">
-                <p><strong>عبدالرضا عطائی</strong>، بنیان‌گذار IranFreelancer، با بیش از یک دهه همکاری با برندهایی چون adidas، BMW، GoDaddy و Siemens، امروز پلی برای فریلنسرهای ایرانی به بازار جهانی ساخته است.</p>
-                <p>ماموریت ما توانمندسازی استعدادهای فارسی‌زبان از طریق پروژه‌های واقعی، پرداخت‌های امن و آموزش‌های روز است. با بیش از ۴۰۰۰ پروژه موفق و همکارانی در آمریکا، اروپا، روسیه و ژاپن، آماده‌ی خدمت به شما هستیم.</p>
-            </div>
-            <div style="text-align:center; margin-top:2rem;">
-                <img src="abdolreza.webp" alt="عبدالرضا عطائی بنیان‌گذار" style="max-width:280px; border-radius:20px; box-shadow:var(--shadow-lg);" loading="lazy">
-            </div>
-        </div>
-    </section>
-
-    <!-- خدمات -->
-    <section class="page" id="page-services">
-        <div class="main-content">
-            <h2 class="section-title">خدمات <span>تخصصی</span></h2>
-            <div class="grid">
-                <div class="card"><i class="fas fa-robot"></i><h3>هوش مصنوعی</h3><p>ساخت دستیارهای هوشمند</p></div>
-                <div class="card"><i class="fas fa-code"></i><h3>اتوماسیون و API</h3><p>اسکریپت‌های سفارشی</p></div>
-                <div class="card"><i class="fas fa-comments"></i><h3>چت‌بات</h3><p>پشتیبانی خودکار هوشمند</p></div>
-                <div class="card"><i class="fas fa-briefcase"></i><h3>فریلنسینگ بین‌المللی</h3><p>اتصال به کارفرمایان خارجی</p></div>
-                <div class="card"><i class="fas fa-search"></i><h3>سئو و بازاریابی</h3><p>صفحه اول گوگل</p></div>
-                <div class="card"><i class="fas fa-chalkboard-teacher"></i><h3>مشاوره تخصصی</h3><p>رایگان برای اعضا</p></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- دوره‌ها -->
-    <section class="page" id="page-courses">
-        <div class="main-content">
-            <h2 class="section-title">دوره‌های <span>آموزشی</span></h2>
-            <div class="grid">
-                <div class="card" style="text-align:right;">
-                    <img src="course-mobile.webp" alt="دوره کسب درآمد با موبایل" style="width:100%; height:200px; object-fit:cover; border-radius:12px;" loading="lazy">
-                    <h3 style="margin-top:1rem;">کسب درآمد با موبایل</h3>
-                    <p>از صفر تا درآمد دلاری</p>
-                    <button class="btn" style="margin-top:1rem; width:100%;">خرید دوره</button>
+            <!-- گرید ۴ زبان -->
+            <div class="lang-grid fade-in-text">
+                <!-- انگلیسی -->
+                <div class="lang-item">
+                    <span class="label">English</span>
+                    <span class="text">We're currently under maintenance. We'll be back shortly.</span>
                 </div>
-                <div class="card" style="text-align:right;">
-                    <img src="course-ai.webp" alt="دوره هوش مصنوعی در کسب‌وکار" style="width:100%; height:200px; object-fit:cover; border-radius:12px;" loading="lazy">
-                    <h3 style="margin-top:1rem;">هوش مصنوعی در کسب‌وکار</h3>
-                    <p>کاربردهای عملی ChatGPT</p>
-                    <button class="btn" style="margin-top:1rem; width:100%;">خرید دوره</button>
+                <!-- چینی -->
+                <div class="lang-item">
+                    <span class="label">中文</span>
+                    <span class="text">我们正在维护中。很快就会恢复。</span>
                 </div>
-                <div class="card" style="text-align:right;">
-                    <img src="course-other.webp" alt="دوره فریلنسری در Upwork" style="width:100%; height:200px; object-fit:cover; border-radius:12px;" loading="lazy">
-                    <h3 style="margin-top:1rem;">فریلنسری در Upwork</h3>
-                    <p>پیدا کردن پروژه‌های بین‌المللی</p>
-                    <button class="btn" style="margin-top:1rem; width:100%;">خرید دوره</button>
+                <!-- ژاپنی -->
+                <div class="lang-item">
+                    <span class="label">日本語</span>
+                    <span class="text">ただいまメンテナンス中です。まもなく復旧いたします。</span>
+                </div>
+                <!-- روسی -->
+                <div class="lang-item">
+                    <span class="label">Русский</span>
+                    <span class="text">В настоящее время проводятся технические работы. Скоро вернемся.</span>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- سوالات متداول -->
-    <section class="page" id="page-faq">
-        <div class="main-content" style="max-width:800px; text-align:right;">
-            <h2 class="section-title">سوالات <span>متداول</span></h2>
-            <div class="faq-item" onclick="this.classList.toggle('open')">
-                <h3>چطور عضو شوم؟</h3>
-                <div class="answer">فرم ثبت‌نام را تکمیل کنید، تیم ما تخصص شما را بررسی و به پروژه‌های مناسب دعوت می‌کند.</div>
-            </div>
-            <div class="faq-item" onclick="this.classList.toggle('open')">
-                <h3>پرداخت‌ها چگونه است؟</h3>
-                <div class="answer">با درگاه‌های بین‌المللی (PayPal, Wise) مبلغ پروژه به ریال و بدون واسطه پرداخت می‌شود.</div>
-            </div>
-            <div class="faq-item" onclick="this.classList.toggle('open')">
-                <h3>آیا دوره‌ها ضمانت دارند؟</h3>
-                <div class="answer">بله، تمام دوره‌ها تا ۷ روز ضمانت بازگشت وجه دارند.</div>
-            </div>
-            <div class="faq-item" onclick="this.classList.toggle('open')">
-                <h3>نیاز به زبان انگلیسی هست؟</h3>
-                <div class="answer">تیم ما هماهنگی اولیه را انجام می‌دهد، ولی تسلط نسبی توصیه می‌شود.</div>
-            </div>
-            <div class="faq-item" onclick="this.classList.toggle('open')">
-                <h3>درآمد فریلنسرها چقدر است؟</h3>
-                <div class="answer">پروژه‌ها از ۵۰ دلار تا چند هزار دلار متغیرند. افراد فعال ما ماهانه بالای ۱۰۰۰ دلار درآمد دارند.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- تماس -->
-    <section class="page" id="page-contact">
-        <div class="main-content">
-            <h2 class="section-title">تماس با <span>ما</span></h2>
-            <div class="form-wrap">
-                <form action="https://formspree.io/f/xkobkppd" method="POST">
-                    <input type="text" name="name" placeholder="نام شما" required>
-                    <input type="email" name="email" placeholder="ایمیل" dir="ltr" required>
-                    <textarea name="message" rows="5" placeholder="پیام شما..."></textarea>
-                    <button type="submit" class="btn" style="width:100%;">ارسال پیام</button>
-                </form>
-            </div>
-            <div style="text-align:center; margin-top:2rem; display:flex; gap:2rem; justify-content:center; color:var(--accent); flex-wrap:wrap;">
-                <a href="tel:+989131580395" style="color:var(--accent); text-decoration:none;"><i class="fas fa-phone"></i> ۰۹۱۳۱۵۸۰۳۹۵</a>
-                <a href="mailto:Admin@freelancer.com" style="color:var(--accent); text-decoration:none;"><i class="fas fa-envelope"></i> Admin@freelancer.com</a>
-                <a href="mailto:Gigosphere@gmail.com" style="color:var(--accent); text-decoration:none;"><i class="fas fa-envelope"></i> Gigosphere@gmail.com</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- فوتر -->
-    <footer class="footer">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>همکاران بین‌المللی</h4>
-                <div class="logo-track">
-                    <div class="logo-slide" id="partners-slide"></div>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h4>پرداخت امن</h4>
-                <div class="logo-track">
-                    <div class="logo-slide" id="banks-slide"></div>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h4>مجوزها</h4>
-                <img src="enamad.webp" alt="نماد اعتماد الکترونیکی" style="height:60px; margin:0 5px;" loading="lazy">
-                <img src="iso.webp" alt="گواهی ISO" style="height:60px; margin:0 5px;" loading="lazy">
-                <img src="ecert.webp" alt="گواهی امنیتی" style="height:60px; margin:0 5px;" loading="lazy">
-            </div>
-        </div>
-        <!-- نشان کربن -->
-        <a href="https://carbonneutralwebsite.org/" target="_blank" rel="noreferrer">
-            <img src="https://carbonneutralwebsite.org/api/banner/Iranfreelancer.com/46.88mg/light.svg" width="250px" alt="Carbon impact">
-        </a>
-        <p style="margin-top:1.5rem; color:#777;">© 2025 IranFreelancer. کلیه حقوق برای عبدالرضا عطائی محفوظ است.</p>
-    </footer>
-
-    <!-- مدال جزئیات پروژه -->
-    <div class="modal-overlay" id="project-modal">
-        <div class="modal">
-            <button class="close-btn" onclick="closeModal()">✕</button>
-            <h2 id="modal-title"></h2>
-            <div class="meta">
-                <span id="modal-client"></span>
-                <span id="modal-budget"></span>
-                <span id="modal-date"></span>
-            </div>
-            <p id="modal-desc"></p>
-            <div class="skills" id="modal-skills"></div>
         </div>
     </div>
 
-    <!-- واتساپ -->
-    <a href="https://wa.me/989131580395" class="whatsapp-float" target="_blank" rel="noreferrer"><i class="fab fa-whatsapp"></i></a>
-
-    <!-- Chatbase -->
-    <script>
-        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...args)=>{if(!window.chatbase.q)window.chatbase.q=[];window.chatbase.q.push(args)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q")return target.q;return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="MTLw3MGfW9Hl48b6yi1kR";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete")onLoad();else window.addEventListener("load",onLoad)})();
-    </script>
-
-    <script>
-        // لودینگ (تایم و محو کردن لودینگ)
-        window.addEventListener('load', ()=>{
-            setTimeout(()=>{
-                const loader = document.getElementById('preloader');
-                loader.classList.add('fade-out');
-                setTimeout(()=> loader.remove(), 600);
-            }, 1500);
-        });
-
-        // ناوبری
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-                const pageId = 'page-' + this.dataset.page;
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                document.getElementById(pageId).classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        });
-
-        // داده‌های پروژه‌ها
-        const projects = [
-            {
-                title: "طراحی فروشگاه اینترنتی چندزبانه",
-                client: "شرکت آریا تجارت",
-                budget: "۲,۵۰۰ دلار",
-                date: "۱۵ اردیبهشت ۱۴۰۴",
-                desc: "طراحی کامل یک فروشگاه آنلاین با پشتیبانی از ۳ زبان فارسی، انگلیسی و عربی. شامل ریسپانسیو کامل، درگاه پرداخت ریالی و ارزی، و پنل مدیریت پیشرفته.",
-                skills: ["UI/UX", "React", "Node.js", "MongoDB"]
-            },
-            {
-                title: "ربات معامله‌گر ارز دیجیتال",
-                client: "یک استارت‌آپ آمریکایی",
-                budget: "۵,۰۰۰ دلار",
-                date: "۲ خرداد ۱۴۰۴",
-                desc: "توسعه ربات خودکار ترید با اتصال به API صرافی‌های Binance و Coinbase. تحلیل تکنیکال با یادگیری ماشین و گزارش‌گیری لحظه‌ای.",
-                skills: ["Python", "Machine Learning", "API", "Docker"]
-            },
-            {
-                title: "اپلیکیشن رزرو نوبت پزشکی",
-                client: "کلینیک سلامت نوین",
-                budget: "۱,۸۰۰ دلار",
-                date: "۱۰ فروردین ۱۴۰۴",
-                desc: "اپلیکیشن موبایل (اندروید و iOS) برای رزرو نوبت، یادآوری ویزیت، و ارتباط مستقیم با پزشک. پنل مدیریت تحت وب.",
-                skills: ["Flutter", "Firebase", "UI Design"]
-            },
-            {
-                title: "سایت شرکتی با سئوی پیشرفته",
-                client: "هلدینگ بین‌المللی مهر",
-                budget: "۳,۲۰۰ دلار",
-                date: "۲۸ اسفند ۱۴۰۳",
-                desc: "طراحی و پیاده‌سازی سایت شرکتی با آخرین استانداردهای سئو، سرعت بالا، و طراحی تعاملی. بهینه‌سازی برای موبایل و دسکتاپ.",
-                skills: ["HTML/CSS", "JavaScript", "SEO", "Figma"]
-            },
-            {
-                title: "سیستم مدیریت محتوای ویدئویی",
-                client: "یک شرکت رسانه‌ای در دبی",
-                budget: "۴,۰۰۰ دلار",
-                date: "۵ بهمن ۱۴۰۳",
-                desc: "پلتفرم اشتراک‌گذاری و پخش ویدئو با قابلیت آپلود، ترانسکود خودکار، و مدیریت کاربران. مشابه YouTube ولی با برندینگ اختصاصی.",
-                skills: ["React", "Node.js", "AWS", "FFmpeg"]
-            },
-            {
-                title: "چت‌بات هوش مصنوعی پشتیبانی",
-                client: "فروشگاه اینترنتی ماکسیم",
-                budget: "۱,۲۰۰ دلار",
-                date: "۲۰ آذر ۱۴۰۳",
-                desc: "چت‌بات مبتنی بر GPT-4 برای پاسخگویی خودکار به مشتریان، پیگیری سفارشات و ارائه پیشنهادات. یکپارچه‌سازی با ووکامرس.",
-                skills: ["Python", "OpenAI", "WordPress", "REST API"]
-            }
-        ];
-
-        // ساخت کارت‌های پروژه
-        function renderProjects() {
-            const container = document.getElementById('projects-container');
-            container.innerHTML = '';
-            projects.forEach((project, index) => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.style.textAlign = 'right';
-                card.innerHTML = `
-                    <h3>${project.title}</h3>
-                    <p style="color:var(--text-mid);">کارفرما: ${project.client}</p>
-                    <p style="color:var(--accent); font-weight:600;">${project.budget}</p>
-                    <div style="margin-top:1rem;">
-                        ${project.skills.map(s => `<span class="skill-tag">${s}</span>`).join(' ')}
-                    </div>
-                `;
-                card.addEventListener('click', () => openModal(index));
-                container.appendChild(card);
-            });
-        }
-
-        // مدال پروژه
-        function openModal(index) {
-            const project = projects[index];
-            document.getElementById('modal-title').textContent = project.title;
-            document.getElementById('modal-client').innerHTML = `<i class="fas fa-building"></i> ${project.client}`;
-            document.getElementById('modal-budget').innerHTML = `<i class="fas fa-dollar-sign"></i> ${project.budget}`;
-            document.getElementById('modal-date').innerHTML = `<i class="fas fa-calendar"></i> ${project.date}`;
-            document.getElementById('modal-desc').textContent = project.desc;
-            const skillsContainer = document.getElementById('modal-skills');
-            skillsContainer.innerHTML = project.skills.map(s => `<span class="skill-tag">${s}</span>`).join(' ');
-            document.getElementById('project-modal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('project-modal').classList.remove('active');
-        }
-
-        window.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal-overlay')) closeModal();
-        });
-
-        renderProjects();
-
-        // اسکرول لوگوها - همکاران
-        const partners = [
-            'partner-adidas.webp','partner-nike.webp','partner-bmw.webp','partner-siemens.webp',
-            'partner-godaddy.webp','partner-amazon.webp','partner-alibaba.webp',
-            'partner-upwork.webp','partner-freelancer.webp',
-            'russia-1.webp','russia-2.webp','japan-1.webp','japan-2.webp'
-        ];
-        const partnersSlide = document.getElementById('partners-slide');
-        partners.forEach(p => { partnersSlide.innerHTML += `<img src="${p}" alt="لوگوی همکار" loading="lazy">`; });
-        partners.forEach(p => { partnersSlide.innerHTML += `<img src="${p}" alt="لوگوی همکار" loading="lazy">`; }); // کپی برای لوپ
-
-        // اسکرول لوگوها - بانک‌ها
-        const banks = [
-            'bank-meli.webp','bank-mellat.webp','bank-pasargad.webp',
-            'paypal.webp','payoneer.webp','wise.webp'
-        ];
-        const banksSlide = document.getElementById('banks-slide');
-        banks.forEach(b => { banksSlide.innerHTML += `<img src="${b}" alt="لوگوی بانک" loading="lazy">`; });
-        banks.forEach(b => { banksSlide.innerHTML += `<img src="${b}" alt="لوگوی بانک" loading="lazy">`; }); // کپی برای لوپ
-
-        // تغییر زبان (ساده)
-        let currentLang = 'fa';
-        document.getElementById('langToggle').addEventListener('click', ()=>{
-            if(currentLang === 'fa'){
-                currentLang = 'en';
-                document.documentElement.lang = 'en';
-                document.documentElement.dir = 'ltr';
-            } else {
-                currentLang = 'fa';
-                document.documentElement.lang = 'fa';
-                document.documentElement.dir = 'rtl';
-            }
-        });
-    </script>
 </body>
 </html>
