@@ -3,17 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>در دست تعمیر | IranFreelancer</title>
-    
-    <!-- فونت وزیرمتن برای زیبایی تایپوگرافی فارسی -->
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" />
-
+    <meta name="description" content="عبدالرضا عطائی - متخصص هوش مصنوعی و فری‌لنسر | Abdolreza Ataei - AI Specialist & Freelancer">
+    <meta name="keywords" content="عبدالرضا عطائی, Abdolreza Ataei, هوش مصنوعی, فری‌لنسر, AI, Freelancer, ایران">
+    <meta name="author" content="Abdolreza Ataei">
+    <meta property="og:title" content="Abdolreza Ataei | AI Specialist">
+    <meta property="og:description" content="Freelance AI Developer & Programmer">
+    <title>Abdolreza Ataei | عبدالرضا عطائی | AI Specialist</title>
     <style>
-        /* تنظیمات اصلی رنگ */
         :root {
-            --white-cream: #FDFBF7;
-            --dark-green: #1A4D2E;
-            --bg-overlay: rgba(253, 251, 247, 0.85); /* پوشش شیری شفاف روی عکس */
+            --bg: #0a0a0f;
+            --text: #e0e0e0;
+            --accent: #00ff88;
+            --accent2: #00b4d8;
+            --terminal-bg: #0d1117;
+            --border: #1f2937;
+            --code: #c9d1d9;
+            --keyword: #ff7b72;
+            --string: #a5d6ff;
+            --function: #d2a8ff;
+            --comment: #8b949e;
         }
 
         * {
@@ -22,187 +30,539 @@
             box-sizing: border-box;
         }
 
-        body, html {
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
-            background-color: var(--white-cream);
-            direction: rtl;
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            direction: ltr;
         }
 
-        /* کانتینر اصلی عکس */
-        .maintenance-wrapper {
-            position: relative;
+        canvas#matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('maintance.gif'); /* نام فایل GIF شما */
-            background-size: cover;
-            background-position: center 30%; /* تنظیم مرکزیت عکس به بالاتر از وسط */
-            background-repeat: no-repeat;
+            z-index: 0;
+            opacity: 0.15;
         }
 
-        /* لایه پوشش شیری برای دیده شدن بهتر متن */
-        .overlay-bg {
-            position: absolute;
-            inset: 0;
-            background: var(--bg-overlay);
+        .container {
+            position: relative;
             z-index: 1;
+            width: 100%;
+            max-width: 900px;
+            padding: 20px;
+            margin: 20px;
         }
 
-        /* کانتینر متن‌ها */
-        .content-box {
-            position: absolute;
-            top: 18%; /* فاصله از بالا (بالاتر از وسط) */
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
-            text-align: center;
-            width: 90%;
-            max-width: 1200px;
-            padding: 2rem;
+        .terminal {
+            background: var(--terminal-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 255, 136, 0.1), 0 0 0 1px rgba(0, 255, 136, 0.05);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
-        /* انیمیشن متن */
-        .fade-in-text {
-            opacity: 0;
-            animation: fadeUp 1.2s ease forwards;
-            color: var(--dark-green);
-        }
-
-        .fade-in-text:nth-child(2) { animation-delay: 0.2s; }
-        .fade-in-text:nth-child(3) { animation-delay: 0.4s; }
-        .fade-in-text:nth-child(4) { animation-delay: 0.6s; }
-        .fade-in-text:nth-child(5) { animation-delay: 0.8s; }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* استایل متن‌ها */
-        .title-main {
-            font-size: 4.5rem;
-            font-weight: 900;
-            letter-spacing: -1px;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .title-sub {
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-            opacity: 0.9;
-        }
-
-        .lang-grid {
+        .terminal-header {
+            background: #161b22;
+            padding: 12px 16px;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.5rem 3rem;
-            margin-top: 2.5rem;
-            font-size: 1.4rem;
-            font-weight: 400;
-        }
-
-        .lang-item {
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 0.2rem;
+            gap: 8px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
         }
 
-        .lang-item .label {
-            font-size: 1rem;
-            color: #4f6b5c;
-            font-weight: bold;
-            margin-bottom: 0.3rem;
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
         }
 
-        .lang-item .text {
-            font-weight: 500;
+        .terminal-dot.red {
+            background: #ff5f56;
+        }
+
+        .terminal-dot.yellow {
+            background: #ffbd2e;
+        }
+
+        .terminal-dot.green {
+            background: #27c93f;
+        }
+
+        .terminal-title {
+            margin-left: 12px;
+            color: #8b949e;
+            font-size: 0.8rem;
             letter-spacing: 0.5px;
+            flex: 1;
+            text-align: left;
         }
 
-        /* انعطاف‌پذیری برای موبایل و تبلت (Responsive) */
-        @media (max-width: 1024px) {
-            .content-box { top: 15%; }
-            .title-main { font-size: 3.5rem; }
-            .title-sub { font-size: 1.3rem; }
-            .lang-grid { gap: 1rem 2rem; font-size: 1.2rem; }
+        .terminal-body {
+            padding: 24px;
+            min-height: 400px;
+            max-height: 70vh;
+            overflow-y: auto;
+            font-size: clamp(13px, 2.5vw, 15px);
+            line-height: 1.8;
         }
 
-        @media (max-width: 768px) {
-            .content-box { top: 12%; padding: 1.5rem; }
-            .title-main { font-size: 2.5rem; }
-            .title-sub { font-size: 1.1rem; }
-            .lang-grid {
+        .line {
+            margin-bottom: 4px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .prompt {
+            color: var(--accent);
+        }
+
+        .keyword {
+            color: var(--keyword);
+        }
+
+        .string {
+            color: var(--string);
+        }
+
+        .function {
+            color: var(--function);
+        }
+
+        .comment {
+            color: var(--comment);
+        }
+
+        .typing {
+            border-right: 2px solid var(--accent);
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        .highlight-box {
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 20px 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .skill-tag {
+            background: rgba(0, 180, 216, 0.1);
+            border: 1px solid rgba(0, 180, 216, 0.3);
+            border-radius: 6px;
+            padding: 8px 12px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--accent2);
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: rgba(0, 180, 216, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 180, 216, 0.2);
+        }
+
+        .progress-bar {
+            background: #1f2937;
+            border-radius: 10px;
+            height: 6px;
+            margin: 8px 0 16px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            height: 100%;
+            border-radius: 10px;
+            transition: width 2s ease;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            color: var(--code);
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .social-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+
+        .social-link.whatsapp:hover {
+            border-color: #25D366;
+            color: #25D366;
+        }
+
+        .social-link.phone:hover {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        .phone-numbers {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .phone-number {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 6px;
+            padding: 6px 12px;
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        .phone-number:hover {
+            background: rgba(255, 107, 107, 0.2);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.2);
+        }
+
+        /* Scrollbar */
+        .terminal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .terminal-body::-webkit-scrollbar-track {
+            background: var(--terminal-bg);
+        }
+
+        .terminal-body::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 600px) {
+            .terminal-body {
+                padding: 16px;
+                font-size: 12px;
+                line-height: 1.6;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+
+            .skill-tag {
+                font-size: 0.7rem;
+                padding: 6px 8px;
+            }
+
+            .social-links {
                 flex-direction: column;
-                gap: 1rem;
-                font-size: 1rem;
-                margin-top: 1.5rem;
             }
-            .maintenance-wrapper {
-                background-position: center 20%; /* جابجایی عکس به بالا در موبایل */
+
+            .social-link {
+                text-align: center;
+                justify-content: center;
+            }
+
+            .phone-numbers {
+                flex-direction: column;
+            }
+
+            .phone-number {
+                text-align: center;
+            }
+
+            .container {
+                padding: 10px;
+                margin: 10px;
             }
         }
 
-        @media (max-width: 480px) {
-            .content-box { top: 10%; padding: 1rem; }
-            .title-main { font-size: 2rem; }
-            .title-sub { font-size: 1rem; }
-            .lang-grid { font-size: 0.9rem; }
+        @media (max-width: 380px) {
+            .terminal-header {
+                padding: 8px;
+            }
+
+            .terminal-title {
+                font-size: 0.65rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 4px;
+            }
+
+            .highlight-box {
+                padding: 10px;
+            }
+        }
+
+        /* Loading animation */
+        .loading-dots span {
+            animation: loadingDot 1.4s infinite;
+            display: inline-block;
+            margin: 0 2px;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes loadingDot {
+            0%,
+            80%,
+            100% {
+                opacity: 0;
+            }
+            40% {
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body>
+    <canvas id="matrix"></canvas>
 
-    <div class="maintenance-wrapper">
-        <!-- لایه کاور شیری رنگ برای خوانایی بهتر متن -->
-        <div class="overlay-bg"></div>
-
-        <div class="content-box">
-            <!-- متن فارسی اصلی -->
-            <h1 class="title-main fade-in-text">در دست تعمیر هستیم</h1>
-            
-            <!-- جمله خلاقانه و حرفه‌ای -->
-            <p class="title-sub fade-in-text">
-                در حال بهینه‌سازی و توسعه زیرساخت‌ها برای ارائه خدمات بهتر به شما هستیم.
-            </p>
-
-            <!-- گرید ۴ زبان -->
-            <div class="lang-grid fade-in-text">
-                <!-- انگلیسی -->
-                <div class="lang-item">
-                    <span class="label">English</span>
-                    <span class="text">We're currently under maintenance. We'll be back shortly.</span>
-                </div>
-                <!-- چینی -->
-                <div class="lang-item">
-                    <span class="label">中文</span>
-                    <span class="text">我们正在维护中。很快就会恢复。</span>
-                </div>
-                <!-- ژاپنی -->
-                <div class="lang-item">
-                    <span class="label">日本語</span>
-                    <span class="text">ただいまメンテナンス中です。まもなく復旧いたします。</span>
-                </div>
-                <!-- روسی -->
-                <div class="lang-item">
-                    <span class="label">Русский</span>
-                    <span class="text">В настоящее время проводятся технические работы. Скоро вернемся.</span>
-                </div>
+    <div class="container">
+        <div class="terminal">
+            <div class="terminal-header">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <span class="terminal-title">abdolreza@ataei:~ portfolio --ai-specialist</span>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <!-- Content generated by JavaScript -->
             </div>
         </div>
     </div>
 
+    <script>
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン'
+            .split('');
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(10, 10, 15, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ff88';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 50);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Typing effect for terminal
+        const terminalBody = document.getElementById('terminalBody');
+
+        const content = `
+        <div class="line"><span class="comment">// ============================================</span></div>
+        <div class="line"><span class="comment">// Developer Profile Loaded</span></div>
+        <div class="line"><span class="comment">// ============================================</span></div>
+        <div class="line">&nbsp;</div>
+        <div class="line"><span class="prompt">$</span> <span class="keyword">whoami</span></div>
+        <div class="line"><span class="string">"Abdolreza Ataei"</span></div>
+        <div class="line"><span class="comment">// AI Specialist | Full-Stack Developer | Freelancer</span></div>
+        <div class="line">&nbsp;</div>
+        <div class="line"><span class="prompt">$</span> <span class="keyword">cat</span> about.json</div>
+        <div class="line">{</div>
+        <div class="line">  <span class="string">"name"</span>: <span class="string">"عبدالرضا عطائی | Abdolreza Ataei"</span>,</div>
+        <div class="line">  <span class="string">"location"</span>: <span class="string">"Iran 🇮🇷"</span>,</div>
+        <div class="line">  <span class="string">"role"</span>: <span class="string">"AI Specialist & Freelancer"</span>,</div>
+        <div class="line">  <span class="string">"expertise"</span>: <span class="string">"Machine Learning, Deep Learning, NLP, Computer Vision"</span></div>
+        <div class="line">}</div>
+        <div class="line">&nbsp;</div>
+        <div class="line"><span class="prompt">$</span> <span class="keyword">ls</span> skills/</div>
+        <div class="skills-grid">
+            <div class="skill-tag">Python</div>
+            <div class="skill-tag">TensorFlow</div>
+            <div class="skill-tag">PyTorch</div>
+            <div class="skill-tag">Scikit-learn</div>
+            <div class="skill-tag">OpenCV</div>
+            <div class="skill-tag">NLP</div>
+            <div class="skill-tag">LLMs</div>
+            <div class="skill-tag">Computer Vision</div>
+            <div class="skill-tag">FastAPI</div>
+            <div class="skill-tag">Docker</div>
+            <div class="skill-tag">Git</div>
+            <div class="skill-tag">SQL/NoSQL</div>
+            <div class="skill-tag">JavaScript</div>
+            <div class="skill-tag">React</div>
+            <div class="skill-tag">Node.js</div>
+            <div class="skill-tag">Linux</div>
+        </div>
+        <div class="line">&nbsp;</div>
+        <div class="line"><span class="prompt">$</span> <span class="keyword">python3</span> train_model.py <span class="comment"># Loading AI capabilities...</span></div>
+        <div class="line"><span class="string">Epoch 1/100</span> - loss: 0.0423 - accuracy: 0.9876</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 95%"></div></div>
+        <div class="line"><span class="string">Model convergence achieved ✅</span></div>
+        <div class="line">&nbsp;</div>
+        <div class="highlight-box">
+            <div class="line"><span class="prompt">🤖</span> <span class="function">AI_Agent</span>.<span class="keyword">status</span>()</div>
+            <div class="line"><span class="string">"Ready to build intelligent solutions for your business"</span></div>
+            <div class="line"><span class="comment">// Specialized in: Chatbots, Recommendation Systems, Predictive Analytics</span></div>
+        </div>
+        <div class="line">&nbsp;</div>
+        <div class="line"><span class="prompt">$</span> <span class="keyword">echo</span> <span class="string">"Let's build the future together"</span> | <span class="keyword">cowsay</span></div>
+        <div class="line"><span class="string">┌──────────────────────────────────┐</span></div>
+        <div class="line"><span class="string">│ Let's build the future together  │</span></div>
+        <div class="line"><span class="string">└──────────────────────────────────┘</span></div>
+        <div class="line"><span class="string">        \\   ^__^</span></div>
+        <div class="line"><span class="string">         \\  (oo)\\_______</span></div>
+        <div class="line"><span class="string">            (__)\\       )\\/\\</span></div>
+        <div class="line"><span class="string">                ||----w |</span></div>
+        <div class="line"><span class="string">                ||     ||</span></div>
+        <div class="line">&nbsp;</div>
+        <div class="line"><span class="comment">// Contact & Social Links</span></div>
+        <div class="social-links">
+            <a href="https://rubika.ir/abdolrezaataei" class="social-link" target="_blank">📱 Rubika</a>
+            <a href="https://wa.me/989131580395" class="social-link whatsapp" target="_blank">💬 WhatsApp</a>
+        </div>
+        <div class="line">&nbsp;</div>
+        <div class="line"><span class="comment">// Direct Phone Numbers</span></div>
+        <div class="phone-numbers">
+            <a href="tel:+989131580395" class="phone-number">📞 0913 158 0395</a>
+            <a href="tel:+989391580395" class="phone-number">📞 0939 158 0395</a>
+        </div>
+        <div class="line">&nbsp;</div>
+        <div class="line"><span class="prompt">$</span> <span class="loading-dots"><span>.</span><span>.</span><span>.</span></span> <span class="comment">Ready for new projects</span></div>
+      `;
+
+        // Function to simulate typing effect
+        function typeWriter(element, html, speed = 20) {
+            let tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
+            let nodes = Array.from(tempDiv.childNodes);
+            let currentNodeIndex = 0;
+            let currentCharIndex = 0;
+            let currentTextNode = null;
+
+            function type() {
+                if (currentNodeIndex >= nodes.length) {
+                    return;
+                }
+
+                if (!currentTextNode || currentCharIndex >= currentTextNode.length) {
+                    let node = nodes[currentNodeIndex];
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        currentTextNode = node.textContent;
+                        currentCharIndex = 0;
+                        element.appendChild(document.createTextNode(''));
+                    } else {
+                        element.appendChild(node.cloneNode(true));
+                        currentNodeIndex++;
+                        currentTextNode = null;
+                        type();
+                        return;
+                    }
+                }
+
+                if (currentTextNode !== null) {
+                    let lastChild = element.lastChild;
+                    if (lastChild && lastChild.nodeType === Node.TEXT_NODE) {
+                        lastChild.textContent += currentTextNode[currentCharIndex];
+                    } else {
+                        element.appendChild(document.createTextNode(currentTextNode[
+                            currentCharIndex]));
+                    }
+                    currentCharIndex++;
+
+                    if (currentCharIndex >= currentTextNode.length) {
+                        currentNodeIndex++;
+                        currentTextNode = null;
+                    }
+                }
+
+                element.scrollTop = element.scrollHeight;
+                setTimeout(type, speed + Math.random() * 20);
+            }
+
+            element.innerHTML = '';
+            type();
+        }
+
+        // Start the typing effect after a short delay
+        setTimeout(() => {
+            typeWriter(terminalBody, content, 15);
+        }, 300);
+
+        // Add subtle animation to progress bars
+        setTimeout(() => {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 200);
+            });
+        }, 5000);
+    </script>
 </body>
 </html>
