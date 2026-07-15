@@ -3,220 +3,269 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IranFreelancer - پلتفرم فریلنسری ایران و جهان</title>
-  <!-- Tailwind CSS CDN -->
+  <title>IranFreelancer | پلتفرم فریلنسری ایران و جهان</title>
+  <meta name="description" content="ثبت‌نام فریلنسرهای ایرانی و خارجی در ایران فریلنسر. حل مشکل پرداخت بین‌المللی فریلنسرها. پرداخت امن ریالی و ارز دیجیتال.">
+  <meta name="keywords" content="فریلنسر,ایران,پرداخت ارز دیجیتال,Upwork,فایور,حل مشکل فریلنسر ایرانی">
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome CDN -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- GSAP & ScrollTrigger -->
+  <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
-    /* استایل‌های نئونی و شخصی‌سازی */
+    /* ========== لودینگ حرفه‌ای ========== */
+    #preloader {
+      position: fixed; inset: 0; background: #ffffff; z-index: 9999;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    .loader-icon { font-size: 3rem; color: #d97706; animation: pulse 1.5s infinite; }
+    .loader-bar { width: 200px; height: 4px; background: #e5e7eb; border-radius: 4px; overflow: hidden; margin-top: 20px; }
+    .loader-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #f59e0b, #d97706); animation: loadBar 1.8s ease-in-out forwards; }
+    @keyframes loadBar { 0% { width: 0%; } 100% { width: 100%; } }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+
+    /* ========== نئون چرخشی خطی دور کادر اصلی (کادر Hero) ========== */
     .neon-frame {
-      position: relative;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(10px);
-      border-radius: 24px;
-      padding: 2rem;
-      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+      position: relative; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px);
+      border-radius: 24px; padding: 2.5rem; z-index: 1;
     }
     .neon-frame::before {
-      content: '';
-      position: absolute;
-      top: -3px;
-      left: -3px;
-      right: -3px;
-      bottom: -3px;
-      border-radius: 27px;
-      background: linear-gradient(45deg, #00ffff, #ff00ff, #00ffff);
-      z-index: -1;
-      filter: blur(8px);
-      opacity: 0.7;
-      animation: neonPulse 2.5s infinite alternate;
+      content: ''; position: absolute; inset: -3px; border-radius: 27px; z-index: -1;
+      background: conic-gradient(from 0deg, transparent 0deg, #f59e0b 90deg, transparent 180deg, #f59e0b 270deg, transparent 360deg);
+      animation: rotateNeon 3s linear infinite; filter: blur(6px); opacity: 0.7;
     }
-    @keyframes neonPulse {
-      0% { opacity: 0.4; filter: blur(6px); }
-      100% { opacity: 0.9; filter: blur(12px); }
-    }
+    @keyframes rotateNeon { to { transform: rotate(360deg); } }
+
+    /* ========== کارت شیشه‌ای ========== */
     .glass-card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+      background: rgba(255,255,255,0.85); backdrop-filter: blur(14px); border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 8px 32px rgba(0,0,0,0.05);
     }
-    /* برای دکمه‌های غیرفعال */
+
+    /* ========== پوشش غیرفعال پرداخت ========== */
     .disabled-overlay {
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
     .disabled-overlay::after {
-      content: "به‌زودی...";
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,0.75);
-      backdrop-filter: blur(4px);
-      font-weight: bold;
-      font-size: 1.2rem;
-      color: #444;
-      border-radius: 16px;
+      content: "به‌زودی..."; position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.75); backdrop-filter: blur(4px);
+      font-weight: bold; font-size: 1.2rem; color: #444; border-radius: 16px;
     }
-    /* تغییر زبان انگلیسی به چپ‌چین */
-    html[lang="en"] {
-      direction: ltr;
+
+    /* ========== دکمه‌های شناور ========== */
+    .floating-btn {
+      position: fixed; width: 55px; height: 55px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; color: white; box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+      cursor: pointer; transition: transform 0.2s; z-index: 50;
     }
+    .whatsapp-btn { bottom: 100px; right: 24px; background: #25D366; }
+    .ai-btn { bottom: 30px; right: 24px; background: #f59e0b; }
+
+    /* ========== باکس چت هوش مصنوعی با نئون چرخشی ========== */
+    .chat-container {
+      position: fixed; bottom: 100px; right: 90px; width: 320px; max-height: 450px;
+      background: white; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      z-index: 49; display: none; flex-direction: column; overflow: hidden;
+    }
+    .chat-container.active { display: flex; }
+    .chat-neon {
+      position: relative; border-radius: 16px; overflow: hidden;
+    }
+    .chat-neon::before {
+      content: ''; position: absolute; inset: -2px; border-radius: 18px; z-index: -1;
+      background: conic-gradient(from 0deg, transparent, #f59e0b, transparent);
+      animation: rotateNeon 2.5s linear infinite; filter: blur(6px); opacity: 0.6;
+    }
+    .chat-header { background: #f59e0b; color: white; padding: 12px 16px; font-weight: bold; }
+    .chat-messages { flex: 1; padding: 12px; overflow-y: auto; max-height: 280px; }
+    .chat-input { display: flex; border-top: 1px solid #eee; padding: 8px; }
+    .chat-input input { flex:1; border:1px solid #ddd; border-radius: 20px; padding: 8px 12px; outline: none; }
+    .chat-input button { background: #f59e0b; color: white; border: none; border-radius: 20px; padding: 8px 16px; margin-left: 8px; }
+    .bot-msg { background: #fef3c7; padding: 8px 12px; border-radius: 12px; margin: 6px 0; align-self: flex-start; }
+    .user-msg { background: #e2e8f0; padding: 8px 12px; border-radius: 12px; margin: 6px 0; align-self: flex-end; }
+
+    /* ========== فوتر ========== */
+    .trust-logos i { font-size: 2rem; margin: 0 12px; color: #6b7280; }
+    html[lang="en"] { direction: ltr; }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased">
 
-  <!-- نوبار -->
-  <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
+  <!-- ========== لودینگ ========== -->
+  <div id="preloader">
+    <i class="fas fa-briefcase loader-icon"></i>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    <p class="mt-4 text-gray-500 text-sm">در حال بارگذاری...</p>
+  </div>
+
+  <!-- ========== نوبار ========== -->
+  <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur-md shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
-        <!-- لوگو -->
         <div class="flex items-center gap-2">
-          <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">IF</div>
-          <span class="text-xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">IranFreelancer</span>
+          <!-- لوگوی شما (فایل logo.png در کنار index.html) -->
+          <img src="logo.png" alt="IranFreelancer Logo" class="w-10 h-10 object-contain rounded-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="w-10 h-10 bg-gradient-to-br from-amber-400 to-yellow-600 rounded-lg items-center justify-center text-white font-bold text-xl hidden" style="display:none;">IF</div>
+          <span class="text-xl font-bold text-gray-800">IranFreelancer</span>
         </div>
-        <!-- منو دسکتاپ -->
         <div class="hidden md:flex items-center gap-6">
-          <a href="#hero" class="hover:text-cyan-600 transition" data-key="nav_home">خانه</a>
-          <a href="#about" class="hover:text-cyan-600 transition" data-key="nav_about">درباره ما</a>
-          <a href="#register" class="hover:text-cyan-600 transition" data-key="nav_register">ثبت‌نام</a>
-          <a href="#contact" class="hover:text-cyan-600 transition" data-key="nav_contact">تماس با ما</a>
-          <!-- تغییر زبان -->
+          <a href="#hero" class="hover:text-amber-600 transition" data-key="nav_home">خانه</a>
+          <a href="#about" class="hover:text-amber-600 transition" data-key="nav_about">درباره ما</a>
+          <a href="#register" class="hover:text-amber-600 transition" data-key="nav_register">ثبت‌نام</a>
+          <a href="#contact" class="hover:text-amber-600 transition" data-key="nav_contact">تماس با ما</a>
           <button id="langToggle" class="flex items-center gap-1 bg-gray-100 px-3 py-1.5 rounded-full text-sm font-medium hover:bg-gray-200 transition">
             <span id="langText">EN</span> <i class="fas fa-globe"></i>
           </button>
         </div>
-        <!-- منو موبایل (آیکون همبرگر) -->
         <div class="md:hidden">
           <button id="mobileMenuBtn" class="text-2xl"><i class="fas fa-bars"></i></button>
         </div>
       </div>
-      <!-- منوی موبایل بازشو -->
       <div id="mobileMenu" class="hidden md:hidden pb-4 flex flex-col gap-3">
-        <a href="#hero" class="hover:text-cyan-600" data-key="nav_home">خانه</a>
-        <a href="#about" class="hover:text-cyan-600" data-key="nav_about">درباره ما</a>
-        <a href="#register" class="hover:text-cyan-600" data-key="nav_register">ثبت‌نام</a>
-        <a href="#contact" class="hover:text-cyan-600" data-key="nav_contact">تماس با ما</a>
+        <a href="#hero" class="hover:text-amber-600" data-key="nav_home">خانه</a>
+        <a href="#about" class="hover:text-amber-600" data-key="nav_about">درباره ما</a>
+        <a href="#register" class="hover:text-amber-600" data-key="nav_register">ثبت‌نام</a>
+        <a href="#contact" class="hover:text-amber-600" data-key="nav_contact">تماس با ما</a>
         <button id="langToggleMobile" class="self-start bg-gray-100 px-3 py-1 rounded-full text-sm">EN <i class="fas fa-globe"></i></button>
       </div>
     </div>
   </nav>
 
-  <!-- هیروسکشن با کادر نئونی -->
+  <!-- ========== هیروسکشن با نئون چرخشی ========== -->
   <section id="hero" class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 px-4">
     <div class="neon-frame max-w-3xl w-full text-center">
       <h1 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight" data-key="hero_title">پلتفرم فریلنسری ایران و جهان</h1>
       <p class="text-lg md:text-xl text-gray-600 mb-8" data-key="hero_subtitle">فریلنسرهای حرفه‌ای ایرانی و بین‌المللی را بیابید یا پروژه بگیرید</p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="#register" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-cyan-200 transition transform hover:-translate-y-1" data-key="hero_cta1">ثبت‌نام فریلنسر</a>
-        <a href="#register" class="border-2 border-cyan-500 text-cyan-600 px-8 py-3 rounded-full font-semibold hover:bg-cyan-50 transition transform hover:-translate-y-1" data-key="hero_cta2">استخدام فریلنسر</a>
+        <a href="#register" class="bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-amber-200 transition transform hover:-translate-y-1" data-key="hero_cta1">ثبت‌نام فریلنسر</a>
+        <a href="#register" class="border-2 border-amber-500 text-amber-600 px-8 py-3 rounded-full font-semibold hover:bg-amber-50 transition transform hover:-translate-y-1" data-key="hero_cta2">استخدام فریلنسر</a>
       </div>
     </div>
   </section>
 
-  <!-- درباره ما -->
+  <!-- ========== درباره ما ========== -->
   <section id="about" class="py-20 px-4 max-w-7xl mx-auto">
     <div class="glass-card p-8 md:p-12">
       <h2 class="text-3xl font-bold mb-6 text-center" data-key="about_title">درباره IranFreelancer</h2>
       <p class="text-gray-600 text-center max-w-2xl mx-auto leading-relaxed" data-key="about_desc">ما بستری امن و حرفه‌ای برای اتصال کارفرمایان و فریلنسرهای ایرانی و خارجی فراهم کرده‌ایم. با تمرکز بر کیفیت، شفافیت و پرداخت‌های امن، ایران فریلنسر انتخاب اول شماست.</p>
+      <p class="text-center text-amber-600 font-medium mt-4" data-key="about_solution">ما مشکل پرداخت بین‌المللی فریلنسرهای ایرانی در پلتفرم‌هایی مانند Upwork و Fiverr را برای همیشه حل می‌کنیم.</p>
       <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-        <div class="p-6"><i class="fas fa-globe text-4xl text-cyan-500 mb-3"></i><h3 class="font-semibold text-lg" data-key="about_feat1">بین‌المللی</h3><p class="text-sm text-gray-500">فریلنسرهایی از سراسر جهان</p></div>
-        <div class="p-6"><i class="fas fa-shield-alt text-4xl text-cyan-500 mb-3"></i><h3 class="font-semibold text-lg" data-key="about_feat2">امنیت پرداخت</h3><p class="text-sm text-gray-500">روش‌های امن ریالی و ارز دیجیتال</p></div>
-        <div class="p-6"><i class="fas fa-rocket text-4xl text-cyan-500 mb-3"></i><h3 class="font-semibold text-lg" data-key="about_feat3">سرعت و کیفیت</h3><p class="text-sm text-gray-500">پروژه‌ها را سریع و با کیفیت تحویل بگیرید</p></div>
+        <div class="p-6"><i class="fas fa-globe text-4xl text-amber-500 mb-3"></i><h3 class="font-semibold text-lg" data-key="about_feat1">بین‌المللی</h3><p class="text-sm text-gray-500">فریلنسرهایی از سراسر جهان</p></div>
+        <div class="p-6"><i class="fas fa-shield-alt text-4xl text-amber-500 mb-3"></i><h3 class="font-semibold text-lg" data-key="about_feat2">امنیت پرداخت</h3><p class="text-sm text-gray-500">روش‌های امن ریالی و ارز دیجیتال</p></div>
+        <div class="p-6"><i class="fas fa-rocket text-4xl text-amber-500 mb-3"></i><h3 class="font-semibold text-lg" data-key="about_feat3">سرعت و کیفیت</h3><p class="text-sm text-gray-500">پروژه‌ها را سریع و با کیفیت تحویل بگیرید</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ثبت‌نام فریلنسر + شمارنده -->
+  <!-- ========== ثبت‌نام ========== -->
   <section id="register" class="py-20 px-4 bg-white">
     <div class="max-w-2xl mx-auto glass-card p-8 md:p-12">
       <h2 class="text-3xl font-bold mb-2 text-center" data-key="register_title">ثبت‌نام فریلنسر</h2>
       <div class="text-center mb-6">
-        <span class="bg-cyan-100 text-cyan-700 px-4 py-1.5 rounded-full text-sm font-medium">
+        <span class="bg-amber-100 text-amber-700 px-4 py-1.5 rounded-full text-sm font-medium">
           <span data-key="counter_label">تعداد ثبت‌نامی‌ها: </span><strong id="regCounter">0</strong>
         </span>
       </div>
       <form id="registerForm" class="space-y-5">
-        <div>
-          <label class="block mb-1 font-medium" data-key="form_name">نام کامل</label>
-          <input type="text" id="name" required class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-cyan-300 outline-none" placeholder="مثال: علی محمدی">
-        </div>
-        <div>
-          <label class="block mb-1 font-medium" data-key="form_email">ایمیل</label>
-          <input type="email" id="email" required class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-cyan-300 outline-none" placeholder="example@mail.com">
-        </div>
-        <div>
-          <label class="block mb-1 font-medium" data-key="form_skills">مهارت‌ها</label>
-          <textarea id="skills" rows="3" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-cyan-300 outline-none" placeholder="طراحی وب، برنامه‌نویسی، ..."></textarea>
-        </div>
-        <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold py-3 rounded-xl hover:shadow-lg transition transform hover:-translate-y-0.5" data-key="form_submit">ثبت‌نام</button>
+        <div><label class="block mb-1 font-medium" data-key="form_name">نام کامل</label><input type="text" id="name" required class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-300 outline-none" placeholder="مثال: علی محمدی"></div>
+        <div><label class="block mb-1 font-medium" data-key="form_email">ایمیل</label><input type="email" id="email" required class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-300 outline-none" placeholder="example@mail.com"></div>
+        <div><label class="block mb-1 font-medium" data-key="form_skills">مهارت‌ها</label><textarea id="skills" rows="3" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-300 outline-none" placeholder="طراحی وب، برنامه‌نویسی، ..."></textarea></div>
+        <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-yellow-600 text-white font-semibold py-3 rounded-xl hover:shadow-lg transition" data-key="form_submit">ثبت‌نام</button>
       </form>
       <p id="registerMsg" class="text-center text-green-600 mt-3 hidden"></p>
     </div>
   </section>
 
-  <!-- ساختار پرداخت (غیرفعال) -->
+  <!-- ========== پرداخت (غیرفعال) ========== -->
   <section id="payment" class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl font-bold mb-10 text-center" data-key="payment_title">روش‌های پرداخت</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- ارز دیجیتال -->
-        <div class="disabled-overlay glass-card p-8 text-center relative">
-          <i class="fab fa-bitcoin text-5xl text-yellow-500 mb-4"></i>
-          <h3 class="text-xl font-bold mb-2">ارز دیجیتال (Crypto)</h3>
-          <p class="text-gray-500 mb-4">بیت‌کوین، اتریوم، USDT و سایر ارزها</p>
-          <button disabled class="bg-gray-300 text-gray-500 px-6 py-2 rounded-full cursor-not-allowed">فعال‌سازی نشده</button>
-        </div>
-        <!-- ریالی -->
-        <div class="disabled-overlay glass-card p-8 text-center relative">
-          <i class="fas fa-money-bill-wave text-5xl text-green-600 mb-4"></i>
-          <h3 class="text-xl font-bold mb-2">ریالی (IRR)</h3>
-          <p class="text-gray-500 mb-4">درگاه‌های شتاب، زرین‌پال و ...</p>
-          <button disabled class="bg-gray-300 text-gray-500 px-6 py-2 rounded-full cursor-not-allowed">فعال‌سازی نشده</button>
-        </div>
+        <div class="disabled-overlay glass-card p-8 text-center"><i class="fab fa-bitcoin text-5xl text-yellow-500 mb-4"></i><h3 class="text-xl font-bold mb-2">ارز دیجیتال</h3><p class="text-gray-500 mb-4">بیت‌کوین، اتریوم، USDT</p><button disabled class="bg-gray-300 text-gray-500 px-6 py-2 rounded-full">فعال‌سازی نشده</button></div>
+        <div class="disabled-overlay glass-card p-8 text-center"><i class="fas fa-money-bill-wave text-5xl text-green-600 mb-4"></i><h3 class="text-xl font-bold mb-2">ریالی</h3><p class="text-gray-500 mb-4">درگاه‌های شتاب</p><button disabled class="bg-gray-300 text-gray-500 px-6 py-2 rounded-full">فعال‌سازی نشده</button></div>
       </div>
     </div>
   </section>
 
-  <!-- تماس با ما -->
+  <!-- ========== تماس با ما ========== -->
   <section id="contact" class="py-20 px-4 max-w-2xl mx-auto">
     <div class="glass-card p-8 md:p-12">
       <h2 class="text-3xl font-bold mb-6 text-center" data-key="contact_title">تماس با ما</h2>
       <form id="contactForm" class="space-y-5">
-        <input type="text" placeholder="نام شما" class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-cyan-300">
-        <input type="email" placeholder="ایمیل" class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-cyan-300">
-        <textarea rows="4" placeholder="پیام شما..." class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-cyan-300"></textarea>
+        <input type="text" placeholder="نام شما" class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-amber-300">
+        <input type="email" placeholder="ایمیل" class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-amber-300">
+        <textarea rows="4" placeholder="پیام شما..." class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-amber-300"></textarea>
         <button type="submit" class="w-full bg-gray-800 text-white font-semibold py-3 rounded-xl hover:bg-gray-700 transition" data-key="contact_send">ارسال پیام</button>
       </form>
     </div>
   </section>
 
-  <!-- فوتر -->
-  <footer class="bg-white border-t py-8 text-center text-gray-500 text-sm">
-    <p>© 2026 IranFreelancer. All rights reserved.</p>
-    <p class="mt-1">طراحی شده با ❤️ برای جامعه فریلنسری</p>
+  <!-- ========== فوتر حرفه‌ای ========== -->
+  <footer class="bg-white border-t py-12">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <div class="mb-8">
+        <p class="text-gray-500 mb-4" data-key="footer_trust">مورد اعتماد و همکاران ما:</p>
+        <div class="flex flex-wrap justify-center items-center gap-6 trust-logos">
+          <i class="fab fa-upwork" title="Upwork"></i>
+          <i class="fab fa-fiverr" title="Fiverr"></i>
+          <i class="fas fa-globe" title="Freelancer.com"></i>
+          <i class="fas fa-briefcase" title="Toptal"></i>
+          <span class="text-gray-600 font-semibold">+50 شرکت بین‌المللی</span>
+        </div>
+      </div>
+      <p class="text-gray-600 text-sm max-w-xl mx-auto" data-key="footer_solution">ما مشکل پرداخت بین‌المللی فریلنسرهای ایرانی در پلتفرم‌های Upwork، Fiverr و سایرین را برای همیشه حل می‌کنیم. با IranFreelancer بدون دغدغه درآمد دلاری و ریالی داشته باشید.</p>
+      <p class="mt-6 text-gray-400 text-xs">© 2026 IranFreelancer. تمام حقوق محفوظ است. طراحی شده با ❤️ توسط تیم فریلنسینگ جهانی.</p>
+    </div>
   </footer>
 
-  <!-- مودال سوال سالانه -->
+  <!-- ========== مودال پرسش سالانه ========== -->
   <div id="yearlyModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center hidden">
     <div class="bg-white rounded-2xl p-8 max-w-md mx-4 text-center shadow-2xl">
-      <i class="fas fa-calendar-check text-5xl text-cyan-500 mb-4"></i>
+      <i class="fas fa-calendar-check text-5xl text-amber-500 mb-4"></i>
       <h3 class="text-xl font-bold mb-2" data-key="yearly_q">آیا مهارت‌های خود را امسال به‌روز کرده‌اید؟</h3>
       <div class="flex justify-center gap-4 mt-6">
-        <button id="yearlyYes" class="bg-cyan-500 text-white px-6 py-2 rounded-full font-medium hover:bg-cyan-600 transition">بله</button>
+        <button id="yearlyYes" class="bg-amber-500 text-white px-6 py-2 rounded-full font-medium hover:bg-amber-600 transition">بله</button>
         <button id="yearlyNo" class="border border-gray-300 px-6 py-2 rounded-full font-medium hover:bg-gray-100 transition">خیر</button>
       </div>
     </div>
   </div>
 
+  <!-- ========== دکمه‌های شناور ========== -->
+  <a href="https://wa.me/1234567890" target="_blank" class="floating-btn whatsapp-btn"><i class="fab fa-whatsapp"></i></a>
+  <div class="floating-btn ai-btn" id="aiToggle"><i class="fas fa-robot"></i></div>
+
+  <!-- ========== باکس چت هوش مصنوعی ========== -->
+  <div class="chat-container chat-neon" id="chatBox">
+    <div class="chat-header">🤖 دستیار IranFreelancer</div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="bot-msg">سلام! هر سوالی در مورد فریلنسری، پرداخت یا ثبت‌نام دارید بپرسید.</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="سوال خود را بنویسید...">
+      <button id="chatSend"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
   <script>
+    // ========== لودینگ ==========
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').style.opacity = '0';
+        document.getElementById('preloader').style.visibility = 'hidden';
+      }, 2000);
+    });
+
+    // ========== تنظیمات Supabase ==========
+    const USE_SUPABASE = false; // برای تست localStorage بگذارید false
+    const SUPABASE_URL = 'https://your-project.supabase.co';
+    const SUPABASE_ANON_KEY = 'your-anon-key';
+
     // ========== ترجمه‌ها ==========
     const translations = {
       fa: {
@@ -224,31 +273,33 @@
         hero_title: "پلتفرم فریلنسری ایران و جهان", hero_subtitle: "فریلنسرهای حرفه‌ای ایرانی و بین‌المللی را بیابید یا پروژه بگیرید",
         hero_cta1: "ثبت‌نام فریلنسر", hero_cta2: "استخدام فریلنسر",
         about_title: "درباره IranFreelancer", about_desc: "ما بستری امن و حرفه‌ای برای اتصال کارفرمایان و فریلنسرهای ایرانی و خارجی فراهم کرده‌ایم. با تمرکز بر کیفیت، شفافیت و پرداخت‌های امن، ایران فریلنسر انتخاب اول شماست.",
+        about_solution: "ما مشکل پرداخت بین‌المللی فریلنسرهای ایرانی در پلتفرم‌هایی مانند Upwork و Fiverr را برای همیشه حل می‌کنیم.",
         about_feat1: "بین‌المللی", about_feat2: "امنیت پرداخت", about_feat3: "سرعت و کیفیت",
         register_title: "ثبت‌نام فریلنسر", counter_label: "تعداد ثبت‌نامی‌ها: ",
         form_name: "نام کامل", form_email: "ایمیل", form_skills: "مهارت‌ها", form_submit: "ثبت‌نام",
         payment_title: "روش‌های پرداخت",
         contact_title: "تماس با ما", contact_send: "ارسال پیام",
-        yearly_q: "آیا مهارت‌های خود را امسال به‌روز کرده‌اید؟"
+        yearly_q: "آیا مهارت‌های خود را امسال به‌روز کرده‌اید؟",
+        footer_trust: "مورد اعتماد و همکاران ما:", footer_solution: "ما مشکل پرداخت بین‌المللی فریلنسرهای ایرانی در پلتفرم‌های Upwork، Fiverr و سایرین را برای همیشه حل می‌کنیم. با IranFreelancer بدون دغدغه درآمد دلاری و ریالی داشته باشید."
       },
       en: {
         nav_home: "Home", nav_about: "About", nav_register: "Register", nav_contact: "Contact",
         hero_title: "Iran & Global Freelance Platform", hero_subtitle: "Find professional Iranian and international freelancers or get projects",
         hero_cta1: "Register as Freelancer", hero_cta2: "Hire a Freelancer",
         about_title: "About IranFreelancer", about_desc: "We provide a secure, professional platform connecting employers with top Iranian and global freelancers. Quality, transparency, and secure payments are our priorities.",
+        about_solution: "We permanently solve the international payment issues of Iranian freelancers on platforms like Upwork and Fiverr.",
         about_feat1: "International", about_feat2: "Payment Security", about_feat3: "Speed & Quality",
         register_title: "Freelancer Registration", counter_label: "Registered freelancers: ",
         form_name: "Full Name", form_email: "Email", form_skills: "Skills", form_submit: "Register",
         payment_title: "Payment Methods",
         contact_title: "Contact Us", contact_send: "Send Message",
-        yearly_q: "Have you updated your skills this year?"
+        yearly_q: "Have you updated your skills this year?",
+        footer_trust: "Trusted & Partnered with:", footer_solution: "We permanently solve the international payment problem of Iranian freelancers on Upwork, Fiverr and others. Earn dollars and IRR without hassle."
       }
     };
 
     let currentLang = 'fa';
-    // تشخیص زبان اولیه
     if (navigator.language.includes('en')) currentLang = 'en';
-    // بارگذاری زبان ذخیره‌شده
     const savedLang = localStorage.getItem('lang');
     if (savedLang) currentLang = savedLang;
 
@@ -259,81 +310,72 @@
       document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
       document.querySelectorAll('[data-key]').forEach(el => {
         const key = el.dataset.key;
-        if (translations[lang][key]) el.textContent = translations[lang][key];
+        if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
       });
-      // به‌روزرسانی دکمه تغییر زبان
-      const toggleText = lang === 'fa' ? 'EN' : 'فا';
-      document.getElementById('langText').textContent = toggleText;
-      if (document.getElementById('langToggleMobile')) document.getElementById('langToggleMobile').childNodes[0].textContent = toggleText + ' ';
+      document.getElementById('langText').textContent = lang === 'fa' ? 'EN' : 'فا';
+      const mobileBtn = document.getElementById('langToggleMobile');
+      if (mobileBtn) mobileBtn.childNodes[0].textContent = (lang === 'fa' ? 'EN ' : 'فا ');
+      // عنوان و توضیحات متا
+      document.title = lang === 'fa' ? 'IranFreelancer | پلتفرم فریلنسری ایران و جهان' : 'IranFreelancer | Iran & Global Freelance Platform';
+      let metaDesc = document.querySelector('meta[name="description"]');
+      if (!metaDesc) { metaDesc = document.createElement('meta'); metaDesc.name = 'description'; document.head.appendChild(metaDesc); }
+      metaDesc.content = lang === 'fa' ? 'ثبت‌نام فریلنسرهای ایرانی و خارجی در ایران فریلنسر. حل مشکل پرداخت بین‌المللی فریلنسرها. پرداخت امن ریالی و ارز دیجیتال.' : 'Join IranFreelancer as a freelancer or hire top talent. We solve international payment issues for Iranian freelancers. Secure IRR & Crypto.';
       // placeholderها
       document.querySelector('input[placeholder="مثال: علی محمدی"]')?.setAttribute('placeholder', lang==='fa'?'مثال: علی محمدی':'e.g. John Doe');
       document.querySelector('textarea[placeholder="طراحی وب، برنامه‌نویسی، ..."]')?.setAttribute('placeholder', lang==='fa'?'طراحی وب، برنامه‌نویسی، ...':'Web design, programming...');
-      document.querySelector('#contactForm input[placeholder="نام شما"]')?.setAttribute('placeholder', lang==='fa'?'نام شما':'Your Name');
-      document.querySelector('#contactForm input[placeholder="ایمیل"]')?.setAttribute('placeholder', 'Email');
-      document.querySelector('#contactForm textarea')?.setAttribute('placeholder', lang==='fa'?'پیام شما...':'Your message...');
+      const contactName = document.querySelector('#contactForm input[placeholder="نام شما"]');
+      if (contactName) contactName.placeholder = lang==='fa'?'نام شما':'Your Name';
+      const contactEmail = document.querySelector('#contactForm input[placeholder="ایمیل"]');
+      if (contactEmail) contactEmail.placeholder = 'Email';
+      const contactMsg = document.querySelector('#contactForm textarea');
+      if (contactMsg) contactMsg.placeholder = lang==='fa'?'پیام شما...':'Your message...';
     }
-
-    // اعمال زبان اولیه
     setLanguage(currentLang);
 
-    // دکمه‌های تغییر زبان
     document.getElementById('langToggle').addEventListener('click', () => setLanguage(currentLang === 'fa' ? 'en' : 'fa'));
     document.getElementById('langToggleMobile')?.addEventListener('click', () => setLanguage(currentLang === 'fa' ? 'en' : 'fa'));
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('hidden'));
 
-    // منوی موبایل
-    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-      document.getElementById('mobileMenu').classList.toggle('hidden');
-    });
-
-    // ========== انیمیشن‌های GSAP ==========
+    // ========== GSAP انیمیشن‌ها ==========
     gsap.registerPlugin(ScrollTrigger);
     gsap.from('.neon-frame', { opacity: 0, y: 60, duration: 1.2, ease: 'power3.out' });
     gsap.from('#about .glass-card', { scrollTrigger: '#about', opacity: 0, y: 50, duration: 1 });
     gsap.from('#register .glass-card', { scrollTrigger: '#register', opacity: 0, y: 50, duration: 1 });
-    gsap.from('#payment > div', { scrollTrigger: '#payment', opacity: 0, y: 40, duration: 0.8, stagger: 0.2 });
-    gsap.from('#contact .glass-card', { scrollTrigger: '#contact', opacity: 0, y: 50, duration: 1 });
 
-    // ========== ثبت‌نام و شمارنده (دمو با LocalStorage) ==========
-    let regCount = parseInt(localStorage.getItem('regCount') || '0');
-    document.getElementById('regCounter').textContent = regCount;
+    // ========== ثبت‌نام و شمارنده ==========
+    let supabase = null;
+    if (USE_SUPABASE) supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    document.getElementById('registerForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      // افزایش شمارنده محلی (برای دمو)
-      regCount++;
-      localStorage.setItem('regCount', regCount);
-      document.getElementById('regCounter').textContent = regCount;
-      // پیام موفقیت
-      const msg = document.getElementById('registerMsg');
-      msg.textContent = currentLang === 'fa' ? 'ثبت‌نام شما با موفقیت انجام شد!' : 'Registration successful!';
-      msg.classList.remove('hidden');
-      this.reset();
-      setTimeout(() => msg.classList.add('hidden'), 3000);
-
-      // ===== اتصال به Supabase (در مرحله بعد فعال کنید) =====
-      // import { createClient } from '@supabase/supabase-js'
-      // const supabase = createClient('YOUR_SUPABASE_URL', 'YOUR_ANON_KEY')
-      // const { data, error } = await supabase.from('registrations').insert([
-      //   { name: document.getElementById('name').value, email: document.getElementById('email').value, skills: document.getElementById('skills').value }
-      // ]);
-      // سپس شمارنده را از پایگاه داده به‌روزرسانی کنید
-    });
-
-    // ========== پرسشنامه سالانه ==========
-    const currentYear = new Date().getFullYear();
-    const modalKey = `yearly_question_${currentYear}`;
-    if (!localStorage.getItem(modalKey)) {
-      setTimeout(() => {
-        document.getElementById('yearlyModal').classList.remove('hidden');
-      }, 2000);
+    async function updateCounter() {
+      if (USE_SUPABASE && supabase) {
+        const { count, error } = await supabase.from('registrations').select('*', { count: 'exact', head: true });
+        if (!error) document.getElementById('regCounter').textContent = count;
+      } else {
+        document.getElementById('regCounter').textContent = localStorage.getItem('regCount') || '0';
+      }
     }
-    document.getElementById('yearlyYes').addEventListener('click', () => {
-      localStorage.setItem(modalKey, 'answered');
-      document.getElementById('yearlyModal').classList.add('hidden');
-    });
-    document.getElementById('yearlyNo').addEventListener('click', () => {
-      localStorage.setItem(modalKey, 'answered');
-      document.getElementById('yearlyModal').classList.add('hidden');
+    updateCounter();
+
+    document.getElementById('registerForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value, email = document.getElementById('email').value, skills = document.getElementById('skills').value;
+      const msg = document.getElementById('registerMsg');
+      let success = false;
+      if (USE_SUPABASE && supabase) {
+        const { error } = await supabase.from('registrations').insert([{ name, email, skills }]);
+        if (!error) success = true;
+        else msg.textContent = 'خطا در ثبت‌نام';
+      } else {
+        let count = parseInt(localStorage.getItem('regCount') || '0') + 1;
+        localStorage.setItem('regCount', count);
+        success = true;
+      }
+      if (success) {
+        msg.textContent = currentLang === 'fa' ? 'ثبت‌نام موفق!' : 'Registration successful!';
+        this.reset(); updateCounter();
+      }
+      msg.classList.remove('hidden');
+      setTimeout(() => msg.classList.add('hidden'), 3000);
     });
 
     // ========== تماس با ما (دمو) ==========
@@ -342,6 +384,41 @@
       alert(currentLang === 'fa' ? 'پیام شما ارسال شد (دمو)' : 'Message sent (demo)');
       this.reset();
     });
+
+    // ========== پرسش سالانه ==========
+    const yearlyKey = `yearly_question_${new Date().getFullYear()}`;
+    if (!localStorage.getItem(yearlyKey)) setTimeout(() => document.getElementById('yearlyModal').classList.remove('hidden'), 2000);
+    document.getElementById('yearlyYes').addEventListener('click', () => { localStorage.setItem(yearlyKey, 'answered'); document.getElementById('yearlyModal').classList.add('hidden'); });
+    document.getElementById('yearlyNo').addEventListener('click', () => { localStorage.setItem(yearlyKey, 'answered'); document.getElementById('yearlyModal').classList.add('hidden'); });
+
+    // ========== هوش مصنوعی و چت ==========
+    const chatBox = document.getElementById('chatBox');
+    const chatMessages = document.getElementById('chatMessages');
+    document.getElementById('aiToggle').addEventListener('click', () => chatBox.classList.toggle('active'));
+    function addMessage(text, sender) {
+      const div = document.createElement('div');
+      div.className = sender === 'bot' ? 'bot-msg' : 'user-msg';
+      div.textContent = text;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    document.getElementById('chatSend').addEventListener('click', sendMessage);
+    document.getElementById('chatInput').addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+      addMessage(text, 'user');
+      input.value = '';
+      // پاسخ ساده
+      const lower = text.toLowerCase();
+      let reply = '';
+      if (lower.includes('پرداخت') || lower.includes('payment')) reply = 'پرداخت‌ها به‌زودی با ارز دیجیتال و ریال فعال می‌شود.';
+      else if (lower.includes('ثبت‌نام') || lower.includes('register')) reply = 'کافیست فرم ثبت‌نام را پر کنید تا به جامعه فریلنسرها بپیوندید.';
+      else if (lower.includes('upwork') || lower.includes('fiverr')) reply = 'ما مشکل پرداخت ایرانی‌ها در Upwork و Fiverr را برای همیشه حل می‌کنیم.';
+      else reply = 'سوال خوبی پرسیدید! تیم پشتیبانی به‌زودی پاسخ می‌دهد.';
+      setTimeout(() => addMessage(reply, 'bot'), 600);
+    }
   </script>
 </body>
 </html>
